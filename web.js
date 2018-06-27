@@ -26,6 +26,9 @@ app.get('/script/common.js', function(req, res) {
     res.sendFile(path.join(__dirname + '/script/common.js'));
 });
 
+app.get('/write.html', function(req, res) {
+    res.sendFile(path.join(__dirname + '/write.html'));
+});
 
 app.get('/favicon.ico', function(req, res) {
     res.sendFile(path.join(__dirname + '/favicon.ico'));
