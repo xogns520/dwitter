@@ -17,6 +17,21 @@ app.get('/script/jquery-3.3.1.min.js', function(req, res) {
     res.sendFile(path.join(__dirname + '/script/jquery-3.3.1.min.js'));
 });
 
+app.get('/style/bootstrap.css', function(req, res) {
+    res.sendFile(path.join(__dirname + '/style/bootstrap.css'));
+});
+
+
+app.get('/script/common.js', function(req, res) {
+    res.sendFile(path.join(__dirname + '/script/common.js'));
+});
+
+
+app.get('/favicon.ico', function(req, res) {
+    res.sendFile(path.join(__dirname + '/favicon.ico'));
+});
+
+
 
 
 app.listen(process.env.PORT);
