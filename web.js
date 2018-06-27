@@ -13,4 +13,10 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+app.get('/script/jquery-3.3.1.min.js', function(req, res) {
+    res.sendFile(path.join(__dirname + '/script/jquery-3.3.1.min.js'));
+});
+
+
+
 app.listen(process.env.PORT);
