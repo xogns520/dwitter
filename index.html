@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" media="all" href="./style/bootstrap.css" />
+<script type="text/javascript" src="./script/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="./script/common.js"></script>
+<script>
+
+//**********************************************************************************
+//화면오픈시 처리 
+//**********************************************************************************
+$(function(){
+	gfMenuIndex();
+});
+
+</script>
+</head>
+<body>
+<div style="width: 960px; margin: 0 auto;">
+
+	<section id="sectionIndex">
+		<div class="jumbotron">
+			<h1 class="display-3">Hello, world!</h1>
+			<p class="lead"> 본 샘플은 개발 방향성을 찾아 구현한 임시파일이고 디자인 또한 정의된것 없이 임의로 작성되었습니다. </p>
+			<p class="lead">
+				<a class="btn btn-secondary btn-lg" href="https://bootswatch.com/" role="button">디자인 참고사이트</a>
+			</p>
+			<hr class="my-4">
+			<p class="lead">
+				<a class="btn btn-primary btn-lg" href="javascript:;" onclick="javascript:gfMenuContentList();" role="button">Dabble 시작하기</a>
+			</p>
+		</div>
+	</section>
+	
+	<section id="sectionContentsList">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<a class="navbar-brand" href="javascript:;" onclick="javascript:gfMenuContentList();">dabble - creative your thinking</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		 	
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav mr-auto"></ul>
+		 
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="text" placeholder="Search">
+					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+		<div style="text-align: right;">
+			<button type="button" class="btn btn-primary" onClick="javascript:gfMenuContentWrite();">글쓰기</button>
+		</div>
+		
+		<div id="contentList">
+		
+			<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+				<div class="card-header">Header</div>
+				<div class="card-body">
+					<h4 class="card-title">Primary card title</h4>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				</div>
+			</div>
+			
+			<div class="alert alert-dismissible alert-info">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+			</div>
+			
+			<ol class="breadcrumb">
+			  <li class="breadcrumb-item active">Home</li>
+			</ol>
+		
+		</div>
+	
+		<div style="position:absolute; width:150px; left:42%; margin-left:-50px;" >
+		<ul class="pagination">
+			<li class="page-item disabled">
+				<a class="page-link" href="#">&laquo;</a>
+			</li>
+			<li class="page-item active">
+				<a class="page-link" href="#">1</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="#">2</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="#">3</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="#">4</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="#">5</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="#">&raquo;</a>
+			</li>
+		</ul>
+		</div>
+	</section>
+	
+	<section id="sectionContentWrite">
+		<table>
+			<colgroup>
+				<!-- <col style="width: 60px"/> -->
+				<col style="width: *"/>
+				<col style="width: 100%"/>
+				<col style="width: *"/>
+			</colgroup>
+			<tbody>
+				<tr>
+					<td>
+						<button type="button" class="btn btn-info" onclick="javascript:gfMenuContentList();">취소</button>
+					</td>
+					<td style="text-align: center;">
+						글쓰기
+					</td>
+					<td>
+						<button type="button" class="btn btn-primary" onClick="javascript:gfContentWriteAction();">글쓰기</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<fieldset>
+			<div class="form-group">
+				<!-- <label for="exampleTextarea">글쓰기</label> -->
+				<textarea class="form-control" id="contentTextarea" rows="3"></textarea>
+			</div>
+		</fieldset>
+	</section>
+
+
+	<section id="sectionContent">
+	</section>
+
+
+</div>
+</body>
+</html>
