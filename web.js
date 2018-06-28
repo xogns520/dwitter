@@ -11,11 +11,18 @@ var path = require('path');
 
  /* serves main page */
  app.get("/", function(req, res) {
-    res.sendfile('index.htm')
+    res.sendfile('index.html')
  });
 
   app.post("/user/add", function(req, res) { 
 	/* some server side logic */
+	  console.log("user add event");
+	res.send("OK");
+  });
+
+  app.post("/write", function(req, res) { 
+	/* some server side logic */
+	  console.log("write event");
 	res.send("OK");
   });
 
