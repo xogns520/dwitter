@@ -4,6 +4,11 @@
  * @코멘트   : Hark~
  */
 
+	$(function(){
+		gfMenuContentList();
+	});
+
+
 	//메뉴 이동 Start
 	function gfMenuIndex(){
 		$("section[id!='sectionIndex']").hide();
@@ -11,8 +16,8 @@
 	}
 	
 	function gfMenuContentList(){
-		$("section[id!='sectionContentsList']").hide();
-		$("section[id='sectionContentsList']").show();
+		$("section[id!='sectionContentList']").hide();
+		$("section[id='sectionContentList']").show();
 		gfContentList();
 	}
 	
@@ -26,6 +31,16 @@
 	//////////////////////////////////////////////////////
 	var gIndex = 0;
 	var gContentArray = new Array();
+	
+	/* Struct
+	var gContentObject = new Object();
+		gContentObject.index=null;
+		gContentObject.content=null;
+		gContentObject.user=null;
+		gContentObject.like=0;
+		
+	*/
+	var gUserArray = [ '김핡핡', '현피박군', '길막테디', '대대자손', '산타페후', 'Sting', '완전용용', 'thomas yoon', '이현'];
 	//////////////////////////////////////////////////////
 	
 	//액션 및 이벤트
@@ -33,17 +48,49 @@
 		$("div[id='contentList']").empty();
 		
 		for ( var x = 0 ; x < gContentArray.length ; x++ ){
+			/*
 			var strHtml	= '<ol class="breadcrumb">' 
 						+ '		<li class="breadcrumb-item active">' + gContentArray[x].content + '</li>'
 						+ '</ol>';
+			*/
+
+			var imgIdx=0;
+			for ( var y = 0 ; y < gUserArray.length ; y++ ){
+				if ( gUserArray[y] == gContentArray[x].user ){
+					imgIdx = y;
+					break;
+				}
+			}
+			
+			var strHtml	= '<div class="element tile-1 home calc bg-change">'
+						+ '	<table style="width: 100%;">'
+						+ '		<tr>'
+						+ '			<td>'
+						+ '				<h4 class="header icon-to-the-right">' + gContentArray[x].user + '</h4>'
+						+ '			</td>'
+						+ '			<td  style="text-align:right; margin: 0px;">'
+						+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + imgIdx + '.png">'
+						+ '			</td>'
+						+ '		</tr>'
+						+ '	</table>'
+						+ '	<p>' + gContentArray[x].content + '</p>'
+						+ '	<p></p>'
+						+ '	<p class="hint">'+ gContentArray[x].like + '명이 좋아합니다 핡핡~</p>'
+						+ '	<div name="divStyle" ></div>'
+						+ '</div>';
+			
 			$("div[id='contentList']").append(strHtml);
 		}
 	}
 	
 	function gfContentWriteAction(){
 		var contentObject = new Object();
+		var rand = Number(Math.floor(Math.random() * 8));
 		contentObject.index = gIndex;
 		contentObject.content = $("#contentTextarea").val();
+		contentObject.user = gUserArray[rand];
+		contentObject.like = 0;
+		
 		gIndex++;
 		gContentArray.push(contentObject);
 		$("#contentTextarea").val("");
