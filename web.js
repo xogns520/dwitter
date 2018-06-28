@@ -8,34 +8,24 @@ var path = require('path');
 
 // use res.render to load up an ejs view file
 
-// index page 
-app.get('/', function(req, res) {
-    //res.sendFile(path.join(__dirname + '/index.html'));
-    console.log("request accepted");
-});
 
-app.get('/script/jquery-3.3.1.min.js', function(req, res) {
-    res.sendFile(path.join(__dirname + '/script/jquery-3.3.1.min.js'));
-});
+ /* serves main page */
+ app.get("/", function(req, res) {
+    res.sendfile('index.htm')
+ });
 
-app.get('/style/bootstrap.css', function(req, res) {
-    res.sendFile(path.join(__dirname + '/style/bootstrap.css'));
-});
+  app.post("/user/add", function(req, res) { 
+	/* some server side logic */
+	res.send("OK");
+  });
 
+ /* serves all the static files */
+ app.get(/^(.+)$/, function(req, res){ 
+     console.log('static file request : ' + req.params);
+     res.sendfile( __dirname + req.params[0]); 
+ });
 
-app.get('/script/common.js', function(req, res) {
-    res.sendFile(path.join(__dirname + '/script/common.js'));
-});
-
-app.get('/write.html', function(req, res) {
-    res.sendFile(path.join(__dirname + '/write.html'));
-});
-
-app.get('/favicon.ico', function(req, res) {
-    res.sendFile(path.join(__dirname + '/favicon.ico'));
-});
-
-
-
-
-app.listen(process.env.PORT);
+ var port = process.env.PORT || 5000;
+ app.listen(port, function() {
+   console.log("Listening on " + port);
+ });
