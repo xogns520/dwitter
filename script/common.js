@@ -73,7 +73,7 @@
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
-						+ '	<p>' + gContentArray[x].content + '</p>'
+						+ '	<p class="preCon">' + gContentArray[x].content + '</p>'
 						+ '	<p></p>'
 						+ '	<p class="hint">'+ gContentArray[x].like + '명이 좋아합니다 핡핡~</p>'
 						+ '	<div name="divStyle" ></div>'
