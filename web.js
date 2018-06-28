@@ -21,7 +21,7 @@ function saveData(account, data){
    		var myobj = { account : account, data : data, date : tod, voting : 0, payout : 0 };
    		dbo.collection("board").insertOne(myobj, function(err, res){
     			if (err) throw err;
-    			//console.log("1 document inserted");
+    			console.log("1 document inserted");
     			db.close();   
    		});
   	}); 
