@@ -21,8 +21,23 @@ var path = require('path');
   });
 
   app.post("/write", function(req, res) { 
+	  
 	/* some server side logic */
-	  console.log("write event");
+
+	  var user = req.body.user;
+	  var data = req.body.data;
+	  console.log("write event", user, data);
+	  //save this data to mongoDB//
+	  res.send("OK");
+  });
+
+  app.post("/read", function(req, res) { 
+	/* some server side logic */
+	  
+	  var user = req.body.user;
+	  var page = req.body.page;
+	  console.log("read event", user, page);
+	  //query Mongo DB
 	res.send("OK");
   });
 
