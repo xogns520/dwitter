@@ -10,7 +10,8 @@ var path = require('path');
 
 // index page 
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+    //res.sendFile(path.join(__dirname + '/index.html'));
+    console.log("request accepted");
 });
 
 app.get('/script/jquery-3.3.1.min.js', function(req, res) {
