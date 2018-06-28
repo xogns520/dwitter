@@ -1,3 +1,5 @@
+require('./web.js');
+
 var static = require('node-static');
 var file = new static.Server();
 require('http').createServer(function(request, response) {
