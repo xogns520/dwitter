@@ -31,6 +31,19 @@ function saveData(account, data){
   	}); 
 }
 
+function readData(account, page, cb){
+	MongoClient.connect(url, function(err, db) {
+   		var dbo = db.db("heroku_dg3d93pq");
+		var tod = Date.now();
+   		dbo.collection("board").find({}).toArray(function(err, result) {(myobj, function(err, res){
+    			if (err) throw err;
+    			console.log("1 document inserted");
+			cb(res);
+    			db.close();   
+   		});
+  	}); 
+}
+
 // use res.render to load up an ejs view file
 
 
@@ -64,7 +77,9 @@ function saveData(account, data){
 	  var page = req.body.page;
 	  console.log("read event", user, page);
 	  //query Mongo DB
-	res.send("OK");
+	  readData(user, page,(result) => {res.send(result)});
+	  
+
   });
 
  /* serves all the static files */
