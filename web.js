@@ -22,7 +22,7 @@ function saveData(account, data){
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
 
-   		var myobj = { account : account, data : data, date : tod, voting : 0, payout : 0 };
+   		var myobj = { account : account, data : data, date : tod, voting : 0, payout : 0, steem : false };
    		dbo.collection("board").insertOne(myobj, function(err, res){
     			if (err) throw err;
     			console.log("1 document inserted");
