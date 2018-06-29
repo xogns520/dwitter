@@ -15,11 +15,7 @@ function writingReply(data){
 	var json_metadata = '';
 	//check author have . then remove that
 	var parent_author_permlink = "jeaimetu";
-	var dotCheck = ".";
-	if(pAuthor.indexOf(dotCheck) != -1){
-		//replace .
-		var parent_author_permlink = pAuthor.replace(".","dot");
-	}
+
 
 	const permlink = steem.formatter.commentPermlink(parent_author_permlink, parent_permlink)
 	//const permlink = steem.formatter.commentPermlink('jeaimetu', parent_permlink)
