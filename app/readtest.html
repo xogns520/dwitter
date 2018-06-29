@@ -8,7 +8,7 @@
         $("#submit").click(function(){
           user=$("#user").val();
           data=$("page").val();
-          $.post("https://dabbledabble.herokuapp.com/write",{user: user, page: data}, function(data){
+          $.post("https://dabbledabble.herokuapp.com/read",{user: user, page: data}, function(data){
             if(data==='done')
               {
                 alert("login success");
