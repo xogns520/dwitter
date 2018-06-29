@@ -82,6 +82,6 @@ function checkReplies() {
 // https://github.com/steemit/steem/blob/master/libraries/protocol/include/steemit/protocol/config.hpp
 // #define STEEMIT_MIN_REPLY_INTERVAL              (fc::seconds(20)) // 20 seconds
 // So I safely add 22secs interval consider delay time.
-setInterval(checkReplies, 22000);
+setInterval(readData, 22000);
 
 
