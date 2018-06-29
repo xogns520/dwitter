@@ -1,6 +1,10 @@
 var express = require('express');
+var bodyParser     =        require("body-parser");
 var app = express();
 var path = require('path');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //mongo DB
 var mongo = require('mongodb');
@@ -70,6 +74,7 @@ function saveData(account, data){
  });
 
  var port = process.env.PORT || 5000;
+console.log("port", port);
 
  app.listen(port, function() {
    console.log("Listening on " + port);
