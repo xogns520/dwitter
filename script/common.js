@@ -81,7 +81,7 @@
 						+ '				<h4 class="header icon-to-the-right">' + data[x].account + '</h4>'
 						+ '			</td>'
 						+ '			<td  style="text-align:right; margin: 0px;">'
-						+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + imgIdx + '.png">'
+//						+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + imgIdx + '.png">'
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
@@ -106,7 +106,7 @@
 		
 	}
 	
-	function gfContentWriteActionCallback(){
+	function gfContentWriteActionCallback(data){
 		console.log(data);
 		if ( "done" == data ){
 			alert("글쓰기 성공");
