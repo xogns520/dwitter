@@ -7,7 +7,7 @@
         var user,data;
         $("#submit").click(function(){
           user=$("#user").val();
-          data=$("#user").val();
+          data=$("#password").val();
           $.post("https://dabbledabble.herokuapp.com/write",{user: user, data: data}, function(data){
             if(data==='done')
               {
