@@ -33,8 +33,10 @@ function writingReply(data){
 		function (err, result){
 			if(err)
 				console.log('Failure', err);
-			else
+			else{
 				console.log('Success');
+				//update mongo DB
+			}
 		}
 		);
 		
@@ -51,6 +53,7 @@ function readData(){
 	      console.log("nothing to write");
       }else{
       //calling write reply
+	      console.log(result._id.$oid);
 	      writingReply(result.data);
       }
         db.close();
