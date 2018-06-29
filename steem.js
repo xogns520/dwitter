@@ -1,14 +1,15 @@
 var steem = require('steem');
 
 //After writing, this needs cool down time to create the block chain
-function writingReply(child_permlink,pAuthor){
+function writingReply(data){
+	child_permlink = "dabbledabble-test";
 	var private_posting_wif = process.env.pass;
-	var parent_author = pAuthor;
+	var parent_author = "jeaimetu";
 	//var parent_author = '';
-	var parent_permlink = child_permlink;
+	var parent_permlink = "dabble";
 	var json_metadata = '';
 	//check author have . then remove that
-	var parent_author_permlink = pAuthor;
+	var parent_author_permlink = "jeaimetu";
 	var dotCheck = ".";
 	if(pAuthor.indexOf(dotCheck) != -1){
 		//replace .
@@ -17,24 +18,7 @@ function writingReply(child_permlink,pAuthor){
 
 	const permlink = steem.formatter.commentPermlink(parent_author_permlink, parent_permlink)
 	//const permlink = steem.formatter.commentPermlink('jeaimetu', parent_permlink)
-	var tarotResult = tarot.randomCard();
-	var i = tarotResult.indexOf("##: ");
-	var a = tarotResult.substr(i+4,tarotResult.length-1);
-	a.replace(/\s/g,'');
-	console.log("image name :", a,":");
-	var b = tarotResult.substr(0,i-1);
-	
-	var content = '<table><tr><td>  ';
-	//content += cloudinary.image("00_Fool.jpg", {alt : "Test"})
-	console.log(cloudinary.image(a, {alt : "Test"}));
-	//content += cloudinary.image(a, {alt : "Test"}, {width : 50})
-	content += cloudinary.image(a, {width : 100, height : 200, crop : 'fit' })
-	content += '</td><td><p><strong>안녕하세요. 타로점 결과 입니다. 많이 사용해 주세요.</strong></p><hr><p>';
-	
-	//content += tarot.randomCard();
-	b = b.replace("/","/\n");
-	content += b;
-	content += '</td></tr></table>';
+	var content = data;
 	
 	steem.broadcast.comment (
     	private_posting_wif,  // Steemit.com Wallet -> Permissions -> Show Private Key (for Posting)
@@ -63,8 +47,10 @@ function readData(){
       if(result == null){
       //if result is null, then return -1
       //do nothing
+	      console.log("nothing to write");
       }else{
       //calling write reply
+	      writingReply(result.data);
       }
         db.close();
         });
