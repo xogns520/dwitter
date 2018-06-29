@@ -5,8 +5,30 @@ var mongo = require('mongodb');
 var MongoClient = require('mongodb').MongoClient;
 var url = process.env.MONGODB_URI;
 
+
+function saveFlag(id){
+	  MongoClient.connect(url, function(err, db) {
+   		 var dbo = db.db("heroku_dg3d93pq");
+    		var updatequer = {_id : id};
+		   var newvalues = { $set: {steem : true } };
+		  
+    dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
+      if(result == null){
+      //if result is null, then return -1
+      //do nothing
+	      console.log("nothing to write");
+      }else{
+      //calling write reply
+
+	      //
+      }
+        db.close();
+        });
+        });
+}
+
 //After writing, this needs cool down time to create the block chain
-function writingReply(data){
+function writingReply(data, id){
 	child_permlink = "dabbledabble-test";
 	var private_posting_wif = process.env.pass;
 	var parent_author = "jeaimetu";
@@ -36,6 +58,7 @@ function writingReply(data){
 			else{
 				console.log('Success');
 				//update mongo DB
+				saveFlag(id);
 			}
 		}
 		);
@@ -53,10 +76,8 @@ function readData(){
 	      console.log("nothing to write");
       }else{
       //calling write reply
-	      console.log(result._id.$oid);
-	      console.log(result._id);
-	      console.log(result._id.oid);
-	      writingReply(result.data);
+
+	      writingReply(result.data, result._id);
       }
         db.close();
         });
