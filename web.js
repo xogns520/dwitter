@@ -61,7 +61,7 @@ function readData(account, page, cb){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
-   		dbo.collection("board").find({}).toArray(function(err, result){
+   		dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
     			if (err) throw err;
     			console.log("read complete");
 			console.log(result);
