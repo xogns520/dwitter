@@ -1,5 +1,10 @@
 var steem = require('steem');
 
+//mongo DB
+var mongo = require('mongodb');
+var MongoClient = require('mongodb').MongoClient;
+var url = process.env.MONGODB_URI;
+
 //After writing, this needs cool down time to create the block chain
 function writingReply(data){
 	child_permlink = "dabbledabble-test";
