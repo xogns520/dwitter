@@ -47,6 +47,8 @@
 	function gfContentList(){
 		var rand = Number(Math.floor(Math.random() * 8));
 		$("#frmRead #user").val(gUserArray[rand]);
+		$("#frmRead #page").val(1);
+		
 		var sAction = "/read";
 		var fnCallback = gfContentListCallback;
 		gfAjaxCallWithForm(sAction,$('#frmRead'),fnCallback,"POST")
