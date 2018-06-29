@@ -9,7 +9,7 @@ var url = process.env.MONGODB_URI;
 function saveFlag(id){
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
-    		var updatequer = {_id : id};
+    		var findquery = {_id : id};
 		   var newvalues = { $set: {steem : true } };
 		  
     dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
