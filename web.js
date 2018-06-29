@@ -36,7 +36,7 @@ function saveData(account, data){
 function increaseVote(id, vote){
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
-    		var findquery = {_id : {$oid:id}};		  
+    		var findquery = {_id : id};		  
     		dbo.collection("board").findOne(findquery, function(err, result){
      			 if(result == null){
       			//if result is null, then return -1
@@ -64,8 +64,6 @@ function readData(account, page, cb){
    		dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
     			if (err) throw err;
     			console.log("read complete");
-			console.log(result[0]._id);
-			console.log(result[0]._id.oid);
 			cb(result);
     			db.close();   
    		});
