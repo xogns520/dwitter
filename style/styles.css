@@ -445,7 +445,7 @@ h1#logo {
 	float: left;
 }
 h1#logo a {
-	background: url(../images/EOS-NY_Horizontal.png) center no-repeat;
+	background: url(../images/dabble.png) center no-repeat;
 	background-size: 182px 70px;
 	width: 182px;
 	height: 70px;
@@ -453,7 +453,7 @@ h1#logo a {
 	display: block;
 }
 #eosnylogo {
-  background: url(../images/eosny-logo.png) center no-repeat;
+  background: url(../images/dabble.png) center no-repeat;
   background-size: 60px 82px;
   width: 60px;
   height: 82px;
