@@ -36,29 +36,24 @@ function saveData(account, data){
 function increaseVote(id, vote){
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
-    		var findquery = {_id : id};
-		   
-		  
-    dbo.collection("board").findOne(findquery, function(err, result){
-      if(result == null){
-      //if result is null, then return -1
-      //do nothing
-	      console.log("nothing to write");
-      }else{
-      //calling write reply
-	      var orig = result.voting;
-	      var newValue = vote + orig;
-	      var newvalues = { $set: {voting : newValue } };
-	      dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
-		      
-	      }
-
-	      //
-		          db.close();
-      });
-      }
+    		var findquery = {_id : id};		  
+    		dbo.collection("board").findOne(findquery, function(err, result){
+     			 if(result == null){
+      			//if result is null, then return -1
+      			//do nothing
+	     		 console.log("nothing to write");
+      		}else{
+      			//calling write reply
+	      		var orig = result.voting;
+	      		var newValue = vote + orig;
+	      		var newvalues = { $set: {voting : newValue } };
+	      		dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
+		      		if (err) throw err;
+	      		        db.close();
+      			});
+      		}
     
-        });
+        	});
         });
 }
 
