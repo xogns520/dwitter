@@ -54,6 +54,8 @@ function readData(){
       }else{
       //calling write reply
 	      console.log(result._id.$oid);
+	      console.log(result._id);
+	      console.log(result._id.oid);
 	      writingReply(result.data);
       }
         db.close();
