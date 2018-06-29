@@ -9,10 +9,9 @@
           user=$("#user").val();
           data=$("#page").val();
           $.post("https://dabbledabble.herokuapp.com/read",{user: user, page: data}, function(data){
-            if(data==='done')
-              {
-                alert("login success");
-              }
+
+                alert(data);
+
           });
         });
       });
