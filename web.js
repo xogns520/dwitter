@@ -64,7 +64,8 @@ function readData(account, page, cb){
    		dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
     			if (err) throw err;
     			console.log("read complete");
-			console.log(result._id);
+			console.log(result[0]._id);
+			console.log(result[0]._id.oid);
 			cb(result);
     			db.close();   
    		});
