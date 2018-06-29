@@ -38,7 +38,7 @@ function readData(account, page, cb){
    		dbo.collection("board").find({}).toArray(function(err, result){
     			if (err) throw err;
     			console.log("1 document inserted");
-			cb(res);
+			cb(result);
     			db.close();   
    		});
   	}); 
