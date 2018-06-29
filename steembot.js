@@ -11,7 +11,7 @@ function writingReply(data){
 	var private_posting_wif = process.env.pass;
 	var parent_author = "jeaimetu";
 	//var parent_author = '';
-	var parent_permlink = "dabble";
+	var parent_permlink = child_permlink;
 	var json_metadata = '';
 	//check author have . then remove that
 	var parent_author_permlink = "jeaimetu";
