@@ -36,7 +36,7 @@ function saveData(account, data){
 function increaseVote(id, vote){
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
-    		var findquery = {_id : id};		  
+    		var findquery = {_id : {$oid:id}};		  
     		dbo.collection("board").findOne(findquery, function(err, result){
      			 if(result == null){
       			//if result is null, then return -1
