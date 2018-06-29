@@ -37,6 +37,10 @@ function writingReply(data, id){
 	var json_metadata = '';
 	//check author have . then remove that
 	var parent_author_permlink = "jeaimetu";
+	
+	if(data == null){
+		data = "you missed something!!!!";
+	}
 
 
 	const permlink = steem.formatter.commentPermlink(parent_author_permlink, parent_permlink)
