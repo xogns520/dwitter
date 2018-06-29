@@ -1,4 +1,4 @@
-require("./steem");
+require("./steembot");
 
 var express = require('express');
 var bodyParser     =        require("body-parser");
