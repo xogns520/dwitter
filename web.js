@@ -54,7 +54,7 @@ function saveData(account, data){
 	  console.log("write event", user, data);
 	  //save this data to mongoDB//
 	  saveData(user, data);
-	  res.send("OK");
+	  res.send("done");
   });
 
   app.post("/read", function(req, res) { 
