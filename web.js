@@ -41,7 +41,7 @@ function increaseVote(id, vote){
      			 if(result == null){
       			//if result is null, then return -1
       			//do nothing
-	     		 console.log("nothing to write");
+	     		 console.log("nothing to increase vote");
       		}else{
       			//calling write reply
 	      		var orig = result.voting;
@@ -64,7 +64,7 @@ function readData(account, page, cb){
    		dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
     			if (err) throw err;
     			console.log("read complete");
-			console.log(result);
+			//console.log(result);
 			cb(result);
     			db.close();   
    		});
