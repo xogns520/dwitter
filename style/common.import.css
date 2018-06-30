@@ -1,0 +1,20 @@
+/* common.css */
+@import url("./reset.css");
+@import url("./bootstrap.min.css");
+@import url("./font-awesome.min.css");
+@import url("./convert.css");
+@import url("./styles.css");
+@import url("./jquery.fancybox.css");
+@import url("./responsive.css");
+@import url("./flexslider.css");
+
+/*
+@import url("./style/reset.css");
+@import url("./style/bootstrap.min.css");
+@import url("./style/font-awesome.min.css");
+@import url("./style/convert.css");
+@import url("./style/styles.css");
+@import url("./style/jquery.fancybox.css");
+@import url("./style/responsive.css");
+@import url("./style/flexslider.css");
+*/
