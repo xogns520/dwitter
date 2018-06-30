@@ -141,11 +141,11 @@
 	}
 	function gfContentVoteActionCallback(){
 		if ( "done" == data ){
-			alert("보팅성");
+			alert("보팅성공");
 			gfMenuContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
-			alert("글쓰기 실패");
+			alert("보팅 실패");
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
@@ -180,6 +180,10 @@
 			},
 			error: function(data, status, err) {
 				/* 서버와 통신중 오류가 발생하였습니다. */
+				alert("서버와 통신중 오류가 발생하였습니다.");
+				console.log(data);
+				console.log(status);
+				console.log(err);
 				if(data.status != 0){
 					//gfMsgBox();
 				}
