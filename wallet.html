@@ -6,7 +6,7 @@
     <title>Dabble Dabble</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Andrew Coutts">
-    <meta name="Description" content="ERP is a free and open-source tool to display the current price for EOSIO network storage and bandwidth resources.">
+    <meta name="Description" content="Dabble Write what you think">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57.png" />
@@ -32,14 +32,7 @@
     <!-- Favicons -->
 
     <!-- Sripts -->
-    <link href="./style/reset.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="./style/bootstrap.min.css" rel="stylesheet" />
-    <link href="./style/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="./style/convert.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="./style/styles.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="./style/jquery.fancybox.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="./style/responsive.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="./style/flexslider.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="./style/common.import.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <script src="./script/modernizr.js" type="text/javascript"></script>
     <script src="./script/jquery-1.12.4.min.js" type="text/javascript"></script>
@@ -98,10 +91,6 @@
         <div class="container clearfix">
           <!-- GLOBAL ALERT BANNER -->
           
-          <div class="alert alert-info" id="headeralert" role="alert">
-            <center><strong>Heads Up!</strong> <BR> 공지 및 알림 <BR> 전송이 완료되었습니다. 지갑에서 토큰 전송 후 메시지창으로 사용가능할지 확인.</center>
-          </div>
-          
           <!-- END GLOBAL ALERT BANNER -->
 
           <!-- ITEMS PERSISTED ON ALL PAGES -->
@@ -117,7 +106,7 @@
 			            <!-- END PERSISTED ITEMS -->
 			
 			            <!-- LANDING PAGE ITEMS -->
-			            <div class="element tile-5 home bg-change">
+			            <div class="element tile-m calc bg-change">
 			            <!-- <div class="element tile-2 calc bg-change"> -->
 			              <!-- <p class="small">토큰송금</p> -->
 			              토큰송금
@@ -126,13 +115,24 @@
 			                
 							<div class="form-group">
 								<label class="col-form-label" for="inputDefault">내 지갑주소</label>
-								<input type="text" class="form-control" style="min-width: 300px;"  placeholder="0x50CfE9f97f8fa857F055824b4d2C4B8faA5969B2" id="inputDefault" readonly="readonly">
+								<select class="form-control" style="width: 100%; id="exampleSelect1">
+									<option>0xa0CfE9f97f8fa857F044824b4d2C4B8faA7169Bf</option>
+									<option>0xa0CfE9f97f8fa857F012524fefcC4766aA596777</option>
+									<option>0xa0CfE9f97f8fa857F044824b4d2C4B8faA7169Bf</option>
+									<option>0xa0CfE9f97f8fa857F012524fefcC4766aA596777</option>
+								</select>
 							</div>
 
 							<div class="form-group">
+								<button type="button" class="btn btn-primary btn-block">지갑주소복사</button>
+							</div>
+							
+							<hr style="margin-top: 10px; margin-bottom: 10px;">
+							
+							<div class="form-group">
 							  <fieldset>
 							    <label class="control-label" for="readOnlyInput">송금 정보</label>
-							    <input class="form-control" style="min-width: 300px;" id="readOnlyInput" type="text" placeholder="송금할 주소">
+							    <input class="form-control" id="readOnlyInput" type="text" placeholder="송금할 주소">
 							  </fieldset>
 							</div>
 
@@ -147,11 +147,11 @@
 									<option>BTC(Bitcoin)</option>
 									<option>ETH(Ethereum)</option>
 								</select>
-								<button type="button" class="btn btn-primary">최대 수량</button>
+								<button type="button" style="width: 18%;" class="btn btn-primary">최대 수량</button>
 							</div>
 							
 							<div class="form-group">
-								<input class="form-control" style="min-width: 300px;" id="readOnlyInput" type="text" placeholder="메모">
+								<input class="form-control" id="readOnlyInput" type="text" placeholder="메모">
 							</div>
 							
 							<div class="form-group">
@@ -284,7 +284,7 @@
               </p>
             </div>
             <div class="col">
-              <ul class="social-list clearfix col">각종링
+              <ul class="social-list clearfix col">각종링크
                 <li> <a href="https://t.me/"><i class="fa fa-telegram"></i></a> </li>
                 <li> <a href="mailto:"><i class="fa fa-envelope"></i></a> </li>
                 <li> <a href="https:"><i class="fa fa-meetup"></i></a> </li>
