@@ -47,6 +47,7 @@ function increaseVote(id, vote){
       			//calling write reply
 	      		var orig = result.voting;
 	      		var newValue = vote + orig;
+			console.log("increaseVote",orig, vote);
 	      		var newvalues = { $set: {voting : newValue } };
 	      		dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
 		      		if (err) throw err;
