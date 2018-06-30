@@ -78,54 +78,67 @@ h4#headertitle {
 /*Small devices (portrait tablets):*/
 @media only screen and (max-width: 668px) {
 	/* re-arrange footer on smaller screens */
-#eosnylogo {
-bottom: 35px
-}
-#sourcecode {
-position: relative;
-}
-.social-list {
-padding-bottom: 16px;
-bottom: 51px
-}
-.container {
-	width: 320px;
-}
-.client {
-	width: 50%;
-}
-.tile-1 {
-	height: 214px;
-}
-.tile-2 {
-	width: 280px;
-	height: auto;
-	padding: 30px 35px 20px 35px;
-}
-.tile-4 {
-	width: 280px;
-	height: auto;
-}
-.tile-5 {
-	height: 1190px;
-}
-.element, .image-overlay {
-	width: 300px !important;
-}
-h1, h2 {
-	font-size: 28px;
-	letter-spacing: -0.5px;
-	margin-bottom: 20px;
-}
-#piechart {
-	width: 360px;
-	height: 280px;
-	cursor: default;
-	margin-left: -30px;
-}
-.piechart-tile {
-	height: 340px;
-}
+	#eosnylogo {
+	bottom: 35px
+	}
+	#sourcecode {
+	position: relative;
+	}
+	.social-list {
+	padding-bottom: 16px;
+	bottom: 51px
+	}
+	.container {
+		width: 320px;
+	}
+	.client {
+		width: 50%;
+	}
+	.tile-1 {
+		height: 214px;
+	}
+	.tile-2 {
+		width: 280px;
+		height: auto;
+		padding: 30px 35px 20px 35px;
+	}
+	.tile-4 {
+		width: 280px;
+		height: auto;
+	}
+	.tile-5 {
+		height: 1190px;
+	}
+	.element, .image-overlay {
+		width: 300px !important;
+	}
+	h1, h2 {
+		font-size: 28px;
+		letter-spacing: -0.5px;
+		margin-bottom: 20px;
+	}
+	#piechart {
+		width: 360px;
+		height: 280px;
+		cursor: default;
+		margin-left: -30px;
+	}
+	.piechart-tile {
+		height: 340px;
+	}
+	
+	.form-control{
+		margin-top: 5px;
+		margin-bottom: 5px;
+		width: 100% !important;
+	}
+	button{
+		margin-top: 5px;
+		margin-bottom: 5px;
+		width: 100% !important;
+	}
+
+
 }
 
 /*Extra small devices (phones):*/
