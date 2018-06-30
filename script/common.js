@@ -139,7 +139,7 @@
 		gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
 		
 	}
-	function gfContentVoteActionCallback(){
+	function gfContentVoteActionCallback(data){
 		if ( "done" == data ){
 			alert("보팅성공");
 			gfMenuContentList();
