@@ -793,6 +793,27 @@ section.same-color-as-previous-section {
   height; 700px;
   padding: 30px 35px 20px 35px;
 }
+
+.tile-s {
+	width: 380px;
+	height: 180px;
+	padding: 30px 35px 20px 35px;
+}
+.tile-s-line {
+	width: 380px;
+	padding: 30px 35px 20px 35px;
+}
+.tile-m {
+	width: 580px;
+	height: 620px;
+	padding: 30px 20px 20px 20px;
+}
+.tile-m-line {
+	width: 580px;
+	padding: 30px 20px 20px 20px;
+}
+
+
 .element.bg-change {
 	background: #fff;
 	transition: box-shadow 0.3s ease-in-out;
