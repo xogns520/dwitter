@@ -53,7 +53,7 @@
 		var fnCallback = gfContentWriteActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmWrite'),fnCallback,"POST");
 	}
-	function gfContentWriteActionCallback(){
+	function gfContentWriteActionCallback(data){
 		if ( "done" == data ){
 			alert("글쓰기 성공");
 			gfContentList();
@@ -86,7 +86,7 @@
 		gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
 		
 	}
-	function gfContentVoteActionCallback(){
+	function gfContentVoteActionCallback(data){
 		if ( "done" == data ){
 			alert("보팅성공");
 			gfContentList();
