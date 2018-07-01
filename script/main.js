@@ -6,7 +6,7 @@ $(function() {
 	  console.log("==========================================main.js");
 	  //return ;
   }
-  $('#menu-button, #menu-close-button').on('click touchend', function(e) {
+  $('#nav-button, #menu-close-button').on('click touchend', function(e) {
     e.preventDefault();
     $('body').toggleClass('pushed-left');
     $('#menu-button').toggleClass('open');
