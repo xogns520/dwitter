@@ -86,8 +86,7 @@ function compareAccount(id, pass, cb){
 				cb(false)				
     			db.close();   
    		});
-  	}); 
-	
+  	}); 	
 }
 
 function readData(account, page, cb){
@@ -154,6 +153,7 @@ function readData(account, page, cb){
 			  //error case
 			  res.send("false");
 		  }
+	  });
 		 
 
   });
