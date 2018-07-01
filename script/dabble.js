@@ -23,7 +23,9 @@
 						+ '	<table style="width: 100%;">'
 						+ '		<tr>'
 						+ '			<td>'
+						//+ '				<abbr id="tooltiptDiv" title="' + data[x].account + '" rel="tooltip">자세히보기</abbr>'
 						+ '				<h4 class="header icon-to-the-right">' + data[x].account + '</h4>'
+//						+ '				<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom" aria-describedby="tooltip113771">Bottom</button>'
 						+ '			</td>'
 						+ '			<td  style="text-align:right; margin: 0px;">'
 //+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + imgIdx + '.png">'
@@ -39,6 +41,8 @@
 			
 			$("div[id='contentList']").append(strHtml);
 		}
+		//$("[data-toggle='tooltip']").tooltip();
+		//gfTooltip();
 	}
 	
 	/**
@@ -56,6 +60,7 @@
 	function gfContentWriteActionCallback(data){
 		if ( "done" == data ){
 			alert("글쓰기 성공");
+			$("#contentTextarea").val("");
 			gfContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
