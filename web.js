@@ -74,6 +74,22 @@ function increaseVote(id, vote){
         });
 }
 
+function compareAccount(id, pass, cb){
+	MongoClient.connect(url, function(err, db) {
+   		var dbo = db.db("heroku_dg3d93pq");
+   		var findquery = { account : id };
+   		dbo.collection("user").findOne(findquery, function(err, res){
+    			if (err) throw err;
+    			if (res != null)
+			    cb(true);
+			else
+				cb(false)				
+    			db.close();   
+   		});
+  	}); 
+	
+}
+
 function readData(account, page, cb){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
@@ -130,7 +146,16 @@ function readData(account, page, cb){
 	  var pass = req.body.pass;
 	  console.log("login event", id, pass);
 	  //make session and return number//
-	  res.send("done");
+	  compareAccount(id, pass, (result) => {
+		  if(result == true){
+			  //make session and return
+			  res.send("done");
+		  }else{
+			  //error case
+			  res.send("false");
+		  }
+		 
+
   });
 
   app.post("/vote", function(req, res) { 
