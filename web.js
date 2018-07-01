@@ -34,6 +34,7 @@ function saveData(account, data){
   	}); 
 }
 
+//return done, fail and duplicated
 function saveAccount(account, pass){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
