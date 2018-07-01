@@ -92,7 +92,7 @@
 			gfContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
-			alert("글쓰기 실패");
+			alert("보팅실패");
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
