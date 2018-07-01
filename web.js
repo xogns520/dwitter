@@ -34,6 +34,20 @@ function saveData(account, data){
   	}); 
 }
 
+function saveAccount(account, pass){
+	MongoClient.connect(url, function(err, db) {
+   		var dbo = db.db("heroku_dg3d93pq");
+		var tod = Date.now();
+
+   		var myobj = { account : account, pass : pass, date : tod, wallet : 0 };
+   		dbo.collection("user").insertOne(myobj, function(err, res){
+    			if (err) throw err;
+    			console.log("1 user inserted");
+    			db.close();   
+   		});
+  	}); 
+}
+
 function increaseVote(id, vote){
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
@@ -95,6 +109,18 @@ function readData(account, page, cb){
 	  console.log("write event", user, data);
 	  //save this data to mongoDB//
 	  saveData(user, data);
+	  res.send("done");
+  });
+
+  app.post("/register", function(req, res) { 
+	  
+	/* some server side logic */
+
+	  var id = req.body.id;
+	  var pass = req.body.pass;
+	  console.log("register event", id, pass);
+	  //save this data to mongoDB//
+	  saveAccount(id, pass);
 	  res.send("done");
   });
 
