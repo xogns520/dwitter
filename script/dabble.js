@@ -81,7 +81,7 @@
 	function gfContentVoteAction(id){
 		$("#frmVote #id").val(id);
 		$("#frmVote #vote").val(1);
-		var sAction = "/write";
+		var sAction = "/vote";
 		var fnCallback = gfContentVoteActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
 		
