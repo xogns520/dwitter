@@ -125,6 +125,14 @@ function readData(account, page, cb){
 	  res.send("done");
   });
 
+  app.post("/login", function(req, res) { 
+	  var id = req.body.id;
+	  var pass = req.body.pass;
+	  console.log("login event", id, pass);
+	  //make session and return number//
+	  res.send("done");
+  });
+
   app.post("/vote", function(req, res) { 
 	  
 	/* some server side logic */
