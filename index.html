@@ -30,17 +30,33 @@
 	<meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
 	<!-- Favicons -->
 
-    <!-- Sripts -->
-    <link href="./style/common.import.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <script src="./script/modernizr.js" type="text/javascript"></script>
-    <script src="./script/jquery-1.12.4.min.js" type="text/javascript"></script>
-    <script src="./script/jquery.isotope.load.js" type="text/javascript"></script>
+	<!-- Sripts -->
+	<link href="./style/common.import.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<script src="./script/modernizr.js" type="text/javascript"></script>
+	<script src="./script/jquery-1.12.4.min.js" type="text/javascript"></script>
+	<script src="./script/jquery.isotope.load.js" type="text/javascript"></script>
 	<script>
 		$(function(){
 			gfContentList();
-		});    
-    </script>
+			//gfTooltip();
+			//시스템 기본 색상 
+			//00548e
+		});
+		
+		function loginChk(){
+			gfIsLoginAction(loginChkCallback);
+		}
+		function loginChkCallback(data){
+			if ( data ){
+				$("#btnContentWrite").click();
+			}else{
+				alert("로그인 후 사용하세요.");
+			}
+		}
+		
+		
+	</script>
 	<!-- Scripts -->
 </head>
 <body>
@@ -104,9 +120,7 @@
 			<h4 id="headertitle">Dabble Write what you think</h4>
 			<nav id="main-nav">
 				<ul class="clearfix" id="options">
-					<li> <a href="./app/writetest.html" target="_blank">POST시험</a></li>
-					<li> <a href="./app/readtest.html">READ시험</a></li>
-					<li> <a href="./auth/Dabble_Legal_Protection.pdf">저작권증명</a></li>
+					<li> <a href="./auth/Dabble_Legal_Protection.pdf">저작권증명</a></li>	  
 					<li> <a href="./login.html">로그인</a></li>
 					<li> <a href="./wallet.html">지갑</a></li>
 					<li> <a href="./signup.html">회원가입</a></li>
@@ -130,7 +144,10 @@
 				<!-- ITEMS PERSISTED ON ALL PAGES -->
 				<h4 id="headertitle-inner">Dabble Write what you think</h4>
 				<div id="container">
-					<button type="button" class="button" id="btnContentWrite" data-toggle="modal" data-target="#myModal">글쓰기</button>
+					<button type="button" class="button" id="btnContentWriteView" onClick="javascript:loginChk();">글쓰기</button>
+					<div style="display: none;">
+						<button type="button" class="button" id="btnContentWrite" data-toggle="modal" data-target="#myModal">글쓰기</button>
+					</div>
 					<section id="sectionContentList">
 						<div id="contentList"></div>
 					</section>
