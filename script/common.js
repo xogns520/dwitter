@@ -69,7 +69,6 @@
 		console.log(data);
 	}
 	
-	
 	function gfMemberRegisterAction(){
 		$("#frmSignUp #id").val( $("#userId").val() );
 		$("#frmSignUp #pass").val( $("#userPassword").val() );
@@ -90,5 +89,27 @@
 			alert("회원가입중 오류가 발생하였습니다.");
 		}
 	}
+
+	function gfLoginAction(){
+		$("#frmLogin #id").val( $("#userId").val() );
+		$("#frmLogin #pass").val( $("#userPassword").val() );
+		
+		var sAction = "/login";
+		var fnCallback = gfLoginActionCallback;
+		var formData = $('#frmLogin');
+		var sMethod = "POST";	// GET/POST
+		gfAjaxCallWithForm(sAction, formData, fnCallback, sMethod);
+	}
+	function gfLoginActionCallback(data){
+		if ( "done" == data ){
+			alert("로그인완료");
+			gfContentList();
+		}else if ( "duplicate"== data ){
+			alert("중복된 ID 입니다.");
+		}else if ( "fail"== data ){
+			alert("회원가입중 오류가 발생하였습니다.");
+		}
+	}
+	
 	
 
