@@ -55,20 +55,6 @@
 		});
 	}
 	
-	function gfAjaxTestMaek(id, value){
-		$('#frmTest').append('<input type="hidden" name="'+ id + '" value="'+ value + '" /> ');
-	}
-	function gfAjaxTest(){
-		var sAction = "/test";
-		var fnCallback = gfAjaxTestCallback;
-		var formData = $('#frmTest');
-		var sMethod = "POST";	// GET/POST
-		gfAjaxCallWithForm(sAction, formData, fnCallback, sMethod);
-	}
-	function gfAjaxTestCallback(data){
-		console.log(data);
-	}
-	
 	function gfMemberRegisterAction(){
 		$("#frmSignUp #id").val( $("#userId").val() );
 		$("#frmSignUp #pass").val( $("#userPassword").val() );
@@ -110,6 +96,3 @@
 			alert("회원가입중 오류가 발생하였습니다.");
 		}
 	}
-	
-	
-
