@@ -445,15 +445,15 @@ h1#logo {
 	float: left;
 }
 h1#logo a {
-	background: url(../images/EOS-NY_Horizontal.png) center no-repeat;
+	background: url(../images/logo-dabble.png) center no-repeat;
 	background-size: 182px 70px;
 	width: 182px;
 	height: 70px;
 	text-indent: -9999px;
 	display: block;
 }
-#eosnylogo {
-  background: url(../images/eosny-logo.png) center no-repeat;
+#dabblelogo {
+  background: url(../images/logo-eosix.png) center no-repeat;
   background-size: 60px 82px;
   width: 60px;
   height: 82px;
@@ -503,10 +503,11 @@ h4#headertitle {
   position: relative;
   padding: 0 !important;
   margin: 0;
-  display: block;
+  display: inline;
   margin-left: 50px;
   margin-top: 5px;
   top: 15px;
+  
   float: left;
 }
 h4#headertitle-inner {
@@ -598,9 +599,43 @@ header .phone-number i.fa {
 	-webkit-transition: all 0.2s ease 0s;
 	transition: all 0.2s ease 0s;
 }
+
+
+#menu-button .left {}
+#menu-button .left .cursor {
+	text-align: left;
+	display: inline-block;
+	cursor: pointer;
+	height: 40px;
+	width: 100%;
+	-webkit-transition: all 0.2s ease 0s;
+	transition: all 0.2s ease 0s;
+}
+#menu-button .center {}
+#menu-button .center .cursor {
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+	
+	height: 50px;
+	width: 100%;
+	-webkit-transition: all 0.2s ease 0s;
+	transition: all 0.2s ease 0s;
+}
+#menu-button .right {}
+#menu-button .right .cursor {
+	text-align: right;
+	display: inline-block;
+	height: 40px;
+	cursor: pointer;
+	width: 100%;
+	-webkit-transition: all 0.2s ease 0s;
+	transition: all 0.2s ease 0s;
+}
+
 #nav-button {
 	display: inline-block;
-	width: 19px;
+	width: 56px;
 	height: 56px;
 	margin: 0;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -810,6 +845,17 @@ section.same-color-as-previous-section {
 }
 .tile-m-line {
 	width: 580px;
+	padding: 30px 20px 20px 20px;
+}
+.tile-l {
+	width: 900px;
+	height: 700px;
+	text-align: center;
+	padding: 30px 20px 20px 20px;
+}
+.tile-l-line {
+	width: 900px;
+	text-align: center;
 	padding: 30px 20px 20px 20px;
 }
 
@@ -1542,6 +1588,52 @@ ul.pagination li a.active:hover {
 .hint {
   font-size: 13px;
   font-style: italic;
+}
+
+
+#tooltip
+{
+    text-align: center;
+    color: #fff;
+    background: #111;
+    position: absolute;
+    z-index: 100;
+    padding: 15px;
+}
+ 
+#tooltip:after /* triangle decoration */
+{
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #111;
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    margin-left: -10px;
+}
+
+#tooltip.top:after
+{
+    border-top-color: transparent;
+    border-bottom: 10px solid #111;
+    top: -20px;
+    bottom: auto;
+}
+
+#tooltip.left:after
+{
+    left: 10px;
+    margin: 0;
+}
+
+#tooltip.right:after
+{
+    right: 10px;
+    left: auto;
+    margin: 0;
 }
 /* =End Custom
 --------------------------------------------------------------------------------------------------------*/
