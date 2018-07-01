@@ -36,6 +36,7 @@
 	<script src="./script/modernizr.js" type="text/javascript"></script>
 	<script src="./script/jquery-1.12.4.min.js" type="text/javascript"></script>
 	<script src="./script/jquery.isotope.load.js" type="text/javascript"></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<!-- Scripts -->
 </head>
 <body>
@@ -116,10 +117,10 @@
 		    <!-- GLOBAL ALERT BANNER -->
 			<!-- END GLOBAL ALERT BANNER -->
 			
-				<h4 id="headertitle-inner">Dabble Wallet</h4>
+				<h4 id="headertitle-inner"></h4>
 				<div id="container">
 					<div id="contentList">
-						<div class="element tile-5 home bg-change">
+						<div class="element tile-5 home bg-change">로그인
 							<div>
 								<div class="form-group">
 									<label for="userId">ID</label>
@@ -128,6 +129,9 @@
 								<div class="form-group">
 									<label for="pass">Password</label>
 									<input type="password" class="form-control" id="userPassword" placeholder="Password">
+								</div>
+								<div style="text-align: center;">
+									<div class="g-recaptcha" data-sitekey="6LdirWEUAAAAAPnOPSQlCygcUp_qMCFeIuSzr_RR"></div>
 								</div>
 								<div class="form-group">
 									<button type="button" class="btn btn-primary btn-block" onClick="javascript:gfLoginAction();">Login</button>
