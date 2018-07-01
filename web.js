@@ -140,6 +140,16 @@ function readData(account, page, cb){
 	  res.send("done");
   });
 
+  app.post("/isLogin", function(req, res) { 
+	  
+	/* some server side logic */
+
+	  var id = req.body.id;
+	  console.log("isLogin event", id);
+	  //save this data to mongoDB//
+	  res.send("true");
+  });
+
   app.post("/login", function(req, res) { 
 	  var id = req.body.id;
 	  var pass = req.body.pass;
