@@ -85,9 +85,9 @@ function compareAccount(id, pass, cb){
    		dbo.collection("user").findOne(findquery, function(err, res){
     			if (err) throw err;
     			if (res != null)
-			    cb("done");
+			    cb(true);
 			else
-				cb("fail")				
+				cb(false)				
     			db.close();   
    		});
   	}); 	
