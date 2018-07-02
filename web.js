@@ -147,7 +147,7 @@ function readData(account, page, cb){
   app.post("/isLogin", function(req, res) { 
 	  
 	/* some server side logic */
-	  if(req.body.length != 0){
+	  if(req.body != undefined && req.body != null ){
 	  	var id = req.body.id;
 	  	console.log("isLogin event", id);
 	  }else{
