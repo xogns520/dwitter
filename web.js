@@ -159,6 +159,7 @@ function readData(account, page, cb){
 			  "id" : null
 	  };
 	  
+	  console.log("isLogin",req.session.account,id);
 	 
 	  if(req.session.account == id){
 		  var body;
