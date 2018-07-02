@@ -32,9 +32,7 @@
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
-						+ '	<table class="preCon" style="width: 350px;">'
-						+ '	<p>' + data[x].data + '</p>'
-						+ '	</table>'
+						+ '	<p class="preCon">' + data[x].data + '</p>'
 						+ '	<p></p>'
 						+ '	<p class="hint">'+ data[x].voting + '명이 Voting</p>'
 						+ '	<button type="button" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x]._id + '\');" >보팅</button>';
