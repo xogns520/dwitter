@@ -178,13 +178,14 @@ function readData(account, page, cb){
 	  var id = req.body.id;
 	  var pass = req.body.pass;
 	  //save id information
-	  req.session.account = id;
+
 	  console.log("login event", id, pass);
 	  //make session and return number//
 	  compareAccount(id, pass, (result) => {
 		  if(result == true){
 			  //make session and return
 			  console.log("login with session id", req.session.id);
+			  req.session.account = id;
 			  res.send(req.session.id);
 		  }else{
 			  //error case
