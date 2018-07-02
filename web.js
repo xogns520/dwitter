@@ -161,8 +161,12 @@ function readData(account, page, cb){
 		  body.id = id;
 	  	  res.send(body)
 	  }
-	  else
-		  res.send("fail" + "null");
+	  else{
+		  var body;
+		  body.result = fail;
+		  body.id = "null";
+	  	  res.send(body)
+	  }
   });
 
   app.post("/login", function(req, res) { 
