@@ -22,8 +22,7 @@
 /* =1. Clearfix
 --------------------------------------------------------------------------------------------------------*/
 .preCon {
-	white-space : pre-wrap;
-	word-wrap : break-word;
+	white-space : pre-line;	
 }
 .clear {
 	clear: both;
