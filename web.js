@@ -157,13 +157,13 @@ function readData(account, page, cb){
 	 
 	  if(req.session.account == id){
 		  var body;
-		  body.result = true;
+		  body.result = "true";
 		  body.id = id;
 	  	  res.send(body)
 	  }
 	  else{
 		  var body;
-		  body.result = fail;
+		  body.result = "fail";
 		  body.id = "null";
 	  	  res.send(body)
 	  }
