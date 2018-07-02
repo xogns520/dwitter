@@ -106,6 +106,21 @@ function increaseVote(id, vote){
 
 }
 
+function readWallet(user, cb){
+	MongoClient.connect(url, function(err, db) {
+   		var dbo = db.db("heroku_dg3d93pq");
+   		var findquery = { account : user };
+   		dbo.collection("user").findOne(findquery, function(err, res){
+    			if (err) throw err;
+    			if (res != null)
+				cb(res.wallet);
+			else
+				cb(0)				
+    			db.close();   
+   		});
+  	}); 	
+}
+
 function compareAccount(id, pass, cb){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
@@ -158,6 +173,18 @@ function readData(account, page, cb){
 	  //save this data to mongoDB//
 	  saveData(user, data);
 	  res.send("done");
+  });
+
+  app.post("/getWallet", function(req, res) { 
+	  
+	/* some server side logic */
+
+	  var user = req.body.user;
+	  console.log("write event", user);
+	  //read wallet info and send the result
+	  readWallet(user, (result) => {
+		  res.send(result);
+	  });
   });
 
   app.post("/register", function(req, res) { 
