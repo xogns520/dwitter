@@ -101,7 +101,8 @@
 	function gfMemberRegisterActionCallback(data){
 		if ( "done" == data ){
 			alert("가입완료");
-			gfContentList();
+			window.location.href="index.html";
+			//gfContentList();
 		}else if ( "duplicate"== data ){
 			alert("중복된 ID 입니다.");
 		}else if ( "fail"== data ){
