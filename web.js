@@ -89,6 +89,7 @@ function increaseVote(id, vote){
 	     		 console.log("nothing to increase vote");
       		}else{
       			//calling write reply
+			increasePay(result.account, 1);
 	      		var orig = result.voting;
 	      		var newValue = parseInt(vote,10) + parseInt(orig,10);
 			console.log("increaseVote",orig, vote);
@@ -101,7 +102,7 @@ function increaseVote(id, vote){
     
         	});
         });
-	increasePay(id, 1);
+
 }
 
 function compareAccount(id, pass, cb){
