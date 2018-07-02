@@ -13,6 +13,7 @@
 
 ## Release note
 version 1.0 - Initial release
+version 1.1 - adding session
 
 
 ## Disclaimer
