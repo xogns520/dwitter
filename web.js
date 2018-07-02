@@ -54,6 +54,7 @@ function saveAccount(account, pass){
 }
 
 function increasePay(id, vote){
+	console.log("increasePay",id);
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
     		var findquery = {account : id};		  
@@ -63,7 +64,7 @@ function increasePay(id, vote){
       			//do nothing
 	     		 console.log("nothing to increase pay");
       		}else{
-			console.log("increasePay",id);
+
 			var newValue = 0;
 			newValue += (parseInt(result.wallet, 10) + 1);
 	      		var newvalues = { $set: {wallet : newValue } };
