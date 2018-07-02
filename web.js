@@ -155,8 +155,12 @@ function readData(account, page, cb){
 	  }
 	  
 	 
-	  if(req.session.account == id)
-	  	  res.send("true"+id)
+	  if(req.session.account == id){
+		  var body;
+		  body.result = true;
+		  body.id = id;
+	  	  res.send(body)
+	  }
 	  else
 		  res.send("fail" + "null");
   });
