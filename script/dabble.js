@@ -32,7 +32,7 @@
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
-						+ '	<table class="preCon" style="width: 100%;">'
+						+ '	<table class="preCon" style="width: 350px;">'
 						+ '	<p>' + data[x].data + '</p>'
 						+ '	</table>'
 						+ '	<p></p>'
