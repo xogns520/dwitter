@@ -154,11 +154,11 @@ function readData(account, page, cb){
 		  id = "__undefined";
 	  }
 	  
-	  res.status(status).send(body)
+	 
 	  if(req.session.account == id)
-	  	  res.status("true").send(id)
+	  	  res.send("true"+id)
 	  else
-		  res.status("fail").send("null");
+		  res.send("fail" + "null");
   });
 
   app.post("/login", function(req, res) { 
