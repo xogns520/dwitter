@@ -161,10 +161,10 @@ function readData(account, page, cb){
 	  
 	  console.log("isLogin",req.session.account,id);
 	 
-	  if(req.session.account == id){
+	  if(req.session.isLogin == true){
 		  var body;
 		  body.result = "true";
-		  body.id = id;
+		  body.id = req.session.account;
 	  	  res.send(body)
 	  }
 	  else{
@@ -187,6 +187,7 @@ function readData(account, page, cb){
 			  //make session and return
 			  console.log("login with session id", req.session.id);
 			  req.session.account = id;
+			  req.session.isLogin = true;
 			  res.send(req.session.id);
 		  }else{
 			  //error case
