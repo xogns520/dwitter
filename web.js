@@ -53,6 +53,30 @@ function saveAccount(account, pass){
   	}); 
 }
 
+function increasePay(id, vote){
+	  MongoClient.connect(url, function(err, db) {
+   		 var dbo = db.db("heroku_dg3d93pq");
+    		var findquery = {account : id};		  
+    		dbo.collection("user").findOne(findquery, function(err, result){
+     			 if(result == null){
+      			//if result is null, then return -1
+      			//do nothing
+	     		 console.log("nothing to increase pay");
+      		}else{
+			console.log("increasePay",id);
+			var newValue += (parseInt(result.wallet, 10) + 1);
+	      		var newvalues = { $set: {wallet : newValue } };
+	      		dbo.collection("user").updateOne(findquery, newvalues, function(err, result){
+		      		if (err) throw err;
+	      		        db.close();
+      			});
+      		}
+    
+        	});
+        });
+}
+
+
 function increaseVote(id, vote){
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
@@ -76,6 +100,7 @@ function increaseVote(id, vote){
     
         	});
         });
+	increasePay(id, 1);
 }
 
 function compareAccount(id, pass, cb){
