@@ -180,10 +180,14 @@ function readData(account, page, cb){
 	/* some server side logic */
 
 	  var user = req.body.user;
-	  console.log("write event", user);
+	  console.log("get Wallet", user);
 	  //read wallet info and send the result
 	  readWallet(user, (result) => {
-		  res.send(result);
+		  var body = {
+			  "result": "done",
+			  "balance" : result
+	  	  };
+		  res.send(body);
 	  });
   });
 
