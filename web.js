@@ -147,16 +147,18 @@ function readData(account, page, cb){
   app.post("/isLogin", function(req, res) { 
 	  
 	/* some server side logic */
-	  if(req.body != undefined && req.body != null ){
+	  if(req.body.id != undefined && req.body.id != null ){
 	  	var id = req.body.id;
 	  	console.log("isLogin event", id);
 	  }else{
 		  id = "__undefined";
 	  }
+	  
+	  res.status(status).send(body)
 	  if(req.session.account == id)
-	  	  res.send("true",id);
+	  	  res.status("true").send(id)
 	  else
-		  res.send("fail",null);
+		  res.status("fail").send("null");
   });
 
   app.post("/login", function(req, res) { 
