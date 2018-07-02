@@ -85,9 +85,9 @@ function compareAccount(id, pass, cb){
    		dbo.collection("user").findOne(findquery, function(err, res){
     			if (err) throw err;
     			if (res != null)
-			    cb(true);
+			    cb("done");
 			else
-				cb(false)				
+				cb("fail")				
     			db.close();   
    		});
   	}); 	
@@ -166,7 +166,7 @@ function readData(account, page, cb){
 			  res.send(req.session.id);
 		  }else{
 			  //error case
-			  res.send("false");
+			  res.send("fail");
 		  }
 	  });
 		 
