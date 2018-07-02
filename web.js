@@ -154,6 +154,11 @@ function readData(account, page, cb){
 		  id = "__undefined";
 	  }
 	  
+	  var body = {
+			  "result": null,
+			  "id" : null
+	  };
+	  
 	 
 	  if(req.session.account == id){
 		  var body;
