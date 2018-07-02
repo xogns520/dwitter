@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser     =        require("body-parser");
 var app = express();
 var path = require('path');
+var session = require('express-session')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -17,6 +18,9 @@ var url = process.env.MONGODB_URI;
 // set the view engine to ejs
 //app.set('view engine', 'ejs');
 //app.set('views',"examples/views");
+
+// Use the session middleware
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
 
 //custom functions
@@ -158,7 +162,8 @@ function readData(account, page, cb){
 	  compareAccount(id, pass, (result) => {
 		  if(result == true){
 			  //make session and return
-			  res.send("done");
+			  console.log("login with session id", req.session.id);
+			  res.send(req.session.id);
 		  }else{
 			  //error case
 			  res.send("false");
