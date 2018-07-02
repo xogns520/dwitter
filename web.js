@@ -64,7 +64,8 @@ function increasePay(id, vote){
 	     		 console.log("nothing to increase pay");
       		}else{
 			console.log("increasePay",id);
-			var newValue += (parseInt(result.wallet, 10) + 1);
+			var newValue = 0;
+			newValue += (parseInt(result.wallet, 10) + 1);
 	      		var newvalues = { $set: {wallet : newValue } };
 	      		dbo.collection("user").updateOne(findquery, newvalues, function(err, result){
 		      		if (err) throw err;
