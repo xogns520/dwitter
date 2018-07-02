@@ -31,8 +31,12 @@
 //+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + imgIdx + '.png">'
 						+ '			</td>'
 						+ '		</tr>'
-						+ '	</table>'
+						+ '		<tr>'
+						+ '			<td>'
 						+ '	<p class="preCon">' + data[x].data + '</p>'
+						+ '			</td>'
+						+ '	</tr>'
+						+ '	</table>'
 						+ '	<p></p>'
 						+ '	<p class="hint">'+ data[x].voting + '명이 Voting</p>'
 						+ '	<button type="button" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x]._id + '\');" >보팅</button>';
