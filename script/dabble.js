@@ -45,8 +45,8 @@
 			
 			$("div[id='contentList']").append(strHtml);
 		}
-		//$("[data-toggle='tooltip']").tooltip();
-		//gfTooltip();
+		$("[data-toggle='tooltip']").tooltip();
+		gfTooltip();
 	}
 	
 	/**
