@@ -150,13 +150,17 @@ function readData(account, page, cb){
 
 	  var id = req.body.id;
 	  console.log("isLogin event", id);
-	  //save this data to mongoDB//
-	  res.send("true");
+	  if(req.session.account == id)
+	  	  res.send("true",id);
+	  else
+		  res.send("fail",null);
   });
 
   app.post("/login", function(req, res) { 
 	  var id = req.body.id;
 	  var pass = req.body.pass;
+	  //save id information
+	  req.session.account = id;
 	  console.log("login event", id, pass);
 	  //make session and return number//
 	  compareAccount(id, pass, (result) => {
