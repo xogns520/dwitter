@@ -23,7 +23,7 @@
 --------------------------------------------------------------------------------------------------------*/
 .preCon {
 	white-space : pre-line;	
-	word-wrap: break-all;
+	word-break: hyphenate;
 }
 .clear {
 	clear: both;
