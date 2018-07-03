@@ -141,7 +141,7 @@
 
 //Teddy, get name call back test
 	function gfContentWrite(data){
-		gfContentWriteAction(data.id);	
+		gfContentWriteActionName(data.id);	
 	}
 
 
