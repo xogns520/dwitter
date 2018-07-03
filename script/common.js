@@ -141,7 +141,7 @@
 
 //Teddy, get name call back test
 	function gfGetUserName(data){
-		alert(data.id);
+		return(data.id);
 	}
 
 
