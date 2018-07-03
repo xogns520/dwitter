@@ -140,8 +140,8 @@
 	}
 
 //Teddy, get name call back test
-	function gfGetUserName(data){
-		return(data.id);
+	function gfContentWrite(data){
+		gfContentWriteAction(data.id);	
 	}
 
 
