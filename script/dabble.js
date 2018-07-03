@@ -49,16 +49,17 @@
 	 * 글 쓰기
 	 * @returns
 	 */
-	function gfContentWriteAction(){
+	async function gfContentWriteAction(){
 		var rand = Number(Math.floor(Math.random() * 8));
-		$("#frmWrite #user").val(gUserArray[rand]);
+		//$("#frmWrite #user").val(gUserArray[rand]);
+		var userName = await gfIsLoginAction(gfGetUserName);
+		$("#frmWrite #user").val(userName);
 		$("#frmWrite #data").val($("#contentTextarea").val());
 		var sAction = "/write";
 		var fnCallback = gfContentWriteActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmWrite'),fnCallback,"POST");
-		//Teddy adding get name test
-		gfIsLoginAction(gfGetUserName);
 	}
+
 	function gfContentWriteActionCallback(data){
 		if ( "done" == data ){
 			//alert("글쓰기 성공");
