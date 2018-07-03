@@ -121,13 +121,10 @@
 		gfAjaxCallWithForm(sAction, formData, fnCallback, sMethod);
 	}
 	function gfLoginActionCallback(data){
-		if ( "done" == data ){
-			alert("로그인완료");
+		if ( "fail" == data ){
+			alert("ID / PW 를 확인하세요.");
+		}else{
 			gfContentList();
-		}else if ( "duplicate"== data ){
-			alert("중복된 ID 입니다.");
-		}else if ( "fail"== data ){
-			alert("회원가입중 오류가 발생하였습니다.");
 		}
 	}
 	
