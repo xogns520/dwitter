@@ -71,7 +71,7 @@
 	}
 
 	//Teddy gfContentWriteAction with Author name
-	async function gfContentWriteAction(userId){
+	async function gfContentWriteActionName(userId){
 		$("#frmWrite #user").val(userId);
 		$("#frmWrite #data").val($("#contentTextarea").val());
 		var sAction = "/write";
