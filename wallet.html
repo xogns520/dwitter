@@ -37,7 +37,34 @@
     <script src="./script/modernizr.js" type="text/javascript"></script>
     <script src="./script/jquery-1.12.4.min.js" type="text/javascript"></script>
     <script src="./script/jquery.isotope.load.js" type="text/javascript"></script>
-    
+	<script>
+		$(function(){
+			gfIsLoginAction(userInfoCallback);
+		});
+		
+		function userInfoCallback(data){
+			if ( "true" == data.result ){
+				$("#frmUserInfo #id").val(data.id)
+				getWalletAction();
+			}else{
+				alert("로그인 후 사용하세요.");
+			}
+		}
+		
+		function getWalletAction(){
+			var sAction = "/getWallet";
+			var fnCallback = getWalletActionCallback;
+			gfAjaxCallWithForm(sAction,$('#frmWallet'),fnCallback,"POST");
+		}
+		function getWalletActionCallback(data){
+			if ( "done" == data.result ){
+				$("#tokenBalance").val(data.balance +" DAB");
+				//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
+			}else{
+				alert("지갑조회실패");
+			}
+		}	
+	</script>
     
     <!-- Scripts -->
   </head>
@@ -112,7 +139,7 @@
 			              <!-- <p class="small">토큰송금</p> -->
 			              토큰송금
 			              <div>
-			                <h4 class="header icon-to-the-right">0 DAB</h4>
+			                <h4 id="tokenBalance" class="header icon-to-the-right">0</h4>
 			                
 							<div class="form-group">
 								<label class="col-form-label" for="inputDefault">내 지갑주소</label>
@@ -299,24 +326,14 @@
         </div>
       </footer>
       
-      
-	<form id="frmWrite">
-		<input type="hidden" id="user" name="user" />
-		<input type="hidden" id="data" name="data" />
+	<form id="frmWallet">
+		<input type="hidden" id="user"   name="user" />
 	</form>
-	<form id="frmRead">
-		<input type="hidden" id="user" name="user" />
-		<input type="hidden" id="page" name="page" />
-	</form>
-	<form id="frmVote">
+	<form id="frmUserInfo">
 		<input type="hidden" id="id"   name="id" />
-		<input type="hidden" id="vote" name="vote" />
 	</form>
-	<form id="frmTest"></form>
-		
-		
+      
 
-	</div>
     <!-- end wrap -->
 
 	</body>
