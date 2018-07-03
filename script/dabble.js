@@ -51,8 +51,8 @@
 	 */
 	async function gfContentWriteAction(){
 		var rand = Number(Math.floor(Math.random() * 8));
-		$("#frmWrite #user").val(gUserArray[rand]);
-		$("#frmWrite #data").val($("#contentTextarea").val());
+		$("#frmWrite #user").val( $("#frmUserInfo #id").va() );
+		$("#frmWrite #data").val( $("#contentTextarea").val() );
 		var sAction = "/write";
 		var fnCallback = gfContentWriteActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmWrite'),fnCallback,"POST");

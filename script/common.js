@@ -135,6 +135,18 @@
 		var sMethod = "POST";	// GET/POST
 		gfAjaxCallWithParam(sAction, param, fnCallback, sMethod);
 	}
+	
+	function gfGetUserInfo(){
+		gfIsLoginAction(gfGetUserInfoCallback);
+	}
+	
+	function gfGetUserInfoCallback(data){
+		if ( "true" == data.result ){
+			$("#frmUserInfo #id").val(data.id);
+		}
+			
+	}
+	
 
 //Teddy, get name call back test
 	function gfContentWrite(data){
