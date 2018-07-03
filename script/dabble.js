@@ -59,7 +59,7 @@
 	}
 	function gfContentWriteActionCallback(data){
 		if ( "done" == data ){
-			alert("글쓰기 성공");
+			//alert("글쓰기 성공");
 			$("#contentTextarea").val("");
 			gfContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
@@ -93,7 +93,7 @@
 	}
 	function gfContentVoteActionCallback(data){
 		if ( "done" == data ){
-			alert("보팅성공");
+			//alert("보팅성공");
 			gfContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
