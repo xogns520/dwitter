@@ -49,7 +49,7 @@
 	 * 글 쓰기
 	 * @returns
 	 */
-	async function gfContentWriteAction(){
+	function gfContentWriteAction(){
 		var rand = Number(Math.floor(Math.random() * 8));
 		$("#frmWrite #user").val( $("#frmUserInfo #id").val() );
 		$("#frmWrite #data").val( $("#contentTextarea").val() );
@@ -71,7 +71,7 @@
 	}
 
 	//Teddy gfContentWriteAction with Author name
-	async function gfContentWriteActionName(userId){
+	function gfContentWriteActionName(userId){
 		$("#frmWrite #user").val(userId);
 		$("#frmWrite #data").val($("#contentTextarea").val());
 		var sAction = "/write";
