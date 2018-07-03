@@ -143,8 +143,17 @@
 	function gfGetUserInfoCallback(data){
 		if ( "true" == data.result ){
 			$("#frmUserInfo #id").val(data.id);
-		}
+			$("#linkUserInfo").show();
+			$("#linkLogin").hide();
+			$("#linkLogout").show();
 			
+		}else{
+			$("#linkUserInfo").hide();
+			$("#linkLogin").show();
+			$("#linkLogout").hide();
+			
+		}
+
 	}
 	
 
