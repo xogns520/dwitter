@@ -124,7 +124,7 @@
 		if ( "fail" == data ){
 			alert("ID / PW 를 확인하세요.");
 		}else{
-			gfContentList();
+			window.location.href="index.html";
 		}
 	}
 	
