@@ -51,7 +51,7 @@
 	 */
 	async function gfContentWriteAction(){
 		var rand = Number(Math.floor(Math.random() * 8));
-		$("#frmWrite #user").val( $("#frmUserInfo #id").va() );
+		$("#frmWrite #user").val( $("#frmUserInfo #id").val() );
 		$("#frmWrite #data").val( $("#contentTextarea").val() );
 		var sAction = "/write";
 		var fnCallback = gfContentWriteActionCallback;
