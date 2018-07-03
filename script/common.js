@@ -139,6 +139,13 @@
 		gfAjaxCallWithParam(sAction, param, fnCallback, sMethod);
 	}
 
+//Teddy, get name call back test
+	function gfGetUserName(data){
+		alert(data.id);
+	}
+
+
+
 	
 	//http://osvaldas.info/elegant-css-and-jquery-tooltip-responsive-mobile-friendly
 	function gfTooltip(){
