@@ -51,9 +51,7 @@
 	 */
 	async function gfContentWriteAction(){
 		var rand = Number(Math.floor(Math.random() * 8));
-		//$("#frmWrite #user").val(gUserArray[rand]);
-		var userName = await gfIsLoginAction(gfGetUserName);
-		$("#frmWrite #user").val(userName);
+		$("#frmWrite #user").val(gUserArray[rand]);
 		$("#frmWrite #data").val($("#contentTextarea").val());
 		var sAction = "/write";
 		var fnCallback = gfContentWriteActionCallback;
@@ -70,6 +68,15 @@
 			alert("글쓰기 실패");
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
+	}
+
+	//Teddy gfContentWriteAction with Author name
+	async function gfContentWriteAction(userId){
+		$("#frmWrite #user").val(userId);
+		$("#frmWrite #data").val($("#contentTextarea").val());
+		var sAction = "/write";
+		var fnCallback = gfContentWriteActionCallback;
+		gfAjaxCallWithForm(sAction,$('#frmWrite'),fnCallback,"POST");
 	}
 	
 	/**
