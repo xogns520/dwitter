@@ -56,6 +56,8 @@
 		var sAction = "/write";
 		var fnCallback = gfContentWriteActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmWrite'),fnCallback,"POST");
+		//Teddy adding get name test
+		gfIsLoginAction(gfGetUserName);
 	}
 	function gfContentWriteActionCallback(data){
 		if ( "done" == data ){
