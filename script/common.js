@@ -128,6 +128,10 @@
 		}
 	}
 	
+	function gfLogoutAction(){
+		alert("로그아웃 되었습니다.");
+	}
+	
 	function gfIsLoginAction(callback){
 		var sAction = "/isLogin";
 		var fnCallback = callback;
