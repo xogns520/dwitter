@@ -177,8 +177,9 @@ function readData(account, page, cb){
 			   foreignField : 'account',
 			   as : 'userdetails'
 			 }
-			}
-			]).sort({date: -1}).toArray(function(err, result){
+			},
+			{$sort: {"date" : -1}},
+			]).toArray(function(err, result){
     			if (err) throw err;
 			//make result for reading
 		        var body = {
