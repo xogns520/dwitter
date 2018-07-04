@@ -187,8 +187,9 @@ function readData(account, page, cb){
 			  "data" : result.data,
 			  "date" : result.date,
 			  "voting" : result.voting,
-			  "profile" : result.userdetails[0].profile 
+			  "profile" : "image7.png"
 	  	        };
+			console.log("join table", result.userdetails);
     			console.log("read complete");
 		        console.log(body);
 			cb(body);
