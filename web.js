@@ -73,7 +73,7 @@ function saveAccount(account, pass){
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
 
-   		var myobj = { account : account, pass : pass, date : tod, wallet : 0 };
+   		var myobj = { account : account, pass : pass, date : tod, wallet : 0, profile : "8.png" };
    		dbo.collection("user").insertOne(myobj, function(err, res){
     			if (err) throw err;
     			console.log("1 user inserted");
