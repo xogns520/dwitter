@@ -14,7 +14,7 @@ function readData(account, page, cb){
 			   foreignField : 'account',
 			   as : 'userdetails'
 			    }
-			   }//,
+			   },
 			  {$sort: {"date" : -1}}
 			]
 		dbo.collection("board").aggregate(agr).toArray(function(err, result){
