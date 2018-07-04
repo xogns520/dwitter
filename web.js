@@ -179,7 +179,7 @@ function readData(account, page, cb){
 			 }
 			},
 			{$sort: {"date" : -1}}
-			];).toArray(function(err, result){
+			]).toArray(function(err, result){
     			if (err) throw err;
 			//make result for reading
 		        var body = {
