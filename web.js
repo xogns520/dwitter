@@ -192,11 +192,13 @@ function readData(account, page, cb){
 			  "voting" : result.voting,
 			  "profile" : "image7.png"
 	  	        };
+			/*
 			console.log("join table", result.userdetails);
 			console.log("test2", result.profile);
     			console.log("read complete");
 		        console.log(body);
-			cb(body);
+			*/
+			cb(result);
     			db.close();   
    		});
   	}); 
