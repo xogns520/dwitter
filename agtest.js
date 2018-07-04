@@ -15,7 +15,7 @@ function readData(account, page, cb){
 			   as : 'userdetails'
 			    }
 			   }//,
-			  //{$sort: {"date" : -1}}
+			  {$sort: {"date" : -1}}
 			]
 		dbo.collection("board").aggregate(agr).toArray(function(err, result){
     			if (err) throw err;
@@ -47,7 +47,7 @@ readData("test", 1,(result) => {
 	//if(result.userdetails != undefined && result.userdetails != null)
 		//console.log("teddy userdetails", result[0].userdetails[0]);
 	for(i = 0;i<result.length;i++){
-		console.log("teddy userdetails", result[i].userdetails);
+		console.log("teddy userdetails", result[i].userdetails[0].profile);
 	}
 	//console.log(result)
 });
