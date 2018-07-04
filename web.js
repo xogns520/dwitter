@@ -180,9 +180,18 @@ function readData(account, page, cb){
 			}
 			]).sort({date: -1}).toArray(function(err, result){
     			if (err) throw err;
+			//make result for reading
+		        var body = {
+			  "id": result._id
+			  "account" : result.account,
+			  "data" : result.data,
+			  "date" : result.date,
+			  "voting" : result.voting,
+			  "profile" : result.userdetails.profile 
+	  	        };
     			console.log("read complete");
-		        console.log(result);
-			cb(result);
+		        console.log(body);
+			cb(body);
     			db.close();   
    		});
   	}); 
