@@ -129,9 +129,19 @@
 	}
 	
 	function gfLogoutAction(){
-		alert("로그아웃 되었습니다.");
+		var sAction = "/logout";
+		var fnCallback = gfLogoutActionCallback;
+		var param = "";
+		var sMethod = "POST";	// GET/POST
+		gfAjaxCallWithParam(sAction, param, fnCallback, sMethod);
 	}
-	
+	function gfLogoutActionCallback(data){
+		if ( "done" == data ){
+			alert("로그아웃 되었습니다.");
+			window.location.href="index.html";
+		}
+	}
+
 	function gfIsLoginAction(callback){
 		var sAction = "/isLogin";
 		var fnCallback = callback;
