@@ -45,6 +45,6 @@ function readData(account, page, cb){
 
 readData("test", 1,(result) => {
 	//if(result.userdetails != undefined && result.userdetails != null)
-		console.log("teddy userdetails", result.userdetails);
+		console.log("teddy userdetails", result[0].userdetails);
 	//console.log(result)
 });
