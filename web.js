@@ -200,7 +200,7 @@ function readData(account, page, cb){
 				else{
 					//console.log("define case");
 					picUrl = result[i].userdetails[0].profile
-				body.push({_id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
+				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl });
 				}
 			}
