@@ -182,7 +182,7 @@ function readData(account, page, cb){
     			if (err) throw err;
 			//make result for reading
 		        var body = {
-			  "id": result._id
+			  "id": result._id,
 			  "account" : result.account,
 			  "data" : result.data,
 			  "date" : result.date,
