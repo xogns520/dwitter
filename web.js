@@ -186,12 +186,13 @@ function readData(account, page, cb){
 			];
 		dbo.collection("board").aggregate(agr).toArray(function(err, result){
 			var body = []; // empty array
+			var picUrl;
 			for(i = 0;i < result.legnth; i++){
 				if(result[i].userdetails[0] == undefined)
 					picUrl = "0.png";
 				else
 					picUrl = result[i].userdetails[0].profile
-				array.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
+				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl });
 			}
     			if (err) throw err;
