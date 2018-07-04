@@ -187,13 +187,15 @@ function readData(account, page, cb){
 		dbo.collection("board").aggregate(agr).toArray(function(err, result){
 			var body = []; // empty array
 			var picUrl;
+			console.log("Readdata size", result.length;
 			for(i = 0;i < result.legnth; i++){
 				if(result[i].userdetails[0] == undefined)
 					picUrl = "0.png";
-				else
+				else{
 					picUrl = result[i].userdetails[0].profile
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl });
+				}
 			}
     			if (err) throw err;
 			//make result for reading
