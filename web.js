@@ -187,7 +187,7 @@ function readData(account, page, cb){
 			  "data" : result.data,
 			  "date" : result.date,
 			  "voting" : result.voting,
-			  "profile" : result.userdetails.profile 
+			  "profile" : result.userdetails[0].profile 
 	  	        };
     			console.log("read complete");
 		        console.log(body);
