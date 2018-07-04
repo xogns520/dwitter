@@ -38,6 +38,25 @@
 	<script src="./script/modernizr.js" type="text/javascript"></script>
 	<script src="./script/jquery-1.12.4.min.js" type="text/javascript"></script>
 	<script src="./script/jquery.isotope.load.js" type="text/javascript"></script>
+	<script>
+		$(function(){
+			
+		});
+		
+		function adCheck(){
+			$("#adboxBtn").removeClass("btn-primary");
+			$("#adboxBtn").addClass("btn-success");
+			$("#adboxBtn").text("완료");
+			
+			//$("#adboxText").prop("disabled","");
+			$("#adboxText").attr("disabled","");
+			
+		    //<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="">
+			
+		}
+		
+	</script>	
+	
 	<!-- Scripts -->
 </head>
 <body>
@@ -135,8 +154,28 @@
 									<label for="pass">Password</label>
 									<input type="password" class="form-control" id="userPassword" placeholder="Password">
 								</div>
+								
+							<div class="form-group">
+								<!-- <input type="text" class="form-control" style="width: 50%; display: inline-block;" placeholder="보낼 수량" id="inputDefault"> -->
+								<img src="./images/addbox_1.png" style="width: 200px; height: 60px; display: inline-block;">
+								
+								<input type="text" class="form-control" id="adboxText" style="width: 30%; display: inline-block;" placeholder="AdBox" >
+								<button type="button" id="adboxBtn" style="width: 40%;" class="btn btn-primary" onClick="javascript:adCheck();">확인</button>
+							</div>
+								
+								
 								<div style="text-align: center;">
-									<img src="./images/addbox_1.png"> 
+									<table>
+									<tr>
+									<td>
+										
+									</td>
+
+									<td>
+										
+									</td>
+									</tr>
+									</table>
 								</div>
 								<div class="form-group">
 									<button type="button" class="btn btn-primary btn-block" onClick="javascript:gfLoginAction();">Login</button>
