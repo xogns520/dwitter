@@ -58,7 +58,7 @@
 		}
 		function getWalletActionCallback(data){
 			if ( "done" == data.result ){
-				$("#tokenBalance").val(data.balance +" DAB");
+				$("#tokenBalance").text(data.balance +" DAB");
 				//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 			}else{
 				alert("지갑조회실패");
