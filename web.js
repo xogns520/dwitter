@@ -189,6 +189,7 @@ function readData(account, page, cb){
 			var picUrl;
 			console.log("Readdata size", result.length);
 			for(i = 0;i < result.legnth; i++){
+				console.log("in for loop");
 				if(result[i].userdetails[0] == undefined){
 					picUrl = "0.png";
 					console.log("undefined case");
