@@ -215,7 +215,7 @@ function readData(account, page, cb){
     			console.log("read complete");
 		        console.log(body);
 			*/
-			
+			console.log(body);
 			cb(body);
     			db.close();   
    		});
