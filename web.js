@@ -173,18 +173,23 @@ function readData(account, page, cb){
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
 		//ToDo : add image path to response
-   		dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
-		/*
+   		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
+		
 		var agr = [{ $lookup:
 			    { from: 'user',
 			   localField: 'account',
 			   foreignField : 'account',
 			   as : 'userdetails'
 			    }
-			   }//,
-			  //{$sort: {"date" : -1}}
-			]
-		dbo.collection("board").aggregate(agr).toArray(function(err, result){ */
+			   },
+			  {$sort: {"date" : -1}}
+			];
+		dbo.collection("board").aggregate(agr).toArray(function(err, result){
+			var body = []; // empty array
+			for(i = 0;i < result.legnth; i++){
+				array.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
+					  voting : result[i].voting,  profile : result[i].userdetails[0].profile});
+			}
     			if (err) throw err;
 			//make result for reading
 		        var body = {
@@ -195,6 +200,9 @@ function readData(account, page, cb){
 			  "voting" : result.voting,
 			  "profile" : "image7.png"
 	  	        };
+										     
+										     
+										     
 			/*
 			console.log("join table", result.userdetails);
 			console.log("test2", result.profile);
