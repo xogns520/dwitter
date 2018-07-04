@@ -42,4 +42,4 @@ function readData(account, page, cb){
 
 
 
-readData("test", 1,(result) => {console(result)});
+readData("test", 1,(result) => {console.log(result)});
