@@ -19,6 +19,7 @@
 		$("div[id='contentList']").empty();
 		
 		for ( var x = 0 ; x < data.length ; x++ ){
+			var imgIdx = Number(Math.floor(Math.random() * 8));
 			var strHtml	= '<div class="element tile-1 home calc bg-change">'
 						+ '	<table style="width: 100%;">'
 						+ '		<tr>'
@@ -28,7 +29,7 @@
 //						+ '				<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom" aria-describedby="tooltip113771">Bottom</button>'
 						+ '			</td>'
 						+ '			<td  style="text-align:right; margin: 0px;">'
-//+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + imgIdx + '.png">'
+						+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + imgIdx + '.png">'
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
