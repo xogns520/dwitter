@@ -169,10 +169,10 @@ function readData(account, page, cb){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
-   		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
-		
+   		dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
+		/*
 		var agr = [{ $lookup:
-			    { from : 'user',
+			    { from: 'user',
 			   localField: 'account',
 			   foreignField : 'account',
 			   as : 'userdetails'
@@ -180,7 +180,7 @@ function readData(account, page, cb){
 			   }//,
 			  //{$sort: {"date" : -1}}
 			]
-		dbo.collection("board").aggregate(agr).toArray(function(err, result){
+		dbo.collection("board").aggregate(agr).toArray(function(err, result){ */
     			if (err) throw err;
 			//make result for reading
 		        var body = {
