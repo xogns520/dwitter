@@ -190,7 +190,7 @@ function readData(account, page, cb){
 			var body = []; // empty array
 			var picUrl;
 			//console.log("Readdata size", result.length);
-			c//onsole.log("before for loop");
+			//onsole.log("before for loop");
 			for(i = 0; i < result.length ; i++){				
 				//console.log("in for loop");
 				if(result[i].userdetails[0] == undefined){
