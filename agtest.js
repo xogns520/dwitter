@@ -47,6 +47,7 @@ readData("test", 1,(result) => {
 	//if(result.userdetails != undefined && result.userdetails != null)
 		//console.log("teddy userdetails", result[0].userdetails[0]);
 	for(i = 0;i<result.length;i++){
+		if(result[i].userdetails[0] != undefined )
 		console.log("teddy userdetails", result[i].userdetails[0].profile);
 	}
 	//console.log(result)
