@@ -196,6 +196,7 @@ function readData(account, page, cb){
 			}
     			if (err) throw err;
 			//make result for reading
+			/*
 		        var body = {
 			  "id": result._id,
 			  "account" : result.account,
@@ -203,7 +204,7 @@ function readData(account, page, cb){
 			  "date" : result.date,
 			  "voting" : result.voting,
 			  "profile" : "image7.png"
-	  	        };
+	  	        };*/
 										     
 										     
 										     
@@ -213,7 +214,8 @@ function readData(account, page, cb){
     			console.log("read complete");
 		        console.log(body);
 			*/
-			cb(result);
+			
+			cb(body);
     			db.close();   
    		});
   	}); 
@@ -325,6 +327,17 @@ function readData(account, page, cb){
 	  });
 		 
 
+  });
+
+  app.post("/logout", function(req, res) { 
+	  
+	/* some server side logic */
+
+	  var id = req.body.id;
+	  req.session.isLogin = false;
+	  console.log("logout event");
+
+	  res.send("done");
   });
 
   app.post("/vote", function(req, res) { 
