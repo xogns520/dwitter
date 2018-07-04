@@ -34,8 +34,7 @@ function readData(account, page, cb){
     			console.log("read complete");
 		        console.log(body);
 			*/
-			if(result.userdetails != undefined && result.userdetails != null)
-				console.log(userdetails);
+
 			cb(result);
     			db.close();   
    		});
@@ -44,4 +43,8 @@ function readData(account, page, cb){
 
 
 
-readData("test", 1,(result) => {console.log(result)});
+readData("test", 1,(result) => {
+	if(result.userdetails != undefined && result.userdetails != null)
+		console.log(userdetails);
+	console.log(result)
+});
