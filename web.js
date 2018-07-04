@@ -169,6 +169,7 @@ function readData(account, page, cb){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
+		//ToDo : add image path to response
    		dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
 		/*
 		var agr = [{ $lookup:
