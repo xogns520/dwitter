@@ -34,6 +34,8 @@ function readData(account, page, cb){
     			console.log("read complete");
 		        console.log(body);
 			*/
+			if(result.userdetails != undefined && result.userdetails != null)
+				console.log(userdetails);
 			cb(result);
     			db.close();   
    		});
