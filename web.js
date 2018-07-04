@@ -184,13 +184,14 @@ function readData(account, page, cb){
 			   },
 			  {$sort: {"date" : -1}}
 			];
+		
 		dbo.collection("board").aggregate(agr).toArray(function(err, result){
 			    			if (err) throw err;
 			var body = []; // empty array
 			var picUrl;
 			console.log("Readdata size", result.length);
 			console.log("before for loop");
-			for(i = 0;i < result.legnth; i++){				
+			for(i = 0; i < result.length ; i++){				
 				console.log("in for loop");
 				if(result[i].userdetails[0] == undefined){
 					picUrl = "0.png";
