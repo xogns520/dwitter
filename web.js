@@ -189,22 +189,22 @@ function readData(account, page, cb){
 			    			if (err) throw err;
 			var body = []; // empty array
 			var picUrl;
-			console.log("Readdata size", result.length);
-			console.log("before for loop");
+			//console.log("Readdata size", result.length);
+			c//onsole.log("before for loop");
 			for(i = 0; i < result.length ; i++){				
-				console.log("in for loop");
+				//console.log("in for loop");
 				if(result[i].userdetails[0] == undefined){
 					picUrl = "0.png";
-					console.log("undefined case");
+					//console.log("undefined case");
 				}
 				else{
-					console.log("define case");
+					//console.log("define case");
 					picUrl = result[i].userdetails[0].profile
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl });
 				}
 			}
-			console.log("after for loop");
+			//onsole.log("after for loop");
 
 			//make result for reading
 			/*
@@ -225,7 +225,7 @@ function readData(account, page, cb){
     			console.log("read complete");
 		        console.log(body);
 			*/
-			console.log(body);
+			//console.log(body);
 			cb(body);
     			db.close();   
    		});
