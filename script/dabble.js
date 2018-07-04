@@ -29,7 +29,7 @@
 //						+ '				<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom" aria-describedby="tooltip113771">Bottom</button>'
 						+ '			</td>'
 						+ '			<td  style="text-align:right; margin: 0px;">'
-						+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + imgIdx + '.png">'
+						+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + data[x].profile + '">'
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
