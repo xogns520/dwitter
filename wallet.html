@@ -53,6 +53,7 @@
 		
 		function getWalletAction(){
 			var sAction = "/getWallet";
+			$("#frmWallet #user").val($("#frmUserInfo #id").val());
 			var fnCallback = getWalletActionCallback;
 			gfAjaxCallWithForm(sAction,$('#frmWallet'),fnCallback,"POST");
 		}
