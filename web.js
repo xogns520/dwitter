@@ -189,9 +189,12 @@ function readData(account, page, cb){
 			var picUrl;
 			console.log("Readdata size", result.length);
 			for(i = 0;i < result.legnth; i++){
-				if(result[i].userdetails[0] == undefined)
+				if(result[i].userdetails[0] == undefined){
 					picUrl = "0.png";
+					console.log("undefined case");
+				}
 				else{
+					console.log("define case");
 					picUrl = result[i].userdetails[0].profile
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl });
