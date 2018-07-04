@@ -36,7 +36,7 @@
 						+ '	<p class="preCon">' + data[x].data + '</p>'
 						+ '	<p></p>'
 						+ '	<p class="hint">'+ data[x].voting + '명이 Voting</p>'
-						+ '	<button type="button" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x]._id + '\');" >보팅</button>';
+						+ '	<button type="button" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" >보팅</button>';
 						+ '	<div name="divStyle" ></div>'
 						+ '</div>';
 			
