@@ -359,7 +359,7 @@ function readData(account, page, cb){
 	  var vote = req.body.vote;
 	  console.log("vote event", id, vote);
 	  //save this data to mongoDB//
-	  increaseVote(id, vote);
+	  increaseVote("용용", vote);
 	  res.send("done");
   });
 
