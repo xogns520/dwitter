@@ -244,6 +244,10 @@ function readData(account, page, cb){
     res.sendfile('./about/about.html')
  });
 
+ app.get("/intro", function(req, res) {
+    res.sendfile('./intro/index.html')
+ });
+
   app.post("/user/add", function(req, res) { 
 	/* some server side logic */
 	  console.log("user add event");
