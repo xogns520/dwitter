@@ -241,7 +241,7 @@ function readData(account, page, cb){
  });
 
  app.get("/about", function(req, res) {
-    res.sendfile('about.html')
+    res.sendfile('./about/about.html')
  });
 
   app.post("/user/add", function(req, res) { 
