@@ -115,23 +115,32 @@ function increaseVote(id, vote){
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
     		var findquery = {_id : ObjectId(id)};		  
-    		dbo.collection("board").findOne(findquery, function(err, result){
-     			 if(result == null){
+    		dbo.collection("board").findOne(findquery, function(err, res){
+     			 if(res == null){
       			//if result is null, then return -1
       			//do nothing
 	     		 console.log("nothing to increase vote");
-      		}else{
-      			//calling write reply
-			increasePay(result.account, 1);
-	      		var orig = result.voting;
-	      		var newValue = parseInt(vote,10) + parseInt(orig,10);
-			console.log("increaseVote",orig, vote);
-	      		var newvalues = { $set: {voting : newValue } };
-	      		dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
-		      		if (err) throw err;
-	      		        db.close();
-      			});
-      		}
+      			}else{
+      				//calling write reply
+				increasePay(result.account, 1);
+	      			var orig = result.voting;
+	      			var newValue = parseInt(vote,10) + parseInt(orig,10);
+				console.log("increaseVote",orig, vote);
+	      			var newvalues = { $set: {voting : newValue } };
+	      			dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
+		      			if (err) throw err;
+	      		        	db.close();
+      				});
+				var tod = Date.now();
+
+   				var myobj = { boardId : res._id,  account, date : tod };
+   				dbo.collection("voting").insertOne(myobj, function(err, res){
+    					if (err) throw err;
+    					console.log("1 document inserted");
+    					db.close();   
+   				});
+			}
+      		
     
         	});
         });
