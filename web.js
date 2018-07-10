@@ -122,8 +122,8 @@ function increaseVote(id, vote){
 	     		 console.log("nothing to increase vote");
       			}else{
       				//calling write reply
-				increasePay(result.account, 1);
-	      			var orig = result.voting;
+				increasePay(res.account, 1);
+	      			var orig = res.voting;
 	      			var newValue = parseInt(vote,10) + parseInt(orig,10);
 				console.log("increaseVote",orig, vote);
 	      			var newvalues = { $set: {voting : newValue } };
