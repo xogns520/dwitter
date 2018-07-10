@@ -111,7 +111,7 @@ function increasePay(id, vote){
 }
 
 
-function increaseVote(id, vote){
+function increaseVote(id, vote, account){
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
     		var findquery = {_id : ObjectId(id)};		  
@@ -133,7 +133,7 @@ function increaseVote(id, vote){
       				});
 				var tod = Date.now();
 
-   				var myobj = { boardId : res._id,  account, date : tod };
+   				var myobj = { boardId : id,  account : account , date : tod };
    				dbo.collection("voting").insertOne(myobj, function(err, res){
     					if (err) throw err;
     					console.log("1 document inserted");
@@ -376,7 +376,7 @@ function readData(account, page, cb){
 	  var vote = req.body.vote;
 	  console.log("vote event", id, vote);
 	  //save this data to mongoDB//
-	  increaseVote(id, vote);
+	  increaseVote(id, vote, req.session.account);
 	  res.send("done");
   });
 
