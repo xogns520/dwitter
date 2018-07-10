@@ -36,14 +36,39 @@
 						+ '	<p class="preCon">' + data[x].data + '</p>'
 						+ '	<p></p>'
 						+ '	<p class="hint">'+ data[x].voting + '명이 Voting</p>'
-						+ '	<button type="button" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" >보팅</button>';
+						+ '	<button type="button" name="btnVote" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" >보팅</button>';
+						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >';
 						+ '	<div name="divStyle" ></div>'
 						+ '</div>';
 			
 			$("div[id='contentList']").append(strHtml);
 		}
+		gfContentReadVoteAction();
 		//$("[data-toggle='tooltip']").tooltip();
 		//gfTooltip();
+	}
+
+	/**
+	 * 리드 보팅
+	 * @returns
+	 */
+	function gfContentReadVoteAction(){
+		$("#frmReadVote #id").val($("#frmUserInfo #id").val());
+		var sAction = "/readvote";
+		var fnCallback = gfContentReadVoteActionCallback;
+		gfAjaxCallWithForm(sAction,$('#frmReadVote'),fnCallback,"POST");
+	}
+	function gfContentReadVoteActionCallback(data){
+		if (  0 < data.length ){
+			for ( var x = 0 ; x < data.length ; x++ ){
+				for ( var y = 0 ; y < $("input[name='hBoardId']").length ; y++ ){
+					if ( data[x].boardId == $("input[name='hBoardId']").eq(y).val() ){
+						$("button[name='btnVote'").eq(y).attr("disabled","");
+						break;
+					}
+				}
+			}
+		}
 	}
 	
 	/**
