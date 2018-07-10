@@ -403,7 +403,7 @@ function readData(account, page, cb){
 	  var vote = req.body.vote;
 	  console.log("vote event", id, vote);
 	  //save this data to mongoDB//
-	  readVote(req.session.account,(result) ==> {res.send(result)});
+	  readVote(req.session.account,(result) => {res.send(result)});
   });
 
 
