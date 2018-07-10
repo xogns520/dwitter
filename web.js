@@ -181,7 +181,7 @@ function readVote(id,cb){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
    		var findquery = { account : id };
-   		dbo.collection("voting").find(findquery).toArrays(function(err, res){
+   		dbo.collection("voting").find(findquery).toArray(function(err, res){
     			if (err) throw err;
     				if (res != null)
 			    		cb(res);
@@ -401,7 +401,7 @@ function readData(account, page, cb){
 
 	  var id = req.body.id;
 	  var vote = req.body.vote;
-	  console.log("vote event", id, vote);
+	  console.log("read vote");
 	  //save this data to mongoDB//
 	  readVote(req.session.account,(result) => {res.send(result)});
   });
