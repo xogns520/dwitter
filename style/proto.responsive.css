@@ -50,9 +50,6 @@
     text-overflow: ellipsis;
 	max-height: 100px; 
 	*/
-	transition-property: width height;
-    transition-duration:0.5s;
-    transition-timing-function: ease-in-out;
 	display: inline-block; 
 	width: 100%; 
 	white-space: nowrap; 
@@ -62,6 +59,7 @@
 	white-space: normal; 
 	line-height: 1.2; 
 	height: 3.6em; 
+	min-height:3.6em;
 	text-align: left; 
 	word-wrap: break-word; 
 	display: -webkit-box; 
@@ -70,8 +68,6 @@
  
 }
 .preConAll {
-    transition-duration:0.5s;
-    transition-timing-function: ease-in-out;
 	white-space : pre-line;	
 	word-break: break-all;
 	
@@ -80,9 +76,6 @@
 /*Larger devices (small laptops):*/
 @media only screen and (max-width: 1200px) {
 .container {
-	width: 900px;
-}
-.containerBody {
 	width: 900px;
 }
 
@@ -96,12 +89,11 @@
 	nav .social-list {
 		padding-bottom: 0;
 	}
+	/* proto01 start */
 	.container {
 		width: 99%;
 	}
-	.containerBody {
-		width: 100%;
-	}
+	/* proto01 end */
 	
 	#menu-button {
 		display: table;
@@ -198,18 +190,24 @@ h4#headertitle {
 	padding-bottom: 16px;
 	bottom: 51px
 	}
+	
+	/* proto01 start */
 	.container {
 		width: 99%;
 	}
+	/* proto01 end */
+	
 	.client {
 		width: 50%;
 	}
 
+	/* proto01 start */
 	.tile-1 {
 	    width: calc(100% - 20px);
 	    text-overflow: ellipsis;
 	    /*padding: 5px 5px 5px 5px;*/
 	}
+	/* proto01 end */
 	/*
 	.tile-2 {
 		width: 280px;
@@ -255,12 +253,11 @@ h4#headertitle {
 		margin-bottom: 5px;
 		width: 100% !important;
 	}
-	button{
-		margin-top: 5px;
-		margin-bottom: 5px;
-		width: 100% !important;
+	
+	.buttonWrite{
+		margin: 10px 10px 10px 10px;
+		width: calc(100% - 20px) !important;
 	}
-
 
 }
 
