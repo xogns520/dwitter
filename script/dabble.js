@@ -19,12 +19,10 @@
 		$("div[id='contentList']").empty();
 		
 		for ( var x = 0 ; x < data.length ; x++ ){
-			var imgIdx = Number(Math.floor(Math.random() * 8));
 			var strHtml	= '<div class="element tile-1 home calc bg-change">'
 						+ '	<table style="width: 100%;">'
 						+ '		<tr>'
 						+ '			<td>'
-//						+ '				<abbr id="tooltiptDiv" title="' + data[x].account + '" rel="tooltip">자세히보기</abbr>'
 						+ '				<h4 class="header icon-to-the-right">' + data[x].account + '</h4>'
 //						+ '				<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom" aria-describedby="tooltip113771">Bottom</button>'
 						+ '			</td>'
@@ -33,20 +31,44 @@
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
-						+ '	<p class="preCon">' + data[x].data + '</p>'
-						+ '	<p></p>'
-						+ '	<p class="hint">'+ data[x].voting + '명이 Voting</p>'
-						+ '	<button type="button" name="btnVote" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" >보팅</button>'
+						+ '	<div name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
+//						+ '	<div name="viewDetail" style="display: none;">' + data[x].data + '</div>'
+						+ '	<div style="margin: 5px;"></div>'
+						+ '	<div class="hint">'+ data[x].voting + '명이 Voting</div>'
+						+ '	<div style="margin: 5px;"></div>'
+						+ '	<button type="button" name="btnVote" style="width:100%;" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" >보팅</button>'
+//						+ '	<abbr id="tooltiptDiv" title="' + data[x].data + '" rel="tooltip">상세보기1-툴팁</abbr>'
+						+ '	<div style="margin: 5px;"></div>'
+						+ '	<button type="button" name="btnDetail" style="width:100%; display: none;" class="btn btn-primary" onClick="javascript:fnContentDetail(' + x + ');" >상세보기</button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 						+ '	<div name="divStyle" ></div>'
 						+ '</div>';
 			
 			$("div[id='contentList']").append(strHtml);
+			var obj = $("div[name='viewDefault']").eq(x);
+			if ( gfTextOverCheck(obj) ){
+				$("button[name='btnDetail']").eq(x).show();
+			}
 		}
 		gfContentReadVoteAction();
 		//$("[data-toggle='tooltip']").tooltip();
 		//gfTooltip();
 	}
+	
+	/**
+	 * 내용 상세 조회
+	 * @returns
+	 */
+	function fnContentDetail(idx){
+		if ( $("div[name='viewDefault']").eq(idx).hasClass("preConSimple") ){
+			$("div[name='viewDefault']").eq(idx).removeClass("preConSimple");
+			$("div[name='viewDefault']").eq(idx).addClass("preConDetail");
+		}else{
+			$("div[name='viewDefault']").eq(idx).removeClass("preConDetail");
+			$("div[name='viewDefault']").eq(idx).addClass("preConSimple");
+		}
+	}
+	
 
 	/**
 	 * 리드 보팅

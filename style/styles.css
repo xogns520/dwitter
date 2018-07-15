@@ -21,10 +21,30 @@
 
 /* =1. Clearfix
 --------------------------------------------------------------------------------------------------------*/
-.preCon {
+.preConSimple {
+	width: 100%; 
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: pre-line; 
+	line-height: 1.2; 
+	height: 3.6em; 
+	min-height:3.6em;
+	text-align: left; 
+	word-wrap: break-word; 
+	display: -webkit-box; 
+	-webkit-line-clamp: 3; 
+	-webkit-box-orient: vertical;
+}
+.preConDetail {
 	white-space : pre-line;	
 	word-break: break-all;
+	word-wrap: break-word;
+	line-height: 1.2;
+	min-height:3.6em;
+	display: -webkit-box; 
+	-webkit-box-orient: vertical;	
 }
+
 .clear {
 	clear: both;
 }

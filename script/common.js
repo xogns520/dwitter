@@ -191,6 +191,19 @@
 		//$(document).on( 'click', 'abbr', toolFunction);
 	}
 	
+	/* html 텍스트 내용이 잘릴경우 overflow true/false 반환 */ 
+	function gfTextOverCheck(obj){
+		var res;
+		var cont = $('<div>'+obj.text()+'</div>').css("display", "table")
+	   				.css("z-index", "-1").css("position", "absolute")
+					.css("font-family", obj.css("font-family"))
+					.css("font-size", obj.css("font-size"))
+					.css("font-weight", obj.css("font-weight")).appendTo('body');
+		res = (cont.width()>obj.width());
+		cont.remove();
+		return res;
+	}
+	
 	function tooltipActive(){
 		target  = $( this );
 	    target.append( '<div id="tooltip"></div>' );
