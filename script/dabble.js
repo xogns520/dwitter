@@ -149,6 +149,17 @@
 		gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
 		
 	}
+	
+	$(document).ready(function() {
+		  $(
+		'now loading'
+		)
+		    .insertBefore('#frmVote')
+		});
+	
+	
+	
+	
 	function gfContentVoteActionCallback(data){
 		if ( "done" == data ){
 			//alert("보팅성공");
@@ -160,3 +171,20 @@
 		}
 	}
 	
+	
+	$(document).ready(function() {
+		  $('
+		Loading...
+		')
+		    .insertBefore('#frmVote')
+		    .ajaxStart(function() {
+		     //호출이시작되면
+		      $(this).show();
+		      //보여준다
+		    }).ajaxStop(function() {
+		    //호출이 끝나면
+		      $(this).hide();
+		      //감춘다.
+		    });
+		});
+
