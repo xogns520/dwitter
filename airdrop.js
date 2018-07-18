@@ -12,19 +12,19 @@ function airDrop(){
      			 if(result == null){
 					 console.log("nothing to increase pay");
 					 db.close();
-      		}else{
+      			}else{
 				for(i = 0;i<result.length;i++){
-					var findquery = {account : result[i].account};	
+					var findquery = {account : result[i].account};			
+	      				var newvalues = { $set: {wallet : 100 } };
+	      				dbo.collection("user").updateOne(findquery, newvalues, function(err, result){
+		      				if (err) throw err;
+	      		        		db.close();
+					});
 				}
-	      		var newvalues = { $set: {wallet : 100 } };
-	      		dbo.collection("user").updateOne(findquery, newvalues, function(err, result){
-		      		if (err) throw err;
-	      		        db.close();
-      			});
-      		}
-    
-        	});
-        });
+			}
+		});
+	  });
 }
+			
 
 airDrop();
