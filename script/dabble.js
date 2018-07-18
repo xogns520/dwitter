@@ -144,9 +144,17 @@
 	function gfContentVoteAction(id){
 		$("#frmVote #id").val(id);
 		$("#frmVote #vote").val(1);
+		
+		for ( var x = 0 ; x < $("input[name='hBoardId'").length ; x++ ){
+			if ( id == $("input[name='hBoardId'").eq(x).val() ){
+				$("button[name='btnVote'").eq(x).attr("disabled","");
+				break;
+			}
+		}
+		
 		var sAction = "/vote";
 		var fnCallback = gfContentVoteActionCallback;
-		gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
+		//gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
 		
 	}
 	
