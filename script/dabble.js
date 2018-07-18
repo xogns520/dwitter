@@ -4,6 +4,7 @@
  * @코멘트   : dabble common 
  */
 
+	var gVoteIdx = null;
 	/**
 	 * 목록 조회
 	 * @returns
@@ -148,13 +149,14 @@
 		for ( var x = 0 ; x < $("input[name='hBoardId'").length ; x++ ){
 			if ( id == $("input[name='hBoardId'").eq(x).val() ){
 				$("button[name='btnVote'").eq(x).attr("disabled","");
+				gVoteIdx = x;
 				break;
 			}
 		}
 		
 		var sAction = "/vote";
 		var fnCallback = gfContentVoteActionCallback;
-		//gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
+		gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
 		
 	}
 	
@@ -164,10 +166,11 @@
 	function gfContentVoteActionCallback(data){
 		if ( "done" == data ){
 			//alert("보팅성공");
-			gfContentList();
+			//gfContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
 			alert("보팅실패");
+			$("button[name='btnVote'").eq(gVoteIdx).attr("disabled",false);
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
