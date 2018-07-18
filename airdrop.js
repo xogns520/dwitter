@@ -8,7 +8,7 @@ function airDrop(){
 	  MongoClient.connect(url, function(err, db) {
    		 var dbo = db.db("heroku_dg3d93pq");
 	  
-    		dbo.collection("user").find(findquery).toArray(function(err, result){
+    		dbo.collection("user").find({}).toArray(function(err, result){
      			 if(result == null){
 					 console.log("nothing to increase pay");
 					 db.close();
