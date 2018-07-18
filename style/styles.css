@@ -22,23 +22,7 @@
 /* =1. Clearfix
 --------------------------------------------------------------------------------------------------------*/
 	
-div#loading{
-height:80px; 
-width:80px; 
-background:#999; 
-border:10px #000 solid;
-} 
 
-div#loading p{
-color:#FFF
-}
-		
-div#loading{ 
-display:none; 
-position:absolute; 
-margin: 100px 0 0 500px;
-}
-	
 
 
 
