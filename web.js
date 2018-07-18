@@ -1,5 +1,7 @@
 //require("./steembot");
 
+require("./airdrop");
+
 
 
 
