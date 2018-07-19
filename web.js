@@ -1,6 +1,8 @@
 //require("./steembot");
+//require("./pass");
 
 require("./airdrop");
+const bcrypt = require('bcrypt');
 
 
 
@@ -77,14 +79,30 @@ function saveAccount(account, pass){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
-
-   		var myobj = { account : account, pass : pass, date : tod, wallet : 0, profile : "8.png" };
-   		dbo.collection("user").insertOne(myobj, function(err, res){
-    			if (err) throw err;
-    			console.log("1 user inserted");
-    			db.close();   
-   		});
+		bcrypt.hash(pass, parseInt(process.env.SALT,10), function(err, hash){
+			var myobj = { account : account, pass : hash, date : tod, wallet : 0, profile : "8.png" };
+   			dbo.collection("user").insertOne(myobj, function(err, res){
+    				if (err) throw err;
+    				console.log("1 user inserted");
+    				db.close();   
+			});
+		});
   	}); 
+}
+
+function readTotalUser(cb){
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dg3d93pq");
+		var col = dbo.collection("user");
+		col.count({}, function(err, count){
+			console.log("readTotalUser", count);
+			var body = {
+			  "count": count
+			}
+			db.close();
+			cb(body);
+		});
+	});
 }
 
 function increasePay(id, vote){
@@ -171,8 +189,14 @@ function compareAccount(id, pass, cb){
    		var findquery = { account : id };
    		dbo.collection("user").findOne(findquery, function(err, res){
     			if (err) throw err;
-    			if (res != null)
-			    cb(true);
+    			if (res != null){
+				bcrypt.compare(pass, res.pass, function(err, result){
+					if(result)
+			    			cb(true);
+					else
+						cb(false);
+				});
+			}
 			else
 				cb(false)				
     			db.close();   
@@ -193,6 +217,33 @@ function readVote(id,cb){
     			db.close();   
    		});
   	}); 	
+}
+
+function setPassword(id,oldPass,newPass,cb){
+	//compare current password
+	//set new password
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dg3d93pq");
+		var findquery = { account : id };
+		dbo.collection("user").findOne(findquery,function(err, res){
+			bcrypt.compare(oldPass, res.pass, function(err, result){
+				if(result){
+					dbo.collection("user").updateOne(findquery, myobj, function(err,result){
+						bcrypt.hash(newPass, parseInt(process.env.SALT,10), function(err, hash){
+							if(hash)
+								cb("OK");
+							else
+								cb("fail");
+							db.close();
+						});
+					});
+				}else{
+					cb("fail");
+						db.close();
+				}
+			});
+		});
+	});	
 }
 
 function readData(account, page, cb){
@@ -407,6 +458,24 @@ function readData(account, page, cb){
 	  console.log("read vote");
 	  //save this data to mongoDB//
 	  readVote(req.session.account,(result) => {res.send(result)});
+  });
+
+  app.post("/readtotaluser", function(req, res) { 
+	  
+	/* some server side logic */
+
+	  console.log("readtotaluser");
+	  readTotalUser((result) => {res.send(result)});
+  });
+
+  app.post("/setpassword", function(req, res) { 
+	  
+	/* some server side logic */
+	  oldPass = req.body.oldpass;
+	  newPass = req.body.newpass;
+	  console.log("setpassword",oldPass, newPass, req.session.account);
+
+	  setPassword(req.session.account, oldPass, newPass, (result) => {res.send(result)});
   });
 
 
