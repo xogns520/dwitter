@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 var mongo = require('mongodb');
 var ObjectId = require('mongodb').ObjectId;
 var MongoClient = require('mongodb').MongoClient;
