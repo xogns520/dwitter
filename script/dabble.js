@@ -88,8 +88,6 @@
 				for ( var y = 0 ; y < $("input[name='hBoardId']").length ; y++ ){
 					if ( data[x].boardId == $("input[name='hBoardId']").eq(y).val() ){
 						$("button[name='btnVote'").eq(y).attr("disabled","");
-						var vCnt = Number($("input[name='hVoteCnt'").eq(y).val());
-						$("input[name='hVoteCnt'").eq(y).val(vCnt +1);
 						break;
 						
 					}
@@ -153,6 +151,9 @@
 		for ( var x = 0 ; x < $("input[name='hBoardId'").length ; x++ ){
 			if ( id == $("input[name='hBoardId'").eq(x).val() ){
 				$("button[name='btnVote'").eq(x).attr("disabled","");
+				
+				var vCnt = Number($("input[name='hVoteCnt'").eq(x).val());
+				$("input[name='hVoteCnt'").eq(x).val(vCnt +1);
 				gVoteIdx = x;
 				break;
 			}
