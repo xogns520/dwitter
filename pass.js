@@ -17,12 +17,13 @@ function passAccount(){
           			var myobj = { $set: {pass : newValue}};
 					var findquery = { account : id };
             			dbo.collection("user").updateOne(findquery, myobj, function(err,result){
-            				db.close();
+
             			});
 				});
 			}
 		});
 	});
+	            				db.close();
 					      
     			
 }
