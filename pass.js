@@ -23,15 +23,20 @@ function passAccount(){
 			for(j=0;j<data.length;j++)
 				console.log(data[j]);
 			
-      			for(i = 0;i< data.length;i++){
+      			for(i = 0; i < data.length ; i++){
 				id = data[i].account;
 				pass = data[i].pass;
+				console.log("before",id,pass);
         			bcrypt.hash(pass, process.env.SALT, function(err, hash){
-          			var newValue = hash;
-          			var myobj = { $set: {pass : newValue}};
+          				var newValue = hash;
+					var myobj = { $set: {pass : newValue}};
 					var findquery = { account : id };
-            			dbo.collection("user").updateOne(findquery, myobj, function(err,result){
-					console.log(id, pass, newValue);
+            				dbo.collection("user").updateOne(findquery, myobj, function(err,result){
+									if (err){
+				console.log(err);
+				throw err;
+			}
+						console.log(id, pass, newValue);
             			});
 				});				
 			}			
