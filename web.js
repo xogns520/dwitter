@@ -471,10 +471,10 @@ function readData(account, page, cb){
   app.post("/setpassword", function(req, res) { 
 	  
 	/* some server side logic */
-
-	  console.log("setpassword");
 	  oldPass = req.body.oldpass;
 	  newPass = req.body.newpass;
+	  console.log("setpassword",oldPass, newPass, req.session.account);
+
 	  setPassword(req.session.account, oldPass, newPass, (result) => {res.send(result)});
   });
 
