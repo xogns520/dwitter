@@ -24,13 +24,10 @@ function passAccount(){
 				console.log(data[j]);
 			
       			for(i = 0; i < data.length ; i++){
-				let id = data[i].account;
-				let pass = data[i].pass;
-				console.log("before",id,pass);
-        			bcrypt.hash(pass, process.env.SALT, function(err, hash){
+        			bcrypt.hash(data[i].pass, process.env.SALT, function(err, hash){
           				var newValue = hash;
 					var myobj = { $set: {pass : newValue}};
-					var findquery = { account : id };
+					var findquery = { account : data[i].account };
             				dbo.collection("user").updateOne(findquery, myobj, function(err,result){
 						if (err){
 							console.log(err);
