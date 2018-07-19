@@ -13,37 +13,30 @@ function passAccount(){
 			}
    		var dbo = db.db("heroku_dg3d93pq");
    		
-   		dbo.collection("user").find().toArray(function(err, res){
+   		dbo.collection("user").find().toArray(function(err, data){
 			if (err){
 				console.log(err);
 				throw err;
 			}
-			console.log(res);
-			console.log("res",res.length);
-			for(j=0;j<res.length;j++)
-				console.log(res[j]);
+			console.log(data);
+			console.log("res",data.length);
+			for(j=0;j<data.length;j++)
+				console.log(data[j]);
 			
       			for(i = 0;i< res.length;i++){
-				id = res[i].account;
-				pass = res[i].pass;
+				id = data[i].account;
+				pass = data[i].pass;
         			bcrypt.hash(pass, process.env.SALT, function(err, hash){
           			var newValue = hash;
           			var myobj = { $set: {pass : newValue}};
 					var findquery = { account : id };
             			dbo.collection("user").updateOne(findquery, myobj, function(err,result){
 					console.log(id, pass, newValue);
-
             			});
-				});
-				
-			}
-			
+				});				
+			}			
 		});
-
-	});
-	            			
-					      
-    			
+	});          						
 }
 
 passAccount();
