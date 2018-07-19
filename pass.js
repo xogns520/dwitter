@@ -7,10 +7,17 @@ var url = process.env.MONGODB_URI;
 
 function passAccount(){
 	MongoClient.connect(url, function(err, db) {
+					if (err){
+				console.log(err);
+				throw err;
+			}
    		var dbo = db.db("heroku_dg3d93pq");
    		
    		dbo.collection("user").find().toArray(function(err, res){
-			if (err) throw err;
+			if (err){
+				console.log(err);
+				throw err;
+			}
 			console.log(res);
 			console.log("res",res.length);
       			for(i = 0;i< res.length;i++){
