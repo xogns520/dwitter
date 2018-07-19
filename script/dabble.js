@@ -91,6 +91,7 @@
 						var vCnt = Number($("input[name='hVoteCnt'").eq(y).val());
 						$("input[name='hVoteCnt'").eq(y).val(vCnt +1);
 						break;
+						
 					}
 				}
 			}
