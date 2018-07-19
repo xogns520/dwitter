@@ -10,14 +10,16 @@ function passAccount(){
    		var dbo = db.db("heroku_dg3d93pq");
    		
    		dbo.collection("user").find({}).toArray(function(err, res){
+			console.log("res",res.length);
       			for(i = 0;i< res.length;i++){
 				id = res[i].account;
-        			bcrypt.hash(res[i].pass, process.env.SALT, function(err, hash){
+				pass = res[i].pass;
+        			bcrypt.hash(pass, process.env.SALT, function(err, hash){
           			var newValue = hash;
           			var myobj = { $set: {pass : newValue}};
 					var findquery = { account : id };
             			dbo.collection("user").updateOne(findquery, myobj, function(err,result){
-					console.log(id, newValue);
+					console.log(id, pass, newValue);
 
             			});
 				});
