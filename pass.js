@@ -32,7 +32,7 @@ function setHash(data){
 		var dbo = db.db("heroku_dg3d93pq");
 		
 	        			bcrypt.hash(data.pass, process.env.SALT, function(err, hash){
-          				var newValue = hash;
+          				var newValue = "1234";
 					var myobj = { $set: {pass : newValue}};
 					var findquery = { account : data.account };
             				dbo.collection("user").updateOne(findquery, myobj, function(err,result){
