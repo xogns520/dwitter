@@ -94,7 +94,7 @@ function readTotalUser(cb){
 		col.count({}, function(err, count){
 			console.log("readTotalUser", count);
 			db.close();
-			cb(count);
+			cb(count.toString());
 		});
 	});
 }
