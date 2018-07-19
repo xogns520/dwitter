@@ -424,11 +424,10 @@ function readData(account, page, cb){
 	  
 	/* some server side logic */
 
-	  var id = req.body.id;
-	  var vote = req.body.vote;
 	  console.log("readtotaluser");
-	  //save this data to mongoDB//
-	  readTotalUser((result) => {res.send(result)});
+	  	  readTotalUser((result) => {res.send(result)});
+
+
   });
 
 
