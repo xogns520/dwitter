@@ -45,6 +45,7 @@ function setHash(data){
 
             				});
 				});
+	});
 }
 
 passAccount();
