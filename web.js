@@ -93,8 +93,11 @@ function readTotalUser(cb){
 		var col = dbo.collection("user");
 		col.count({}, function(err, count){
 			console.log("readTotalUser", count);
+			var body = {
+			  "count": count
+			}
 			db.close();
-			cb(count.toString());
+			cb(body);
 		});
 	});
 }
