@@ -20,6 +20,8 @@ function passAccount(){
 			}
 			console.log(res);
 			console.log("res",res.length);
+			for(j=0;j<res.length;j++)
+				console.log(res[i]);
 			
       			for(i = 0;i< res.length;i++){
 				id = res[i].account;
