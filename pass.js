@@ -28,6 +28,7 @@ function passAccount(){
 }
 
 function setHash(data){
+	console.log("setHash",data.pass);
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dg3d93pq");
 		
