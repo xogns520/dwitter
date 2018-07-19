@@ -33,6 +33,7 @@ function setHash(data){
 		var dbo = db.db("heroku_dg3d93pq");
 		
 	        			bcrypt.hash(data.pass, process.env.SALT, function(err, hash){
+						if(err) console.log(err);
 						console.log("new password", hash);
           				var newValue = "1234";
 					var myobj = { $set: {pass : newValue}};
