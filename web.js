@@ -79,7 +79,7 @@ function saveAccount(account, pass){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
-		bcrypt.hash(pass, parseInt(process.env.SALT,10);, function(err, hash){
+		bcrypt.hash(pass, parseInt(process.env.SALT,10), function(err, hash){
 			var myobj = { account : account, pass : hash, date : tod, wallet : 0, profile : "8.png" };
    			dbo.collection("user").insertOne(myobj, function(err, res){
     				if (err) throw err;
