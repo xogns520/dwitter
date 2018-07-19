@@ -79,7 +79,7 @@ function saveAccount(account, pass){
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
 		bcrypt.hash(pass, 10, function(err, hash){
-			var myobj = { account : account, pass : pass, hash : tod, wallet : 0, profile : "8.png" };
+			var myobj = { account : account, pass : hash, date : tod, wallet : 0, profile : "8.png" };
    			dbo.collection("user").insertOne(myobj, function(err, res){
     				if (err) throw err;
     				console.log("1 user inserted");
