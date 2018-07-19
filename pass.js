@@ -19,12 +19,19 @@ function passAccount(){
 				throw err;
 			}
 			console.log(data);
-			console.log("res",data.length);
-			for(j=0;j<data.length;j++)
-				console.log(data[j]);
-			
+			console.log("res",data.length);			
       			for(i = 0; i < data.length ; i++){
-        			bcrypt.hash(data[i].pass, process.env.SALT, function(err, hash){
+				setHash(data[i]);
+			}			
+		});
+	});          						
+}
+
+function setHash(data){
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dg3d93pq");
+		
+	        			bcrypt.hash(data[i].pass, process.env.SALT, function(err, hash){
           				var newValue = hash;
 					var myobj = { $set: {pass : newValue}};
 					var findquery = { account : data[i].account };
@@ -37,10 +44,7 @@ function passAccount(){
 						}
 
             				});
-				});				
-			}			
-		});
-	});          						
+				});
 }
 
 passAccount();
