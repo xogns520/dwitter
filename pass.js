@@ -32,7 +32,7 @@ function setHash(data){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dg3d93pq");
 		
-	        			bcrypt.hash(data.pass, process.env.SALT, function(err, hash){
+	        			bcrypt.hash(data.pass, parseInt(process.env.SALT,10), function(err, hash){
 						if(err) console.log(err);
 						console.log("new password", hash);
           				var newValue = "1234";
