@@ -31,16 +31,16 @@ function setHash(data){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dg3d93pq");
 		
-	        			bcrypt.hash(data[i].pass, process.env.SALT, function(err, hash){
+	        			bcrypt.hash(data.pass, process.env.SALT, function(err, hash){
           				var newValue = hash;
 					var myobj = { $set: {pass : newValue}};
-					var findquery = { account : data[i].account };
+					var findquery = { account : data.account };
             				dbo.collection("user").updateOne(findquery, myobj, function(err,result){
 						if (err){
 							console.log(err);
 							throw err;
 						}else{
-							console.log(id, pass, newValue);
+							;
 						}
 
             				});
