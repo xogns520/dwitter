@@ -23,7 +23,7 @@ function passAccount(){
 			for(j=0;j<data.length;j++)
 				console.log(data[j]);
 			
-      			for(i = 0;i< res.length;i++){
+      			for(i = 0;i< data.length;i++){
 				id = data[i].account;
 				pass = data[i].pass;
         			bcrypt.hash(pass, process.env.SALT, function(err, hash){
