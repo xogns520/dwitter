@@ -87,7 +87,7 @@ function saveAccount(account, pass){
   	}); 
 }
 
-function readTotalUser(id, cb){
+function readTotalUser(cb){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dg3d93pq");
 		var totalCount = dbo.collection("user").count(function(err, count){
@@ -428,7 +428,7 @@ function readData(account, page, cb){
 	  var vote = req.body.vote;
 	  console.log("readtotaluser");
 	  //save this data to mongoDB//
-	  readTotalUser(id, (result) => {res.send(result)});
+	  readTotalUser((result) => {res.send(result)});
   });
 
 
