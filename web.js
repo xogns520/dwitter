@@ -90,8 +90,9 @@ function saveAccount(account, pass){
 function readTotalUser(cb){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dg3d93pq");
-		var totalCount = dbo.collection("user").count({}, function(err, count){
-			console.log("readTotalUser", totalCount);
+		var col = dbo.collection("user");
+		col.count({}, function(err, count){
+			console.log("readTotalUser", count);
 			db.close();
 			cb(count);
 		});
