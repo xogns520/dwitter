@@ -1,5 +1,5 @@
 //require("./steembot");
-require("./pass");
+//require("./pass");
 
 require("./airdrop");
 const bcrypt = require('bcrypt');
