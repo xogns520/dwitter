@@ -9,6 +9,7 @@
     "steem": "~0.7.1",
     "node-static":"0.7.10",
     "express-session" : "1.15.6",
-    "connect-mongodb-session" : "2.0.3"
+    "connect-mongodb-session" : "2.0.3",
+    "bcrypt" : "3.0.0"
   }
 }
