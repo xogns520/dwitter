@@ -87,6 +87,16 @@ function saveAccount(account, pass){
   	}); 
 }
 
+function readTotalUser(cb){
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dg3d93pq");
+		var totalCount = dbo.collection("user").count();
+		console.log("readTotalUser", totalCount);
+		db.close();
+		cb(totalCount);
+	});
+}
+
 function increasePay(id, vote){
 	console.log("increasePay",id);
 	  MongoClient.connect(url, function(err, db) {
@@ -407,6 +417,17 @@ function readData(account, page, cb){
 	  console.log("read vote");
 	  //save this data to mongoDB//
 	  readVote(req.session.account,(result) => {res.send(result)});
+  });
+
+  app.post("/readtotaluser", function(req, res) { 
+	  
+	/* some server side logic */
+
+	  var id = req.body.id;
+	  var vote = req.body.vote;
+	  console.log("readtotaluser");
+	  //save this data to mongoDB//
+	  readTotalUser(req.session.account,(result) => {res.send(result)});
   });
 
 
