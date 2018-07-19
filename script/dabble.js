@@ -35,7 +35,7 @@
 						+ '	<div name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
 //						+ '	<div name="viewDetail" style="display: none;">' + data[x].data + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<div class="hint">'+ data[x].voting + '명이 Voting</div>'
+						+ '	<div class="hint" name="viewVoteCount">'+ data[x].voting + '명이 Voting</div>'
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<button type="button" name="btnVote" style="width:100%;" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" >보팅</button>'
 //						+ '	<abbr id="tooltiptDiv" title="' + data[x].data + '" rel="tooltip">상세보기1-툴팁</abbr>'
@@ -153,7 +153,10 @@
 				$("button[name='btnVote'").eq(x).attr("disabled","");
 				
 				var vCnt = Number($("input[name='hVoteCnt'").eq(x).val());
-				$("input[name='hVoteCnt'").eq(x).val(vCnt +1);
+				vCnt++;
+				$("input[name='hVoteCnt'").eq(x).val(vCnt);
+				$("div[name='viewVoteCount']").eq(x).text(vCnt + "명이 Voting");
+				
 				gVoteIdx = x;
 				break;
 			}
