@@ -20,6 +20,7 @@ function passAccount(){
 			}
 			console.log(res);
 			console.log("res",res.length);
+			
       			for(i = 0;i< res.length;i++){
 				id = res[i].account;
 				pass = res[i].pass;
@@ -32,8 +33,9 @@ function passAccount(){
 
             			});
 				});
+				
 			}
-						db.close();
+			
 		});
 
 	});
