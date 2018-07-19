@@ -10,6 +10,8 @@ function passAccount(){
    		var dbo = db.db("heroku_dg3d93pq");
    		
    		dbo.collection("user").find({}).toArray(function(err, res){
+			if (err) throw err;
+			console.log(res);
 			console.log("res",res.length);
       			for(i = 0;i< res.length;i++){
 				id = res[i].account;
