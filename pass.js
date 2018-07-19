@@ -9,7 +9,7 @@ function passAccount(){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
    		
-   		dbo.collection("user").find({}).toArray(function(err, res){
+   		dbo.collection("user").find().toArray(function(err, res){
 			if (err) throw err;
 			console.log(res);
 			console.log("res",res.length);
