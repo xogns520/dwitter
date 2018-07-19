@@ -35,7 +35,7 @@ function setHash(data){
 	        			bcrypt.hash(data.pass, parseInt(process.env.SALT,10), function(err, hash){
 						if(err) console.log(err);
 						console.log("new password", hash);
-          				var newValue = hash;
+          				var newValue = "1234";
 					var myobj = { $set: {pass : newValue}};
 					var findquery = { account : data.account };
             				dbo.collection("user").updateOne(findquery, myobj, function(err,result){
