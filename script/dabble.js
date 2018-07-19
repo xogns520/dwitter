@@ -42,6 +42,7 @@
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<button type="button" name="btnDetail" style="width:100%; display: none;" class="btn btn-primary" onClick="javascript:fnContentDetail(' + x + ');" >상세보기</button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
+						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 						+ '	<div name="divStyle" ></div>'
 						+ '</div>';
 			
@@ -87,6 +88,8 @@
 				for ( var y = 0 ; y < $("input[name='hBoardId']").length ; y++ ){
 					if ( data[x].boardId == $("input[name='hBoardId']").eq(y).val() ){
 						$("button[name='btnVote'").eq(y).attr("disabled","");
+						var vCnt = Number($("input[name='hVoteCnt'").eq(y).val());
+						$("input[name='hVoteCnt'").eq(y).val(vCnt +1);
 						break;
 					}
 				}
