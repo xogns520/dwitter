@@ -219,6 +219,33 @@ function readVote(id,cb){
   	}); 	
 }
 
+function setPassword(id,oldPass,newPass,cb){
+	//compare current password
+	//set new password
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dg3d93pq");
+		var findquery = { account : id };
+		dbo.collection("user").findOne(findquery,function(err, res){
+			bcrypt.compare(oldPass, res.pass, function(err, result){
+				if(result){
+					dbo.collection("user").updateOne(findquery, myobj, function(err,result){
+						bcrypt.hash(newPass, parseInt(process.env.SALT,10), function(err, hash){
+							if(hash)
+								cb("OK");
+							else
+								cb("fail");
+							db.close();
+						});
+					});
+				}else{
+					cb("fail");
+						db.close();
+				}
+			});
+		});
+	});	
+}
+
 function readData(account, page, cb){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
@@ -438,9 +465,17 @@ function readData(account, page, cb){
 	/* some server side logic */
 
 	  console.log("readtotaluser");
-	  	  readTotalUser((result) => {res.send(result)});
+	  readTotalUser((result) => {res.send(result)});
+  });
 
+  app.post("/setpassword", function(req, res) { 
+	  
+	/* some server side logic */
 
+	  console.log("setpassword");
+	  oldPass = req.body.oldpass;
+	  newPass = req.body.newpass;
+	  setPassword(req.session.account, oldPass, newPass(result) => {res.send(result)});
   });
 
 
