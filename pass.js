@@ -11,10 +11,11 @@ function passAccount(){
    		
    		dbo.collection("user").find({}).toArray(function(err, res){
       			for(i = 0;i< res.length;i++){
+				id = res[i].account;
         			bcrypt.hash(res[i].pass, process.env.SALT, function(err, hash){
           			var newValue = hash;
           			var myobj = { $set: {pass : newValue}};
-					var findquery = { account : res[i].account };
+					var findquery = { account : id };
             			dbo.collection("user").updateOne(findquery, myobj, function(err,result){
             				db.close();
             			});
