@@ -26,8 +26,9 @@ function passAccount(){
             			});
 				});
 			}
+						db.close();
 		});
-			db.close();
+
 	});
 	            			
 					      
