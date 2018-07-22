@@ -1,84 +1,10 @@
 @charset "utf-8";
 
-/*
-.parent { width: 250px; height:125px;}
-.box {
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    font-size: 20px;
-    left: 0px;
-    top: 0px;
-    position:absolute;
-    -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color;
-    -webkit-transition-duration:0.5s;
-    -webkit-transition-timing-function: ease-in-out;
-    transition-property: width height background-color font-size left top transform -webkit-transform color;
-    transition-duration:0.5s;
-    transition-timing-function: ease-in-out;
-}
-.box1{
-    transform: rotate(270deg);
-    -webkit-transform: rotate(270deg);
-    width: 50px;
-    height: 50px;
-    background-color: blue;
-    color: yellow;
-    font-size: 18px;
-    left: 150px;
-    top:25px;
-    position:absolute;
-    -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color;
-    -webkit-transition-duration:0.5s;
-    -webkit-transition-timing-function: ease-in-out;
-    transition-property: width height background-color font-size left top transform -webkit-transformv color;
-    transition-duration:0.5s;
-    transition-timing-function: ease-in-out;
-}
-
-*/
-
-
-
-/*http://webdir.tistory.com/483*/
-.preCon2 {
-	/*
-	white-space : pre-line;	
-	word-break: break-all;
-	width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-	max-height: 100px; 
-	*/
-	display: inline-block; 
-	width: 100%; 
-	white-space: nowrap; 
-	overflow: hidden; 
-	text-overflow: ellipsis; 
-	/* 여러 줄 자르기 추가 스타일 */ 
-	white-space: normal; 
-	line-height: 1.2; 
-	height: 3.6em; 
-	min-height:3.6em;
-	text-align: left; 
-	word-wrap: break-word; 
-	display: -webkit-box; 
-	-webkit-line-clamp: 3; 
-	-webkit-box-orient: vertical;
- 
-}
-.preConAll {
-	white-space : pre-line;	
-	word-break: break-all;
-	
-}
-
 /*Larger devices (small laptops):*/
 @media only screen and (max-width: 1200px) {
 .container {
 	width: 900px;
 }
-
 }
 
 /*Medium devices (landscape tablets):*/
@@ -89,12 +15,9 @@
 	nav .social-list {
 		padding-bottom: 0;
 	}
-	/* proto01 start */
 	.container {
 		width: 99%;
 	}
-	/* proto01 end */
-	
 	#menu-button {
 		display: table;
 	}
@@ -156,10 +79,7 @@
 	    padding: 30px 35px 20px 35px;
 	}
 	
-	
 }
-
-
 
 /* Move banner down on small devices */
 @media only screen and (max-width: 692px) {
@@ -190,29 +110,21 @@ h4#headertitle {
 	padding-bottom: 16px;
 	bottom: 51px
 	}
-	
-	/* proto01 start */
 	.container {
 		width: 99%;
 	}
-	/* proto01 end */
-	
 	.client {
 		width: 50%;
 	}
-
-	/* proto01 start */
 	.tile-1 {
 	    width: calc(100% - 20px);
 	    text-overflow: ellipsis;
-	    /*padding: 5px 5px 5px 5px;*/
 	}
-	/* proto01 end */
-	/*
 	.tile-2 {
-		width: 280px;
+	    width: calc(100% - 20px);
 		height: auto;
 		padding: 30px 35px 20px 35px;
+		margin-left:10px;
 	}
 	.tile-4 {
 		width: 280px;
@@ -221,6 +133,7 @@ h4#headertitle {
 	.tile-5 {
 		height: 1190px;
 	}
+	/*
 	.element, .image-overlay {
 		width: 300px !important;
 	}
@@ -231,7 +144,7 @@ h4#headertitle {
 	    /*calc(10rem - 56px);*/
 	    /*background: none;*/
 	    border: 1px solid #dedede;
-	}	
+	}
 	
 	
 	h1, h2 {
