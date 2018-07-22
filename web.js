@@ -228,18 +228,24 @@ function setPassword(id,oldPass,newPass,cb){
 		dbo.collection("user").findOne(findquery,function(err, res){
 			bcrypt.compare(oldPass, res.pass, function(err, result){
 				if(result){
-					dbo.collection("user").updateOne(findquery, myobj, function(err,result){
-						bcrypt.hash(newPass, parseInt(process.env.SALT,10), function(err, hash){
-							if(hash)
-								cb("OK");
-							else
-								cb("fail");
+					bcrypt.hash(newPass, parseInt(process.env.SALT,10), function(err, hash){
+						if(hash){
+							cb("OK");
+							var myobj = { $set:{pass : hash}};
+							dbo.collection("user").updateOne(findquery, myobj, function(err,result){
+								console.log("password updated", id);
+								db.close();
+							});
+						}
+						else{
+							cb("fail");
 							db.close();
+						}
 						});
-					});
+	
 				}else{
 					cb("fail");
-						db.close();
+					db.close();
 				}
 			});
 		});
