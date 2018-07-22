@@ -135,14 +135,19 @@
 	function gfGetUserInfoCallback(data){
 		if ( "true" == data.result ){
 			$("#frmUserInfo #id").val(data.id);
+			
+			$("#linkWallet").show();
 			$("#linkUserInfo").show();
 			$("#linkLogin").hide();
 			$("#linkLogout").show();
+			$("#linkSingup").hide();
 			
 		}else{
 			$("#linkUserInfo").hide();
 			$("#linkLogin").show();
+			$("#linkSingup").show();
 			$("#linkLogout").hide();
+			$("#linkWallet").hide();
 			
 		}
 

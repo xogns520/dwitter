@@ -161,17 +161,19 @@
 				break;
 			}
 		}
-		
-		var sAction = "/vote";
-		var fnCallback = gfContentVoteActionCallback;
-		gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
+		gfIsLoginAction(gfContentVoteActionCallback1);
+	}
+	function gfContentVoteActionCallback1(data){
+		if ( "true" == data.result ){
+			var sAction = "/vote";
+			var fnCallback = gfContentVoteActionCallback2;
+			gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
+		}else{
+			alert("로그인 후 사용하세요.");
+		}
 		
 	}
-	
-
-	
-	
-	function gfContentVoteActionCallback(data){
+	function gfContentVoteActionCallback2(data){
 		if ( "done" == data ){
 			//alert("보팅성공");
 			//gfContentList();
