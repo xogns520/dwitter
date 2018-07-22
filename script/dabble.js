@@ -172,13 +172,15 @@
 			gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
 			
 		}else{
+			alert("로그인 후 사용하세요.");
+			/*
 			for ( var x = 0 ; x < $("input[name='hBoardId'").length ; x++ ){
 				if ( $("#frmVote #id").val() == $("input[name='hBoardId'").eq(x).val() ){
 					$("button[name='btnVote'").eq(x).blur();
 					break;
 				}
-			}			
-			alert("로그인 후 사용하세요.");
+			}
+			*/		
 		}
 		
 	}
