@@ -47,25 +47,15 @@
 			$("#adboxBtn").removeClass("btn-primary");
 			$("#adboxBtn").addClass("btn-success");
 			$("#adboxBtn").text("완료");
-			
 			//$("#adboxText").prop("disabled","");
 			$("#adboxText").attr("disabled","");
-			
-		    //<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="">
 			
 		}
 		
 	</script>	
-	<style>
-		html, body {width: 100%; height: 100%;}
-		.container {width: 70%; height: 70%; margin: 0px auto;}
-		.outer {display: table; width: 100%; height: 100%; }
-		
-	</style>
 	<!-- Scripts -->
 </head>
 <body>
-
 	<!-- start preloader -->
 	<div id="preloader">
 		<div id="status">
@@ -142,51 +132,41 @@
 		<!-- end header -->
 
 		<!-- start content -->
-		<div class="container">
-		<div class="outer">
-
-
-		
 		<div id="content">
 			<div class="container clearfix">
-		    <!-- GLOBAL ALERT BANNER -->
-			<!-- END GLOBAL ALERT BANNER -->
-			
+				<!-- GLOBAL ALERT BANNER -->
+				<!-- END GLOBAL ALERT BANNER -->
+				<!-- ITEMS PERSISTED ON ALL PAGES -->
 				<h4 id="headertitle-inner"></h4>
 				<div id="container">
-					<div id="contentList">
-						<div class="element tile-5 home bg-change"><h4>로그인</h><br><br>
-							<div>
-								<div class="form-group">
-									<label for="userId">ID</label>
-									<input class="form-control" id="userId" type="text" placeholder="">
-								</div>
-								<div class="form-group">
-									<label for="pass">Password</label>
-									<input type="password" class="form-control" id="userPassword" placeholder="Password">
-								</div>
-								
-								<div class="form-group">
-									<!-- <input type="text" class="form-control" style="width: 50%; display: inline-block;" placeholder="보낼 수량" id="inputDefault"> -->
-									<img src="./images/addbox_1.png" style="width: 200px; height: 60px; display: inline-block;">
-									<input type="text" class="form-control" id="adboxText" style="width: 40%; display: inline-block;" placeholder="AdBox" >
-									<button type="button" id="adboxBtn" style="width: 18%;" class="btn btn-primary" onClick="javascript:adCheck();">확인</button>
-								</div>
-								
-								
-								<div class="form-group">
-									<button type="button" class="btn btn-primary btn-block" onClick="javascript:gfLoginAction();">Login</button>
-								</div>
+						<div class="element tile-2 home bg-change"><h4>로그인</h><br><br>
+							<div class="form-group">
+								<label for="userId">ID</label>
+								<input class="form-control" id="userId" type="text" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="pass">Password</label>
+								<input type="password" class="form-control" id="userPassword" placeholder="Password">
+							</div>
+ 
+							<div class="form-group">
+								<!-- <input type="text" class="form-control" style="width: 50%; display: inline-block;" placeholder="보낼 수량" id="inputDefault"> -->
+								<img src="./images/addbox_2.png" style="width: 200px; height: 60px; display: inline-block;">
+								<input type="text" class="form-control" id="adboxText" style="width: 40%; display: inline-block;" placeholder="AdBox" >
+								<button type="button" id="adboxBtn" style="width: 18%;" class="btn btn-primary" onClick="javascript:adCheck();">확인</button>
+							</div>
+
+							
+							<div class="form-group">
+								<button type="button" class="btn btn-primary btn-block" onClick="javascript:gfLoginAction();">Login</button>
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
 		<!-- end content -->
 
+		<!-- start footer -->
 		<footer id="footer">
 			<div class="container clearfix">
 				<div class="col">
@@ -209,6 +189,7 @@
 				</div>
 			</div>
 		</footer>
+		<!-- end footer -->
 	</div>
     <!-- end wrap -->
     

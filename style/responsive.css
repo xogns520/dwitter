@@ -121,9 +121,10 @@ h4#headertitle {
 	    text-overflow: ellipsis;
 	}
 	.tile-2 {
-		width: 280px;
+	    width: calc(100% - 20px);
 		height: auto;
 		padding: 30px 35px 20px 35px;
+		margin-left:10px;
 	}
 	.tile-4 {
 		width: 280px;

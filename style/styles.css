@@ -21,11 +21,6 @@
 
 /* =1. Clearfix
 --------------------------------------------------------------------------------------------------------*/
-	
-
-
-
-
 .preConSimple {
 	width: 100%; 
 	overflow: hidden; 
@@ -831,8 +826,8 @@ section.same-color-as-previous-section {
 }
 .tile-2 {
 	width: 580px;
-	height: 620px;
 	padding: 45px 60px 44px 50px;
+	margin-left:calc( (100% - 580px) / 2 );
 }
 .tile-3 {
 	width: 280px;
@@ -846,7 +841,6 @@ section.same-color-as-previous-section {
 }
 .tile-5 {
 	width: 580px;
-	height: 640px;
 	padding: 30px 35px 20px 35px;
 }
 .tile-6 {
