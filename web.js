@@ -473,7 +473,7 @@ function readData(account, page, cb){
 	/* some server side logic */
 	  oldPass = req.body.oldpass;
 	  newPass = req.body.newpass;
-	  console.log("setpassword",oldPass, newPass, req.session.account);
+	  console.log("setpassword", oldPass, newPass, req.session.account);
 
 	  setPassword(req.session.account, oldPass, newPass, (result) => {res.send(result)});
   });
