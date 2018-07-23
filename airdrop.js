@@ -15,7 +15,7 @@ function airDrop(){
       			}else{
 				for(i = 0;i<result.length;i++){
 					var findquery = {account : result[i].account};			
-	      				var newvalues = { $set: {wallet : 100 } };
+	      				var newvalues = { $set: {wallet : 150 } };
 	      				dbo.collection("user").updateOne(findquery, newvalues, function(err, result){
 		      				if (err) throw err;
 	      		        		db.close();
