@@ -194,7 +194,9 @@ function setWallet(user, walletAccount, cb){
 				throw err;
 			}
 			cb("OK");
-		}
+			db.close();
+		});
+	});
 		
 		
 }
