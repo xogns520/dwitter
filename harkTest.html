@@ -57,6 +57,8 @@
 						+'</div>';
 						
 				$("#dataPrint").append(str);
+				//var formStr = '<input type="hidden" id="frmName" />'
+				//$("#frmTest").append(formStr);
 				
 			}else{
 				
@@ -80,14 +82,14 @@
 					+'	<label for="userId">' + id + '</label>'
 					+'	<input class="form-control" name="' + id + '" id="' + id + '" type="text" placeholder="" value="' + value + '" />'
 					+'</div>';
-			var formStr = '<input class="form-control" name="' + id + '" id="' + id + '" type="text" placeholder="" value="' + value + '" />';
+			var formStr = '<input  name="' + id + '" id="' + id + '" type="hidden"  value="' + value + '" />';
 			$("#frmTest").append(formStr);
 			$("#dataPrint").append(str);
 			$("#__param").val("");
 			$("#__value").val("");
 		}
 		function gfAjaxTestAction(){
-			var obj = $("#" + $("#dataPrint").val() );
+			var obj = $("#dataPrint") ; //$("#" + $("#dataPrint").val() );
 			var fid = $("#selList").val();
 			
 			for (var x = 0 ; x < obj.children().length ; x++ ){
