@@ -397,7 +397,7 @@ function readData(account, page, cb){
 	  setWallet(req.session.account, walletAccount, (result)=>{
 		  res.send(result);
 	  });
-  }
+  });
 	  
   app.post("/register", function(req, res) { 
 	  
