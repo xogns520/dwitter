@@ -53,7 +53,7 @@
 						+'	<input class="form-control" style="width: 47%; display:  inline-block;" id="__value" type="text" placeholder="파라메타 값"/>'
 						+'</div>'
 						+'<div class="form-group">'
-						+'	<button type="button" class="btn btn-primary btn-block" onClick="javascript:gfAjaxTestMaek();">파라메터 추가</button>'
+						+'	<button type="button" class="btn btn-primary btn-block" onClick="javascript:gfAjaxTestMake();">파라메터 추가</button>'
 						+'</div>';
 						
 						
@@ -74,14 +74,15 @@
 			}
 		}
 		
-		function gfAjaxTestMaek(){
+		function gfAjaxTestMake(){
 			var id = $("#__param").val();
 			var value = $("#__value").val();
 			var str ='<div class="form-group"> '
 					+'	<label for="userId">' + id + '</label>'
 					+'	<input class="form-control" name="' + id + '" id="' + id + '" type="text" placeholder="" value="' + value + '" />'
 					+'</div>';
-					
+			var formStr = '<input class="form-control" name="' + id + '" id="' + id + '" type="text" placeholder="" value="' + value + '" />';
+			$("#frmTest").append(formStr);
 			$("#dataPrint").append(str);
 			$("#__param").val("");
 			$("#__value").val("");
@@ -182,7 +183,7 @@
 		<header id="header" class="clearfix">
 			<h1 id="logo"><a href="index.html">Dabble</a></h1>
 			<!-- start main nav -->
-			<h4 id="headertitle">Dabble Write what you think</h4>
+			<h4 id="headertitle"></h4>
 			<nav id="main-nav">
 				<ul class="clearfix" id="options">
 					<li> <a href="/index.html">메인</a></li>
@@ -200,10 +201,10 @@
 		    <!-- GLOBAL ALERT BANNER -->
 			<!-- END GLOBAL ALERT BANNER -->
 			
-				<h4 id="headertitle-inner">Dabble Wallet</h4>
+				<h4 id="headertitle-inner"></h4>
 				<div id="container">
 					<div id="contentList">
-						<div class="element tile-5 home bg-change">핡 테스트
+						<div class="element tile-2 home bg-change">핡 테스트
 							<div>
 								<div class="form-group">
 									<label class="col-form-label" for="inputDefault"></label>
