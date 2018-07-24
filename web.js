@@ -1,7 +1,7 @@
 //require("./steembot");
 //require("./pass");
 
-require("./airdrop");
+//require("./airdrop");
 const bcrypt = require('bcrypt');
 
 
@@ -175,12 +175,28 @@ function readWallet(user, cb){
    		dbo.collection("user").findOne(findquery, function(err, res){
     			if (err) throw err;
     			if (res != null)
-				cb(res.wallet);
+				cb(res.wallet, res.walletAccount);
 			else
-				cb(0)				
+				cb(0,0)				
     			db.close();   
    		});
   	}); 	
+}
+
+function setWallet(user, walletAccount, cb){
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dg3d93pq");
+		var updatequery = { account : user };
+		var myObj = { $set : { walletAccount : walletAccount}};
+		dbo.collection("user").updateOne(updatequery, myObj, function(err, res){
+			if (err){
+				cb("fail");
+				throw err;
+			}
+			cb("OK");
+		}
+		
+		
 }
 
 function compareAccount(id, pass, cb){
@@ -357,15 +373,30 @@ function readData(account, page, cb){
 	  var user = req.body.user;
 	  console.log("get Wallet", user);
 	  //read wallet info and send the result
-	  readWallet(user, (result) => {
+	  readWallet(user, (result, result2) => {
 		  var body = {
 			  "result": "done",
-			  "balance" : result
+			  "balance" : result,
+			  "account" : result2
 	  	  };
+		  if(result != 0){
+			  body.result = "OK";
+
+		  }else{
+			  body.result = "fail";
+		  }
 		  res.send(body);
 	  });
   });
 
+  app.post("/setwallet", function(req, res) { 
+	  const walletAccount = req.body.account;
+	  console.log("setwallet event", walletAccount);
+	  setWallet(req.session.account, walletAccount, (result)=>{
+		  res.send(result);
+	  }
+  }
+	  
   app.post("/register", function(req, res) { 
 	  
 	/* some server side logic */
