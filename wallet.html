@@ -50,7 +50,7 @@
 				getWalletAction();
 			}else{
 				alert("로그인 후 사용하세요.");
-				$(location).attr("href", "index.html");
+				//$(location).attr("href", "index.html");
 			}
 		}
 		
@@ -61,13 +61,79 @@
 			gfAjaxCallWithForm(sAction,$('#frmWallet'),fnCallback,"POST");
 		}
 		function getWalletActionCallback(data){
-			if ( "done" == data.result ){
+			if ( "OK" == data.result ){
 				$("#tokenBalance").text(data.balance +" DAB");
+				if ( "" == data.account ){
+					alert("등록된 eos account 가 없습니다.");
+					$("#btnChangeAccount").hide();
+					$("#btnAccountSave").show();
+					$("#eosaccount").attr("readonly", false);
+				}else{
+					$("#btnChangeAccount").show();
+					$("#btnAccountSave").hide();
+					$("#eosaccount").val(data.account);
+					
+					
+				}
 				//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 			}else{
 				alert("지갑조회실패");
 			}
-		}	
+		}
+		
+		
+		
+		function fnEosAccountChange(){
+			$("#btnChangeAccount").hide();
+			$("#btnAccountSave").show();
+			$("#btnAccountSaveCancel").show();
+			$("#eosaccount").attr("readonly", false);
+
+//			$("#btnChangeAccount").show();
+			//$("#btnAccountSave").hide();
+ 		}
+		
+		function fnEosAccountChangeCancel(){
+			$("#btnChangeAccount").show();
+			$("#btnAccountSave").hide();
+			$("#btnAccountSaveCancel").hide();
+			$("#eosaccount").attr("readonly", true);
+
+//			$("#btnChangeAccount").show();
+			//$("#btnAccountSave").hide();
+ 		}
+		
+		function fnEosAccountSave(){
+			
+			var sAction = "/setwallet";
+			$("#frmWallet #account").val($("#eosaccount").val());
+			var fnCallback = fnEosAccountSaveCallback;
+			gfAjaxCallWithForm(sAction,$('#frmWallet'),fnCallback,"POST");
+		}
+		
+		function fnEosAccountSaveCallback(data){
+			if ( "OK" == data ){
+				$("#btnChangeAccount").show();
+				$("#btnAccountSave").hide();
+				$("#btnAccountSaveCancel").hide();
+				$("#eosaccount").attr("readonly", true);
+				alert("수정 되었습니다.");
+				getWalletAction();
+				
+			}else{
+				$("#btnChangeAccount").hide();
+				$("#btnAccountSave").show();
+				$("#btnAccountSaveCancel").show();
+				$("#eosaccount").attr("readonly", false);
+			}
+			
+		}
+		
+		
+		
+		
+		
+		
 	</script>
     
     <!-- Scripts -->
@@ -160,12 +226,23 @@
 		                
 							<div class="form-group">
 								<label class="col-form-label" for="inputDefault">내 지갑주소</label>
+								<input class="form-control"  id="eosaccount" readonly="readonly" type="text" placeholder="">
+							</div>
+							<div class="form-group">
+
+								<button type="button" class="btn btn-primary btn-block" onClick="javascript:fnEosAccountChange();" id="btnChangeAccount" >변경</button>
+								<!-- <button type="button" id="btnChangeAccount" onClick="javascript:fnEosAccountChange();" style="width: 40%;" class="btn btn-primary">변경</button> -->
+								<button type="button" id="btnAccountSave" style="width: 49%; display: none;" onClick="javascript:fnEosAccountSave();" class="btn btn-primary">저장</button>
+								<button type="button" id="btnAccountSaveCancel" style="width: 49%; display: none;" onClick="javascript:fnEosAccountChangeCancel();" class="btn btn-primary">취소</button>
+								
+								<!-- 
 								<select class="form-control" style="width: 100%; id="exampleSelect1">
 									<option>gm3dkgenesis</option>
 									<option>ge4dsmzvguge</option>
 									<option>gyytsnigenes</option>
 									<option>gy4tsmzwguge</option>
 								</select>
+								 -->
 							</div>
 
 							<div class="form-group">
@@ -338,6 +415,7 @@
       
 	<form id="frmWallet">
 		<input type="hidden" id="user"   name="user" />
+		<input type="hidden" id="account"   name="account" />
 	</form>
 	
 	<form id="frmUserInfo">
