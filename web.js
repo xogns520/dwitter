@@ -3,6 +3,7 @@
 
 //require("./airdrop");
 const bcrypt = require('bcrypt');
+const ObjectID = require('mongodb');
 
 
 
@@ -72,6 +73,21 @@ function saveData(account, data){
     			db.close();   
    		});
   	}); 
+}
+
+function editData(postid, data, cb){
+	//ToDo : payout data condition check
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dg3d93pq");
+		var myobj = { $set : {data : data}};
+		var findquery = {_id : OBjectId(postid)};
+		dbo.collection("board").updateOne(findquery, myobj, function(err, res){
+			if (err) throw err;
+			console.log("1 document modified");
+			cb("success");
+			db.close()
+		});
+	});
 }
 
 //return done, fail and duplicated
@@ -526,8 +542,16 @@ function readData(account, page, cb){
 	  console.log("read event", user, page);
 	  //query Mongo DB
 	  readData(user, page,(result) => {res.send(result)});
-	  
+  });
 
+  app.post("/edit", function(req, res) { 
+	/* some server side logic */
+	  
+	  var postid = req.body.postid;
+	  var data = req.body.data;
+	  console.log("edit event", postid, data);
+	  //query Mongo DB
+	  editData(postid, data,(result) => {res.send(result)});
   });
 
  /* serves all the static files */
