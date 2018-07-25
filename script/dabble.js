@@ -39,10 +39,18 @@
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<button type="button" name="btnVote" style="width:100%;" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" >보팅</button>'
 //						+ '	<abbr id="tooltiptDiv" title="' + data[x].data + '" rel="tooltip">상세보기1-툴팁</abbr>'
-						+ '	<div style="margin: 5px;"></div>'
-						+ '	<button type="button" name="btnDetail" style="width:100%; display: none;" class="btn btn-primary" onClick="javascript:fnContentDetail(' + x + ');" >상세보기</button>'
+						+ '	<div style="margin: 5px;"></div>';
+			
+				if ( data[x].account == $("#frmUserInfo #id").val() ){
+					strHtml +=	'	<div style="margin: 5px;"></div>'
+							+	'	<button type="button" name="btnUpdate" style="width:100%;" class="btn btn-primary" onClick="javascript:gfContentUpdate(' + x + ');" >수정</button>'
+ 							+	'	<div style="margin: 5px;"></div>';
+				}
+
+				strHtml +='	<button type="button" name="btnDetail" style="width:100%; display: none;" class="btn btn-primary" onClick="javascript:fnContentDetail(' + x + ');" >상세보기</button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
+						+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
 						+ '	<div name="divStyle" ></div>'
 						+ '</div>';
 			
@@ -138,6 +146,39 @@
 		$("#contentTextarea").val("");
 		gfContentList();
 	}
+	
+	
+	
+	function gfContentUpdate(idx){
+		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
+		$("#contentEditTextarea").text($("div[name='viewDefault'").eq(idx).text());
+		$("#btnContentEidt").click();
+	}
+	
+	
+	/**
+	 * 글 수정
+	 * @returns
+	 */
+	function gfContentEditAction(){
+		$("#frmEdit #data").val( $("#contentEditTextarea").val() );
+		var sAction = "/edit";
+		var fnCallback = gfContentEditActionCallback;
+		gfAjaxCallWithForm(sAction,$('#frmEdit'),fnCallback,"POST");
+	}
+
+	function gfContentEditActionCallback(data){
+		if ( "success" == data ){
+			//alert("글쓰기 성공");
+			$("#contentEditTextarea").val("");
+			gfContentList();
+			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
+		}else{
+			alert("글수정 실패");
+			//gfMsgBox(data.resultMsg, "핡~!");
+		}
+	}
+	
 	
 	/**
 	 * 보팅
