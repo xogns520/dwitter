@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const url = process.env.MONGODB_URI;
 
 
-exports.createfriend = function(account, friend, callback){
+exports.createFriend = function(account, friend, callback){
   MongoClient.connect(url, function(err, db) {
 	  const dbo = db.db("heroku_dg3d93pq");
 	  const myObj = {account : account, follower : friend};
@@ -17,7 +17,7 @@ exports.createfriend = function(account, friend, callback){
   });  
 }
 
-exports.readfriends = function(account, friend, callback){
+exports.readFriends = function(account, friend, callback){
 	MongoClient.connect(url, function(err, db) {
 	  const dbo = db.db("heroku_dg3d93pq");
 	  const findQuery = {account : account};
@@ -35,7 +35,7 @@ exports.readfriends = function(account, friend, callback){
   });  
 }
 
-exports.deletefriend = function(account, callback){
+exports.deleteFriend = function(account, callback){
 	MongoClient.connect(url, function(err, db) {
 		const dbo = db.db("heroku_dg3d93pq");
 		const deleteQuery = {account : account, follower : friend};
