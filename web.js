@@ -80,7 +80,7 @@ function editData(postid, data, cb){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dg3d93pq");
 		var myobj = { $set : {data : data}};
-		var findquery = {_id : OBjectId(postid)};
+		var findquery = {_id : ObjectId(postid)};
 		dbo.collection("board").updateOne(findquery, myobj, function(err, res){
 			if (err) throw err;
 			console.log("1 document modified");
