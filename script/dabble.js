@@ -161,7 +161,7 @@
 	 * @returns
 	 */
 	function gfContentEditAction(){
-		$("#frmEdit #data").val( $("#contentEditTextarea").val() );
+		$("#frmEdit #data").val( $("#contentEditTextarea").text() );
 		var sAction = "/edit";
 		var fnCallback = gfContentEditActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmEdit'),fnCallback,"POST");
@@ -170,7 +170,7 @@
 	function gfContentEditActionCallback(data){
 		if ( "success" == data ){
 			//alert("글쓰기 성공");
-			$("#contentEditTextarea").val("");
+			$("#contentEditTextarea").text("");
 			gfContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
