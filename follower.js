@@ -11,7 +11,7 @@ exports.createFriend = function(account, friend, callback){
 	  dbo.collection("follower").insertOne(myObj, function(err, res){
 		  if (err) throw err;
 		  console.log("1 follower inserted", account, friend);
-		  callback("OK");
+		  callback("success");
 		  db.close();
 	  });
   });  
@@ -42,7 +42,7 @@ exports.deleteFriend = function(account, callback){
 		dbo.collection("follower").deleteOne(deleteQuery, function(err, res){
 			if (err) throw err;
 			console.log("1 follower deleted", account, friend);
-			callback("OK");
+			callback("success");
 			db.close();
 		});
 	});
