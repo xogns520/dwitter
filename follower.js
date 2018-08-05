@@ -17,7 +17,7 @@ exports.createFriend = function(account, friend, callback){
   });  
 }
 
-exports.readFriends = function(account, friend, callback){
+exports.readFriends = function(account,callback){
 	MongoClient.connect(url, function(err, db) {
 	  const dbo = db.db("heroku_dg3d93pq");
 	  const findQuery = {account : account};
