@@ -28,7 +28,8 @@ exports.readFriends = function(account,callback){
 		  var body = [];
 		  for(i = 0;i < res.length; i++){
 			  body.push({ data : res[i].friend });
-		  }		  
+		  }
+		  console.log(body);
 		  callback(body);
 		  db.close();
 	  });
