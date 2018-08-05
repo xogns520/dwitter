@@ -27,7 +27,7 @@ exports.readFriends = function(account,callback){
 		  //make body
 		  var body = [];
 		  for(i = 0;i < res.length; i++){
-			  body.push({ data : res[i].friend });
+			  body.push({ data : res[i].follower });
 		  }
 		  console.log(body);
 		  callback(body);
