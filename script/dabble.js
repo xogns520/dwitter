@@ -39,17 +39,17 @@
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<div class="hint" name="viewVoteCount">'+ data[x].voting + '명이 Voting</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<button type="button" name="btnVote" style="width:100%;" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i class="fa fa-thumbs-o-up" style="font-size:36px"></i></button>'
+						+ '	<button type="button" name="btnVote" style="width:20%;" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i class="fa fa-thumbs-o-up"></i></button>'
 //						+ '	<abbr id="tooltiptDiv" title="' + data[x].data + '" rel="tooltip">상세보기1-툴팁</abbr>'
 						+ '	<div style="margin: 5px;"></div>';
 			
 				if ( data[x].account == $("#frmUserInfo #id").val() ){
 					strHtml +=	'	<div style="margin: 5px;"></div>'
-							+	'	<button type="button" name="btnUpdate" style="width:100%;" class="btn btn-primary" onClick="javascript:gfContentUpdate(' + x + ');" >수정</button>'
+							+	'	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-primary" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
  							+	'	<div style="margin: 5px;"></div>';
 				}
 
-				strHtml +='	<button type="button" name="btnDetail" style="width:100%; display: none;" class="btn btn-primary" onClick="javascript:fnContentDetail(' + x + ');" >상세보기</button>'
+				strHtml +='	<button type="button" name="btnDetail" style="width:20%; display: none;" class="btn btn-primary" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-plus-square-o"></i></button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 						+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
