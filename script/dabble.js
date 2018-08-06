@@ -4,6 +4,8 @@
  * @코멘트   : dabble common 
  */
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	var gVoteIdx = null;
 	/**
 	 * 목록 조회
@@ -37,7 +39,7 @@
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<div class="hint" name="viewVoteCount">'+ data[x].voting + '명이 Voting</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<button type="button" name="btnVote" style="width:100%;" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" >보팅</button>'
+						+ '	<button type="button" name="btnVote" style="width:100%;" class="btn btn-primary" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i class="fa fa-thumbs-o-up" style="font-size:36px"></i></button>'
 //						+ '	<abbr id="tooltiptDiv" title="' + data[x].data + '" rel="tooltip">상세보기1-툴팁</abbr>'
 						+ '	<div style="margin: 5px;"></div>';
 			
