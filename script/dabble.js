@@ -49,7 +49,7 @@
  							//+	'	<div style="margin: 5px;"></div>';
 				}
 
-				strHtml +='	<button type="button" name="btnDetail" style="width:20%; display: none;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-plus-square-o"></i></button>'
+				strHtml +='	<button type="button" name="btnDetail" style="width:20%; display: none;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 						+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
