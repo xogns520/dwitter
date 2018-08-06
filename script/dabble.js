@@ -44,7 +44,7 @@
 						//+ '	<div style="margin: 5px;"></div>';
 			
 				if ( data[x].account == $("#frmUserInfo #id").val() ){
-					strHtml +=	'	<div style="margin: 5px;"></div>'
+					strHtml +=	//'	<div style="margin: 5px;"></div>'
 							+	'	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-primary" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
  							//+	'	<div style="margin: 5px;"></div>';
 				}
