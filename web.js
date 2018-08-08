@@ -301,7 +301,7 @@ function readData(account, page, cb){
 			    }
 			   },
 			  {$sort: {"date" : -1}},
-			   {$limit : 40}}
+			   {$limit : 40}
 			];
 		
 		dbo.collection("board").aggregate(agr).toArray(function(err, result){
