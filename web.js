@@ -301,14 +301,14 @@ function readData(account, page, cb){
 			    }
 			   },
 			  {$sort: {"date" : -1}},
-			   {$limit : 40}
+			   {$limit : 20}
 			];
 		
 		dbo.collection("board").aggregate(agr).toArray(function(err, result){
 			    			if (err) throw err;
 			var body = []; // empty array
 			var picUrl;
-			//console.log("Readdata size", result.length);
+			console.log("Readdata size", result.length);
 			//onsole.log("before for loop");
 			for(i = 0; i < result.length ; i++){				
 				//console.log("in for loop");
