@@ -1,6 +1,6 @@
 /**
  * @작성일   : 2018. 6. 30.
- * @작성자   : 김대형
+ * @작성자   : 김핡핡
  * @코멘트   : dabble common 
  */
 
@@ -26,6 +26,9 @@
 		$("div[id='contentList']").empty();
 		
 		for ( var x = 0 ; x < data.length ; x++ ){
+			
+			var btnVoteEnable = 'false' == data[x].votingenable ? 'disabled' : '';
+				
 			var strHtml	= '<div class="element tile-1 home calc bg-change">'
 						+ '	<table style="width: 100%;">'
 						+ '		<tr>'
@@ -33,8 +36,8 @@
 						+ '				<h4 class="header icon-to-the-right">' + data[x].account + '</h4>'
 //						+ '				<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom" aria-describedby="tooltip113771">Bottom</button>'
 						+ '			</td>'
-						+ '			<td  style="text-align:right; margin: 0px;">'
-						+ '				<img style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + data[x].profile + '">'
+						+ '			<td  style="text-align:right; margin: 0px;" onclick="javascript:gfFollowPopup(' + x + ');">'
+						+ '				<img name="userImage" style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="./images/user/' + data[x].profile + '">'
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
@@ -43,7 +46,7 @@
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<div class="hint" name="viewVoteCount">'+ data[x].voting + '명이 Voting</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<button type="button" name="btnVote" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i class="fa fa-thumbs-o-up"></i></button>'
+						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:20%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i class="fa fa-thumbs-o-up"></i></button>'
 //						+ '	<abbr id="tooltiptDiv" title="' + data[x].data + '" rel="tooltip">상세보기1-툴팁</abbr>'
 						//+ '	<div style="margin: 5px;"></div>';
 			
@@ -66,7 +69,7 @@
 				$("button[name='btnDetail']").eq(x).show();
 			}
 		}
-		gfContentReadVoteAction();
+		//gfContentReadVoteAction();
 		//$("[data-toggle='tooltip']").tooltip();
 		//gfTooltip();
 	}
@@ -154,12 +157,32 @@
 	}
 	
 	
-	
+	/**
+	 * 글수정 팝업
+	 * @param idx
+	 * @returns
+	 */
 	function gfContentUpdate(idx){
 		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
 		$("#contentEditTextarea").text($("div[name='viewDefault'").eq(idx).text());
 		$("#btnContentEidt").click();
 	}
+	
+	
+	/**
+	 * 팔로우 팝업
+	 * @param idx
+	 * @returns
+	 */
+	function gfFollowPopup(idx){
+		
+		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
+		//$("#userImage").attr("src", $("img[name='userImage'").eq(idx).attr("src") );
+		$("#userImage").attr("src", "/images/user/0.png");
+		$("#btnFollowPopup").click();
+	}
+	
+	
 	
 	
 	/**
