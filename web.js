@@ -300,7 +300,7 @@ function readData(account, page, cb){
 			   as : 'userdetails'
 			    }
 			   },
-			  {$sort: {"date" : -1},
+			  {$sort: {"date" : -1}},
 			   {$limit : 40}}
 			];
 		
