@@ -2,10 +2,8 @@ $(function() {
   "use strict";
   /* 모바일 메뉴 펼치기/접기 */
   
-  if (1==1){
-	  console.log("==========================================main.js");
-	  //return ;
-  }
+  //console.log("==========================================main.js");
+  //return ;
   $('#nav-button, #menu-close-button').on('click touchend', function(e) {
     e.preventDefault();
     $('body').toggleClass('pushed-left');
