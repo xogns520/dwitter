@@ -11,9 +11,13 @@
 	 * 목록 조회
 	 * @returns
 	 */
-	function gfContentList(){
-		var rand = Number(Math.floor(Math.random() * 8));
-		$("#frmRead user").val(gUserArray[rand]);
+	function gfContentList(page){
+		//var rand = Number(Math.floor(Math.random() * 8));
+		//$("#frmRead user").val(gUserArray[rand]);
+		if ( undefined == page ){
+			page = 0;
+		}
+		$("#frmRead #page").val(page);
 		var sAction = "/read";
 		var fnCallback = gfContentListCallback;
 		gfAjaxCallWithForm(sAction,$('#frmRead'),fnCallback,"POST");
