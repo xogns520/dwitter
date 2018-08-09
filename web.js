@@ -170,7 +170,7 @@ function increaseVote(id, vote, account){
       				});
 				var tod = Date.now();
 
-   				var myobj = { boardId : ObjectId(id),  account : account , date : tod };
+   				var myobj = { boardId : id,  account : account , date : tod };
    				dbo.collection("voting").insertOne(myobj, function(err, res){
     					if (err) throw err;
     					console.log("1 document inserted");
@@ -296,7 +296,7 @@ function readData(account, page, cb){
    		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
 		
 		var agr = [	
-			{ $addFields : {idString : "$_id"}},
+			{ $addFields : {idString : "$_id.toString()"}},
 			{ $lookup:
 			 {from : "voting",
 			  localField: "idString",
