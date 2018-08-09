@@ -83,11 +83,11 @@
 		$("#frmRead #page").val(page);
 		var sAction = "/read";
 		var fnCallback = gfContentList2Callback;
-		$("div[id='contentList']").empty();
 		gfAjaxCallWithForm(sAction,$('#frmRead'),fnCallback,"POST");
 	}
 	function gfContentList2Callback(data){
 		
+		$("div[id='contentList']").empty();
 		for ( var x = 0 ; x < data.length ; x++ ){
 			
 			var btnVoteEnable = 'false' == data[x].votingenable ? 'disabled' : '';
