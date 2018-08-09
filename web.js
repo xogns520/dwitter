@@ -321,7 +321,7 @@ function readData(account, page, cb){
 			var body = []; // empty array
 			var picUrl;
 			console.log("Readdata size", result.length);
-			//console.log("aggregate data", result);
+			console.log("aggregate data", result);
 			//onsole.log("before for loop");
 			for(i = 0; i < result.length ; i++){				
 				//console.log("in for loop");
