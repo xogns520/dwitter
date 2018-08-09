@@ -304,7 +304,7 @@ function readData(account, page, cb){
 			{ $lookup:
 			    { from: 'user',
 			   localField: '_id',
-			   foreignField : ObjectId(boardId),
+			   foreignField : ObjectId('boardId'),
 			   as : 'userdetails'
 			    }
 			   },
