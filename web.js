@@ -581,7 +581,15 @@ function readData(account, page, cb){
 	  var page = req.body.page;
 	  console.log("read event", user, page);
 	  //query Mongo DB
-	  readData(user, page,(result) => {res.send(result)});
+	  if(page == 0)
+	  	req.session.page = page;
+	  else if(page == -1)
+		  req.session.page++;
+	  else if(page == -2)
+		  req.session.page--;
+	  else
+		  req.session.page = page;
+	  readData(user, req.session.page,(result) => {res.send(result)});
   });
 
   app.post("/edit", function(req, res) { 
