@@ -298,7 +298,7 @@ function readData(account, page, cb){
 		var agr = [
 			{$project:{
 				$let:{
-					vars: {id:'id.$oid},
+					vars: {id:'id.$oid'},
 					       in:ObjectId("$$id)
 					      }
 				}
