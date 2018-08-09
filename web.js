@@ -301,7 +301,7 @@ function readData(account, page, cb){
 			 {from : "voting",
 			  localField: "idString",
 			  foreignField : "boardId",
-			  as : 'votingdetails"
+			  as : "votingdetails"
 			 }
 			},
 			{ $lookup:
