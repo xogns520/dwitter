@@ -299,7 +299,7 @@ function readData(account, page, cb){
 			   { $lookup:
 			    {from: 'voting',
 			     localField: '_id',
-			     foreignField: ObjectId('boardId'),
+			     foreignField: {"$oid":'boardId'},
 			     as : 'accountvoting'
 			    }
 			   },			
