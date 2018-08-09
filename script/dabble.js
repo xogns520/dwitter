@@ -230,7 +230,7 @@
 	 */
 	function gfFollowPopup(idx){
 		$("#frmFollow #account").val($("input[name='hAccount']").eq(idx).val());
-		$("#frmEdit #postid").val(  );
+		$("span[id='myModalLabelFollowId']").text($("input[name='hAccount']").eq(idx).val());
 		$("#userImage").attr("src", $("img[name='userImage'").eq(idx).attr("src") );
 		//$("#userImage").attr("src", "/images/user/0.png");
 		$("#btnFollowPopup").click();
@@ -250,7 +250,7 @@
 			alert("Follow 하였습니다");
 			$("#userImage").attr("src","");
 		}else{
-			alert("Follow 실");
+			alert("Follow 실패");
 		}
 	}
 	
