@@ -76,7 +76,7 @@
 				var strHtml	= '	<tr>'
 							+ '		<th scope="row" style="width: 140px; padding: 5px;">' + data[x].data + '</th>'
 							+ '		<td style="width: 50px; padding: 5px;">'
-							+ '			<button type="button" class="btn btn-primary" onclick="javascript:fnDeleteFriend("' + data[x].data + '");">삭제</button>'
+							+ '			<button type="button" class="btn btn-primary" onclick="javascript:fnDeleteFriend(\'' + data[x].data + '\');">삭제</button>'
 							+ '		</td>'
 							+ '	</tr>';
 				$("tbody[id='followList']").append(strHtml);
