@@ -318,7 +318,7 @@ function readData(account, page, cb){
 			var body = []; // empty array
 			var picUrl;
 			console.log("Readdata size", result.length);
-			console.log("aggregate data", result);
+			//console.log("aggregate data", result);
 			//onsole.log("before for loop");
 			for(i = 0; i < result.length ; i++){				
 				//console.log("in for loop");
@@ -328,13 +328,15 @@ function readData(account, page, cb){
 				}
 				else{
 					//console.log("define case");
-					var picUrl = result[i].userdetails[0].profile
+					var picUrl = result[i].userdetails[0].profile;
+				}
+				
 					var votingenable = true;
 					if(result[i].userdetails.length == 0)
 						votingenable = false;
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl, votingenable : votingenable });
-				}
+				
 			}
 			//onsole.log("after for loop");
 
