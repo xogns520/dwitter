@@ -333,6 +333,7 @@ function readData(account, page, cb){
 					for(j = 0;j < result[i].accountvoting.length;j++){
 						if(result[i]._id == result[i].accountvoting[j]._id)
 							votingenable = false;
+						console.log("voting comparison", result[i]._id, result[i].accountvoting[j]._id);
 					}
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl, votingenable : votingenable });
