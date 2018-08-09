@@ -293,20 +293,22 @@ function readData(account, page, cb){
 		//ToDo : add image path to response
    		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
 		
-		var agr = [{ $lookup:
-			    { from: 'user',
-			   localField: 'account',
-			   foreignField : 'account',
-			   as : 'userdetails'
-			    }
-			   },
+		var agr = [
 			   { $lookup:
 			    {from: 'voting',
 			     localField: '_id',
 			     foreignField: 'boardId',
 			     as : 'accountvoting'
 			    }
+			   },			
+			{ $lookup:
+			    { from: 'user',
+			   localField: 'account',
+			   foreignField : 'account',
+			   as : 'userdetails'
+			    }
 			   },
+
 			  {$sort: {"date" : -1}},
 			   {$limit : 20}
 			];
