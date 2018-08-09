@@ -299,7 +299,7 @@ function readData(account, page, cb){
 			{$project:{
 				$let:{
 					vars: {id:'id.$oid'},
-					       in:ObjectId("$$id)
+					       in:ObjectId("$$id")
 					      }
 				}
 		},
