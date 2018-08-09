@@ -328,9 +328,14 @@ function readData(account, page, cb){
 				}
 				else{
 					//console.log("define case");
-					picUrl = result[i].userdetails[0].profile
+					var picUrl = result[i].userdetails[0].profile
+					var votingenable = true;
+					for(j = 0;j < result[i].accountvoting.length;j++){
+						if(result[i]._id == result[i].accountvoting[j]._id)
+							votingenable = false;
+					}
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
-					  voting : result[i].voting,  profile : picUrl });
+					  voting : result[i].voting,  profile : picUrl votingenable : votingenable });
 				}
 			}
 			//onsole.log("after for loop");
