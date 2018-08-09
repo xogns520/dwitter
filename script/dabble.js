@@ -231,7 +231,7 @@
 	function gfFollowPopup(idx){
 		$("#frmFollow #account").val($("input[name='hAccount']").eq(idx).val());
 		$("span[id='myModalLabelFollowId']").text($("input[name='hAccount']").eq(idx).val());
-		$("#userImage").attr("src", $("img[name='userImage'").eq(idx).attr("src") );
+		$("#userImage").attr("src", $("img[name='userImage']").eq(idx).attr("src") );
 		//$("#userImage").attr("src", "/images/user/0.png");
 		$("#btnFollowPopup").click();
 	}
