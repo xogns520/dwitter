@@ -336,6 +336,7 @@ function readData(account, page, cb){
 				if(page == 0 && i == 0){
 					lastOid = result[i]._id
 					console.log("last oid", lastOid);
+					console.log("addition of oid", lastOid.valueOf()+1);
 				}
 				
 					var votingenable = true;
