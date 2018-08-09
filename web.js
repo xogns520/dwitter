@@ -303,7 +303,7 @@ function readData(account, page, cb){
 			   { $lookup:
 			    {from: 'voting',
 			     localField: 'account',
-			     foreignField: 'account,
+			     foreignField: 'account',
 			     as : 'accountvoting'
 			    }
 			   },
