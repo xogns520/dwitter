@@ -342,8 +342,9 @@ function readData(account, page, cb){
 				}
 				
 					var votingenable = true;
-					if(result[i].userdetails.length == 0)
+					if(result[i].votingdetails.length != 0)
 						votingenable = false;
+				
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl, votingenable : votingenable });
 				
