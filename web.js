@@ -594,8 +594,11 @@ function readData(account, page, cb){
 	  	req.session.page = page + 1;
 	  else if(page == -1)
 		  req.session.page++;
-	  else if(page == -2)
+	  else if(page == -2){
 		  req.session.page--;
+		  if(req.session.page == 0)
+			  req.session.page = 1;
+	  }
 	  else
 		  req.session.page = page;
 	  readData(user, req.session.page,(result) => {res.send(result)});
