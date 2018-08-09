@@ -286,6 +286,8 @@ function setPassword(id,oldPass,newPass,cb){
 	});	
 }
 
+var lastOid = "nil";
+
 function readData(account, page, cb){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
@@ -329,6 +331,11 @@ function readData(account, page, cb){
 				else{
 					//console.log("define case");
 					var picUrl = result[i].userdetails[0].profile;
+				}
+				
+				if(page == 0 && i == 0){
+					lastOid = result[i]._id
+					console.log("last oid", lastOid);
 				}
 				
 					var votingenable = true;
