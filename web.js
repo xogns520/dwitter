@@ -298,8 +298,8 @@ function readData(account, page, cb){
 		var agr = [
 			   { $lookup:
 			    {from: 'voting',
-			     localField: 'ObjectId(_id)',
-			     foreignField: "boardId",
+			     localField: '_id',
+			     foreignField: ObjectId('board'),
 			     as : 'accountvoting'
 			    }
 			   },			
