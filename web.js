@@ -296,7 +296,7 @@ function readData(account, page, cb){
    		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
 		
 		var agr = [	
-			{ $project : { "idString" : "$_id.toString()"}},
+			{ $project : { "idString" : "$_id.toString()", account : 1}},
 			{ $lookup:
 			 {from : "voting",
 			  localField: "idString",
