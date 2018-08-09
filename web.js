@@ -312,6 +312,7 @@ function readData(account, page, cb){
 			   },
 
 			  {$sort: {"date" : -1}},
+			{$skip : (20 * page) - 20},
 			   {$limit : 20}
 			];
 		
@@ -590,7 +591,7 @@ function readData(account, page, cb){
 	  console.log("read event", user, page);
 	  //query Mongo DB
 	  if(page == 0)
-	  	req.session.page = page;
+	  	req.session.page = page + 1;
 	  else if(page == -1)
 		  req.session.page++;
 	  else if(page == -2)
