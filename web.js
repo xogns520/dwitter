@@ -341,9 +341,9 @@ function readData(account, page, cb){
 					console.log("addition of oid", parseInt(lastOid,16)+1);
 				}
 				
-					var votingenable = true;
+					var votingenable = "true";
 					if(result[i].votingdetails.length != 0)
-						votingenable = false;
+						votingenable = "false";
 				
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl, votingenable : votingenable });
