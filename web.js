@@ -295,14 +295,7 @@ function readData(account, page, cb){
 		//ToDo : add image path to response
    		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
 		
-		var agr = [
-			   { $lookup:
-			    {from: 'voting',
-			     localField: '_id',
-			     foreignField: ObjectId('board'),
-			     as : 'accountvoting'
-			    }
-			   },			
+		var agr = [	
 			{ $lookup:
 			    { from: 'user',
 			   localField: 'account',
@@ -323,6 +316,7 @@ function readData(account, page, cb){
 			console.log("Readdata size", result.length);
 			console.log("aggregate data", result);
 			//onsole.log("before for loop");
+			
 			for(i = 0; i < result.length ; i++){				
 				//console.log("in for loop");
 				if(result[i].userdetails[0] == undefined){
