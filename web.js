@@ -299,7 +299,7 @@ function readData(account, page, cb){
 			{ $addFields : {idString : "$_id.toString()"}},
 			{ $lookup:
 			 {from : "voting",
-			  localField: "_id.toString()",
+			  localField: "idString",
 			  foreignField : "boardId",
 			  as : "votingdetails"
 			 }
