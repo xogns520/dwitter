@@ -300,6 +300,13 @@ function readData(account, page, cb){
 			   as : 'userdetails'
 			    }
 			   },
+			   { $lookup:
+			    {from: 'voting',
+			     localField: 'account',
+			     foreignField: 'account,
+			     as : 'accountvoting'
+			    }
+			   },
 			  {$sort: {"date" : -1}},
 			   {$limit : 20}
 			];
