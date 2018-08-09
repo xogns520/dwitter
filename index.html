@@ -150,6 +150,7 @@
 				<ul class="clearfix" id="options">
 					<li> <a href="./auth/Dabble_Legal_Protection.pdf">저작권증명</a></li>	  
 					<li style="display: none;" id="linkUserInfo"> <a href="./userinfo.html">회원정보</a></li>
+					<li style="display: none;" id="linkFollow"> <a href="./follow.html">친구정보</a></li>
 					<li style="display: none;" id="linkLogin" >   <a href="./login.html">로그인</a></li>
 					<li style="display: none;" id="linkWallet"> <a href="./wallet.html">지갑</a></li>
 					<li style="display: none;" id="linkSingup"> <a href="./signup.html">회원가입</a></li>
@@ -205,7 +206,7 @@
     
 	<!-- Modal Start-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="margin-top: 100px;">
 			<div class="modal-content">
 				<div class="modal-header">
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -226,7 +227,7 @@
 	</div>
 	
 	<div class="modal fade" id="contentEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="margin-top: 100px;">
 			<div class="modal-content">
 				<div class="modal-header">
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -246,15 +247,15 @@
 		</div>
 	</div>
 	
-	<div class="modal fade" id="followPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+	<div class="modal fade" id="followPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabelFollow" aria-hidden="true">
+		<div class="modal-dialog" style="margin-top: 100px;">
 			<div class="modal-content">
 				<div class="modal-header">
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						<!-- <button type="button" data-dismiss="modal">&times;</button> -->
 		        	</button>
-		        	<h4 class="modal-title" id="myModalLabel">핡? 친하게 지내시려구요?</h4>
+		        	<h4 class="modal-title" id="myModalLabelFollow"><span id="myModalLabelFollowId">12121221</span> 님과 친하게 지내시려구요?</h4>
 		        	<img id="userImage" src="/images/user/0.png" style="width:20%; height: 20%; ">
 				</div>
 				<!--
@@ -264,7 +265,7 @@
 				 -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary" onClick="javascript:gfContentEditAction();" data-dismiss="modal">완료</button>
+					<button type="button" class="btn btn-primary" onClick="javascript:gfFollowAction();" data-dismiss="modal">Follow</button>
 				</div>
 			</div>
 		</div>
@@ -292,6 +293,9 @@
 	</form>
 	<form id="frmUserInfo">
 		<input type="hidden" id="id"   name="id" />
+	</form>
+	<form id="frmFollow">
+		<input type="hidden" id="account"   name="account" />
 	</form>
 	
 </body>

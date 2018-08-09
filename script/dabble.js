@@ -74,7 +74,6 @@
 		//gfTooltip();
 	}
 	
-	
 	/**
 	 * 내용 상세 조회
 	 * @returns
@@ -91,30 +90,6 @@
 	
 
 	/**
-	 * 리드 보팅
-	 * @returns
-	 */
-	function gfContentReadVoteAction(){
-		$("#frmReadVote #id").val($("#frmUserInfo #id").val());
-		var sAction = "/readvote";
-		var fnCallback = gfContentReadVoteActionCallback;
-		gfAjaxCallWithForm(sAction,$('#frmReadVote'),fnCallback,"POST");
-	}
-	function gfContentReadVoteActionCallback(data){
-		if (  0 < data.length ){
-			for ( var x = 0 ; x < data.length ; x++ ){
-				for ( var y = 0 ; y < $("input[name='hBoardId']").length ; y++ ){
-					if ( data[x].boardId == $("input[name='hBoardId']").eq(y).val() ){
-						$("button[name='btnVote'").eq(y).attr("disabled","");
-						break;
-						
-					}
-				}
-			}
-		}
-	}
-	
-	/**
 	 * 글 쓰기
 	 * @returns
 	 */
@@ -126,7 +101,6 @@
 		var fnCallback = gfContentWriteActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmWrite'),fnCallback,"POST");
 	}
-
 	function gfContentWriteActionCallback(data){
 		if ( "done" == data ){
 			//alert("글쓰기 성공");
@@ -168,24 +142,7 @@
 		$("#contentEditTextarea").text($("div[name='viewDefault'").eq(idx).text());
 		$("#btnContentEidt").click();
 	}
-	
-	
-	/**
-	 * 팔로우 팝업
-	 * @param idx
-	 * @returns
-	 */
-	function gfFollowPopup(idx){
-		
-		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
-		//$("#userImage").attr("src", $("img[name='userImage'").eq(idx).attr("src") );
-		$("#userImage").attr("src", "/images/user/0.png");
-		$("#btnFollowPopup").click();
-	}
-	
-	
-	
-	
+
 	/**
 	 * 글 수정
 	 * @returns
@@ -196,7 +153,6 @@
 		var fnCallback = gfContentEditActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmEdit'),fnCallback,"POST");
 	}
-
 	function gfContentEditActionCallback(data){
 		if ( "success" == data ){
 			//alert("글쓰기 성공");
@@ -208,7 +164,6 @@
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
-	
 	
 	/**
 	 * 보팅
@@ -253,7 +208,6 @@
 			}
 			*/		
 		}
-		
 	}
 	function gfContentVoteActionCallback2(data){
 		if ( "done" == data ){
@@ -267,6 +221,38 @@
 		}
 	}
 	
+	
+	
+	/**
+	 * 팔로우 팝업
+	 * @param idx
+	 * @returns
+	 */
+	function gfFollowPopup(idx){
+		$("#frmFollow #account").val($("input[name='hAccount']").eq(idx).val());
+		$("#frmEdit #postid").val(  );
+		$("#userImage").attr("src", $("img[name='userImage'").eq(idx).attr("src") );
+		//$("#userImage").attr("src", "/images/user/0.png");
+		$("#btnFollowPopup").click();
+	}
+	
+	/**
+	 * 팔로우 하기
+	 * @returns
+	 */
+	function gfFollowAction(){
+		var sAction = "/createfriend";
+		var fnCallback = gfContentEditActionCallback;
+		gfAjaxCallWithForm(sAction,$('#frmFollow'),fnCallback,"POST");
+	}
+	function gfContentEditActionCallback(data){
+		if ( "success" == data ){
+			alert("Follow 하였습니다");
+			$("#userImage").attr("src","");
+		}else{
+			alert("Follow 실");
+		}
+	}
 	
 
 

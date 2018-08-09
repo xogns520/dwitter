@@ -138,16 +138,18 @@
 			
 			$("#linkWallet").show();
 			$("#linkUserInfo").show();
+			$("#linkFollow").show();
 			$("#linkLogin").hide();
 			$("#linkLogout").show();
 			$("#linkSingup").hide();
 			
 		}else{
+			$("#linkWallet").hide();
 			$("#linkUserInfo").hide();
+			$("#linkFollow").hide();
 			$("#linkLogin").show();
 			$("#linkSingup").show();
 			$("#linkLogout").hide();
-			$("#linkWallet").hide();
 			
 		}
 
