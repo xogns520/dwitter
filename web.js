@@ -303,7 +303,7 @@ function readData(account, page, cb){
 			   },			
 			{ $lookup:
 			    { from: 'user',
-			   localField: '_id.$oid',
+			   localField: '_id',
 			   foreignField : 'boardId',
 			   as : 'userdetails'
 			    }
@@ -330,6 +330,8 @@ function readData(account, page, cb){
 					//console.log("define case");
 					var picUrl = result[i].userdetails[0].profile
 					var votingenable = true;
+					if(result[i].userdetails.length == 0)
+						votingenable = false;
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl, votingenable : votingenable });
 				}
