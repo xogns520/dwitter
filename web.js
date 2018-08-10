@@ -579,7 +579,7 @@ function readData(account, page, cb){
 	  }
 	  else
 		  req.session.page = page;
-	  readData(user, req.session.page,(result) => {res.send(result)});
+	  readData(req.session.account, req.session.page,(result) => {res.send(result)});
   });
 
   app.post("/edit", function(req, res) { 
