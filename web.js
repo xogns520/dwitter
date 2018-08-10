@@ -347,10 +347,7 @@ function readData(account, page, cb){
 				}
 				cb(body);
     				db.close();   
-			}
-			
-
-
+			});
    		});
   	}); 
 }
