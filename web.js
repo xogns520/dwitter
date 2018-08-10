@@ -340,7 +340,7 @@ function readData(account, page, cb){
 				if(err) throw err;
 				for(i = 0;i < body.length;i++){
 					for(j = 0;j<votingTable.length;j++)
-						if(body[i].id == votingTable[i]._id){
+						if(body[i].id == votingTable[i].boardId){
 							body[i].votingenable = "false";
 							break;
 						}
