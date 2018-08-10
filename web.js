@@ -314,7 +314,7 @@ function readData(account, page, cb){
 			var body = []; // empty array
 			var picUrl;
 			console.log("Readdata size", result.length);
-			console.log("aggregate data", result);
+			//console.log("aggregate data", result);
 			//onsole.log("before for loop");
 			
 			for(i = 0; i < result.length ; i++){				
@@ -338,6 +338,7 @@ function readData(account, page, cb){
 			var findQuery = { account : account };
 			dbo.collection("voting").find(findQuery).toArray(function(err, votingTable){
 				if(err) throw err;
+				console.log("voting table query result",votingenable.length, account);
 				for(i = 0;i < body.length;i++){
 					for(j = 0;j<votingTable.length;j++)
 						if(body[i].id == votingTable[i].boardId){
