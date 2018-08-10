@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const ObjectID = require('mongodb');
 
 const follower = require("./follower");
+const profile = require("./profile");
 
 
 var express = require('express');
@@ -542,6 +543,13 @@ function readData(account, page, cb){
 	  //save this data to mongoDB//
 	  readVote(req.session.account,(result) => {res.send(result)});
   });
+
+ app.post("/setprofilepicture", function(req, res) { 
+	 var url = req.body.url;
+	 console.log("setprofilepicture", url);
+	 follower.setProfilePicture(req.session.account, url,
+				    (result) => {res.send(result)});
+ });
 
   app.post("/readtotaluser", function(req, res) { 
 	  
