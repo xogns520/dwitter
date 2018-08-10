@@ -36,7 +36,7 @@ exports.readFriends = function(account,callback){
   });  
 }
 
-exports.deleteFriend = function(account, callback){
+exports.deleteFriend = function(account, friend, callback){
 	MongoClient.connect(url, function(err, db) {
 		const dbo = db.db("heroku_dg3d93pq");
 		const deleteQuery = {account : account, follower : friend};
