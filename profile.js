@@ -10,7 +10,7 @@ exports.setProfilePicture = function(account, url, callback){
 		const findQuery = {account : account};
 		dbo.collection("user").updateOne(findQuery, myObj, function(err, res){
 			if(err) throw err;
-			cb("success");
+			callback("success");
 			db.close();
 		});
 	});
