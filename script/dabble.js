@@ -28,7 +28,7 @@
 		for ( var x = 0 ; x < data.length ; x++ ){
 			
 			var btnVoteEnable = 'false' == data[x].votingenable ? 'disabled' : '';
-			var profilePath = (data[x].length == 5) ? '"./images/user/' + data[x].profile : '"' + data[x].profile;
+			var profilePath = (data[x].profile.length == 5) ? '"./images/user/' + data[x].profile : '"' + data[x].profile;
 	
 				
 			var strHtml	= '<div class="element tile-1 home calc bg-change">'
