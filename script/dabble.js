@@ -244,10 +244,10 @@
 	 */
 	function gfFollowAction(){
 		var sAction = "/createfriend";
-		var fnCallback = gfContentEditActionCallback;
+		var fnCallback = gfFollowActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmFollow'),fnCallback,"POST");
 	}
-	function gfContentEditActionCallback(data){
+	function gfFollowActionCallback(data){
 		if ( "success" == data ){
 			alert("Follow 하였습니다");
 			$("#userImage").attr("src","");
