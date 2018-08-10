@@ -3,7 +3,7 @@ const ObjectId = require('mongodb').ObjectId;
 const MongoClient = require('mongodb').MongoClient;
 const url = process.env.MONGODB_URI;
 
-exports.setProfilePicture(account, url, callback){
+exports.setProfilePicture = function(account, url, callback){
 	MongoClient.connect(url, function(err, db) {
 		const dbo = db.db("heroku_dg3d93pq");
 		const myObj = { $set : { account : account, profile : url}};
