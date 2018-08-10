@@ -29,6 +29,7 @@
 			
 			var btnVoteEnable = 'false' == data[x].votingenable ? 'disabled' : '';
 			var profilePath = (data[x].length == 5) ? '"./images/user/' + data[x].profile : '"' + data[x].profile;
+			console.log("profilePath", profilePath);
 				
 			var strHtml	= '<div class="element tile-1 home calc bg-change">'
 						+ '	<table style="width: 100%;">'
