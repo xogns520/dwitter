@@ -338,7 +338,7 @@ function readData(account, page, cb){
 			var findQuery = { account : account };
 			dbo.collection("voting").find(findQuery).toArray(function(err, votingTable){
 				if(err) throw err;
-				console.log("voting table query result",votingenable.length, account);
+				console.log("voting table query result",votingTable.length, account);
 				for(i = 0;i < body.length;i++){
 					for(j = 0;j<votingTable.length;j++)
 						if(body[i].id == votingTable[i].boardId){
