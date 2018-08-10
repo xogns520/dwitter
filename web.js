@@ -286,7 +286,7 @@ function setPassword(id,oldPass,newPass,cb){
 	});	
 }
 
-var lastOid = "nil";
+
 
 function readData(account, page, cb){
 	MongoClient.connect(url, function(err, db) {
@@ -296,14 +296,6 @@ function readData(account, page, cb){
    		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
 		
 		var agr = [	
-			{ $addFields : {idString : String("$_id")}},
-			{ $lookup:
-			 {from : "voting",
-			  localField: "idString",
-			  foreignField : "boardId",
-			  as : "votingdetails"
-			 }
-			},
 			{ $lookup:
 			    { from: 'user',
 			   localField: 'account',
@@ -336,44 +328,29 @@ function readData(account, page, cb){
 					var picUrl = result[i].userdetails[0].profile;
 				}
 				
-				if(page == 0 && i == 0){
-					lastOid = result[i]._id
-					console.log("last oid", lastOid);
-					console.log("addition of oid", parseInt(lastOid,16)+1);
-				}
-				
-					var votingenable = "true";
-					if(result[i].votingdetails.length != 0)
-						votingenable = "false";
-				
+
+				const votingenable = "true";				
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
 					  voting : result[i].voting,  profile : picUrl, votingenable : votingenable });
 				
 			}
-			//onsole.log("after for loop");
+			//generating votingenable flag
+			var findQuery = { account : account };
+			dbo.collection("board").find(findQuery).toArray(function(err, votingTable){
+				if(err) throw err;
+				for(i = 0;i < body.length;i++){
+					for(j = 0;j<votingTable.length;j++)
+						if(body[i].id == votingTable[i]._id){
+							body[i].votingenable = "false";
+							break;
+						}
+				}
+				cb(body);
+    				db.close();   
+			}
+			
 
-			//make result for reading
-			/*
-		        var body = {
-			  "id": result._id,
-			  "account" : result.account,
-			  "data" : result.data,
-			  "date" : result.date,
-			  "voting" : result.voting,
-			  "profile" : "image7.png"
-	  	        };*/
-										     
-										     
-										     
-			/*
-			console.log("join table", result.userdetails);
-			console.log("test2", result.profile);
-    			console.log("read complete");
-		        console.log(body);
-			*/
-			//console.log(body);
-			cb(body);
-    			db.close();   
+
    		});
   	}); 
 }
