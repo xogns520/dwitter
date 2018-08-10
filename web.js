@@ -547,7 +547,7 @@ function readData(account, page, cb){
  app.post("/setprofilepicture", function(req, res) { 
 	 var url = req.body.url;
 	 console.log("setprofilepicture", url);
-	 follower.setProfilePicture(req.session.account, url,
+	 profile.setProfilePicture(req.session.account, url,
 				    (result) => {res.send(result)});
  });
 
