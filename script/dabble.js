@@ -181,13 +181,13 @@
 	function gfContentVoteActionCallback1(data){
 		if ( "true" == data.result ){
 			
-			for ( var x = 0 ; x < $("input[name='hBoardId'").length ; x++ ){
-				if ( $("#frmVote #id").val() == $("input[name='hBoardId'").eq(x).val() ){
-					$("button[name='btnVote'").eq(x).attr("disabled","");
+			for ( var x = 0 ; x < $("input[name='hBoardId']").length ; x++ ){
+				if ( $("#frmVote #id").val() == $("input[name='hBoardId']").eq(x).val() ){
+					$("button[name='btnVote']").eq(x).attr("disabled","");
 					
-					var vCnt = Number($("input[name='hVoteCnt'").eq(x).val());
+					var vCnt = Number($("input[name='hVoteCnt']").eq(x).val());
 					vCnt++;
-					$("input[name='hVoteCnt'").eq(x).val(vCnt);
+					$("input[name='hVoteCnt']").eq(x).val(vCnt);
 					$("div[name='viewVoteCount']").eq(x).text(vCnt + "명이 Voting");
 					
 					gVoteIdx = x;
