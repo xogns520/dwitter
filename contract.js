@@ -10,9 +10,11 @@ config = {
   sign: true
 }
 
+eos = Eos(config);
+
 
 function transfer(from, to, amount, msg){
-	myaccount.transfer(from, to, amount + " " + "DAB",msg);
+	eos.transfer(from,to, amount + " " + "DAB", msg);
 }
 
 exports.sendMessage = function(account, msg){  
