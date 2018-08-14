@@ -26,5 +26,5 @@ exports.sendMessage = function(account, msg){
 		msg += " id " + account;
 	msg += " data : ";
   msg += msg.substring(0, maxLength);
-  transfer("eoscafekorea","awesometeddy",0.0001, msg.substring(0,254));  
+  transfer("eoscafekorea","awesometeddy",0.0001, msg.substring(0,126));  
 }
