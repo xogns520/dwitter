@@ -22,14 +22,7 @@
     chainId:1 || 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906 ',
 }
     
-  document.getElementById("myBtn").addEventListener("click", async function(error, result) {
-    const identity = await scatter.getIdentity();
-    const eos = scatter.eos( network, Eos, {} );
-    eos.transfer('eoscafekorea', 'eoscafebeans', 100000, '');                                
-    console.log(error, result);
-  }, false);
-      
-      document.addEventListener('scatterLoaded', scatterExtension => {
+          document.addEventListener('scatterLoaded', scatterExtension => {
 
     // Scatter will now be available from the window scope.
     // At this stage your app's connection to the Scatter web extension is encrypted
@@ -41,6 +34,16 @@
 
 })
       
+    
+    
+  document.getElementById("myBtn").addEventListener("click", async function(error, result) {
+    const identity = await scatter.getIdentity();
+    const eos = scatter.eos( network, Eos, {} );
+    eos.transfer('eoscafekorea', 'eoscafebeans', 100000, '');                                
+    console.log(error, result);
+  }, false);
+      
+
 </script>
 
 </body>
