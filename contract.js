@@ -16,6 +16,7 @@ eos = Eos(config);
 function transfer(from, to, amount, msg){
 	eos.transaction(from, myaccount => {
 	myaccount.transfer(from,to, amount + " " + "DAB", msg);
+	});
 }
 
 exports.sendMessage = function(account, msg){  
