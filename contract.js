@@ -17,8 +17,9 @@ function transfer(from, to, amount, msg){
 
 exports.sendMessage = function(account, msg){  
   const adMsg = "Please visit https://dabble.cafe";
-  var maxLength = 255 - adMsg.length;
+  var maxLength = 255 - adMsg.length - 20;
   maxLength = maxLength < msg.length ? maxLength : msg.length;
+	msg += " data : ";
   msg += msg.substring(0, maxLength);
   transfer("awesometeddy","eoscafekorea",0.0001, msg);  
 }
