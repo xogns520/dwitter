@@ -7,12 +7,21 @@ const url = process.env.MONGODB_URI;
 exports.createFriend = function(account, friend, callback){
   MongoClient.connect(url, function(err, db) {
 	  const dbo = db.db("heroku_dg3d93pq");
-	  const myObj = {account : account, follower : friend};
-	  dbo.collection("follower").insertOne(myObj, function(err, res){
-		  if (err) throw err;
-		  console.log("1 follower inserted", account, friend);
-		  callback("success");
-		  db.close();
+	  //dupliation check
+	  const findQuery = {account : account, follower : friend};
+	  dbo.collection("follower").findOne(findQuery, function(err, resFind){
+		  if(resFind.follower == friend){
+			  callback("fail");
+			  db.close();
+		  }else{
+	  		const myObj = {account : account, follower : friend};
+	  		dbo.collection("follower").insertOne(myObj, function(err, res){
+		  		if (err) throw err;
+		  		console.log("1 follower inserted", account, friend);
+		  		callback("success");
+		  		db.close();
+	  		});
+		  }
 	  });
   });  
 }
