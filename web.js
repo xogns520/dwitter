@@ -98,11 +98,13 @@ function saveAccount(account, pass){
 		var tod = Date.now();
 		bcrypt.hash(pass, parseInt(process.env.SALT,10), function(err, hash){
 			var myobj = { account : account, pass : hash, date : tod, wallet : 0, profile : "8.png" };
-   			dbo.collection("user").insertOne(myobj, function(err, res){
-    				if (err) throw err;
+   			dbo.collection("user").insertOne(myobj).then(function(res){
     				console.log("1 user inserted");
     				db.close();   
-			});
+			}).catch(function(e){
+				console.log('catch in test');
+				db.close();
+				console.log(e);				
 		});
   	}); 
 }
