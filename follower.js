@@ -10,7 +10,7 @@ exports.createFriend = function(account, friend, callback){
 	  //dupliation check
 	  const findQuery = {account : account, follower : friend};
 	  dbo.collection("follower").findOne(findQuery, function(err, resFind){
-		  if(resFind == null){
+		  if(resFind != null){
 			  callback("fail");
 			  db.close();
 		  }else{
