@@ -13,6 +13,15 @@
 
   
   <script type="text/javascript">  
+    
+    const network = {
+    protocol:'http', // Defaults to https
+    blockchain:'eos',
+    host:'http://mainnet.eoscalgary.io', // ( or null if endorsed chainId )
+    port:null, // ( or null if defaulting to 80 )
+    chainId:1 || 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906 ',
+}
+    
   document.getElementById("myBtn").addEventListener("click", async function(error, result) {
     const identity = await scatter.getIdentity();
     const eos = scatter.eos( network, Eos, {} );
@@ -26,6 +35,9 @@
     // At this stage your app's connection to the Scatter web extension is encrypted
     // and ready for use.
     const scatter = window.scatter;
+        window.scatter = null;
+        scatter.requireVersion(3.0);
+        
 
 })
       
