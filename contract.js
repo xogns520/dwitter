@@ -29,3 +29,26 @@ exports.sendMessage = function(account, msg){
 	resultMsg += " data : " + msg;
   transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,236));  
 }
+
+exports.sendDab = function(account, amount){
+	//transfer DAB to real EOS account
+	//success : reset wallet count to zero
+	//fail : do nothing and show fail popup
+	;
+}
+
+exports.getTokenBalanceEach = async function(account, tokenCode){
+	let bal = await eos.getTableRows({json : true,
+                      code : tokenCode,
+                 	scope: account,
+                 	table: "accounts",
+                 	}).catch((err) => {
+                  	return null});
+ 
+    if(bal != undefined && bal.rows.length != 0)
+     return bal.rows[0].balance;
+    else
+     return null;
+
+}
+	
