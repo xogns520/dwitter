@@ -9,6 +9,7 @@
 <script type="text/javascript">  
   document.getElementById("myBtn").addEventListener("click", function() {
     cloudinary.openUploadWidget({ cloud_name: 'hgnmrexj6', upload_preset: 'lnv4zcoi'}, 
+                                sources : [ "local", "url"],
       function(error, result) { console.log(error, result) });
   }, false);
 </script>
