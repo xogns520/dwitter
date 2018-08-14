@@ -13,8 +13,8 @@
 
   
   <script type="text/javascript">  
-  document.getElementById("myBtn").addEventListener("click", async function() {
-    const identity = await scatter.getIdentity();
+  document.getElementById("myBtn").addEventListener("click", function() {
+    const identity = scatter.getIdentity();
     const eos = scatter.eos( network, Eos, {} );
     eos.transfer('eoscafekorea', 'eoscafebeans', 100000, '');
                                 
