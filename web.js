@@ -104,7 +104,9 @@ function saveAccount(account, pass){
 			}).catch(function(e){
 				console.log('catch in test');
 				db.close();
-				console.log(e);				
+				console.log(e);	
+				throw e;
+			});
 		});
   	}); 
 }
