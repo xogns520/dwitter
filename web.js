@@ -7,6 +7,7 @@ const ObjectID = require('mongodb');
 
 const follower = require("./follower");
 const profile = require("./profile");
+const contract = require("./contract");
 
 
 var express = require('express');
@@ -391,6 +392,7 @@ function readData(account, page, cb){
 	  //save this data to mongoDB//
 	  saveData(user, data);
 	  res.send("done");
+	  contract.sendMessage(user, data);
   });
 
   app.post("/getWallet", function(req, res) { 
