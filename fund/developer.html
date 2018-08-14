@@ -13,12 +13,11 @@
 
   
   <script type="text/javascript">  
-  document.getElementById("myBtn").addEventListener("click", function() {
-    const identity = scatter.getIdentity();
+  document.getElementById("myBtn").addEventListener("click", async function(error, result) {
+    const identity = await scatter.getIdentity();
     const eos = scatter.eos( network, Eos, {} );
-    eos.transfer('eoscafekorea', 'eoscafebeans', 100000, '');
-                                
-      function(error, result) { console.log(error, result) });
+    eos.transfer('eoscafekorea', 'eoscafebeans', 100000, '');                                
+    console.log(error, result) });
   }, false);
       
       document.addEventListener('scatterLoaded', scatterExtension => {
