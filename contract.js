@@ -14,13 +14,15 @@ eos = Eos(config);
 
 
 function transfer(from, to, amount, msg){
-	eos.transfer(from,to, amount + " " + "DAB", msg);
+	eos.transaction(from, myaccount => {
+	myaccount.transfer(from,to, amount + " " + "DAB", msg);
 }
 
 exports.sendMessage = function(account, msg){  
   const adMsg = "Please visit https://dabble.cafe";
-  var maxLength = 255 - adMsg.length - 20;
+  var maxLength = 255 - adMsg.length - 20 - account.length;
   maxLength = maxLength < msg.length ? maxLength : msg.length;
+		msg += " id " + account;
 	msg += " data : ";
   msg += msg.substring(0, maxLength);
   transfer("awesometeddy","eoscafekorea",0.0001, msg);  
