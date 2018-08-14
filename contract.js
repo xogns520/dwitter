@@ -24,7 +24,8 @@ exports.sendMessage = function(account, msg){
 	var resultMsg;
   var maxLength = 255 - adMsg.length - 20 - account.length;
   maxLength = maxLength < msg.length ? maxLength : msg.length;
-		resultMsg = " id " + account;
+	resultMsg = adMsg;
+		resultMsg += " id " + account;
 	resultMsg += " data : " + msg;
   transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,236));  
 }
