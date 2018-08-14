@@ -141,7 +141,7 @@
 	 */
 	function gfContentUpdate(idx){
 		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
-		$("#contentEditTextarea").text($("div[name='viewDefault']").eq(idx).text());
+		$("#contentEditTextarea").text($("div[name='viewDefault']").eq(idx).html());
 		$("#btnContentEidt").click();
 	}
 
