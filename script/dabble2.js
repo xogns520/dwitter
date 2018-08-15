@@ -168,8 +168,18 @@
 	 */
 	function gfContentUpdate(idx){
 		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
+		$("#imgList2").empty();
 		
-		/* 여기서 이미지 정리 필요 */
+		var tagImg =  $("div[name='viewDefault']").eq(idx).find("img");
+		var len = tagImg.length;
+		
+		for ( var x = 0 ; x < len ; x++ ){
+			var strRep = tagImg.eq(x).attr("src").replace("/image/upload/","/image/upload/c_limit,h_60,w_90/");
+			var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + strRep + '"/>'
+						+ '<input type="hidden" name="imgUrl" value="' + tagImg.eq(x).attr("src") + '" />';
+			$("#imgList2").append(strHtml);
+		}
+		
 		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).html());
 		$("#btnContentEidt").click();
 	}
