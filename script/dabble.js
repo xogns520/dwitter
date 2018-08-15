@@ -63,7 +63,7 @@
 			*/
 		}
 		
-		var len = $("input[name='hAccount']").lenght;
+		var len = $("input[name='hAccount']").length;
 		var strId = $("#frmUserInfo #id").val();
 		for ( var x = 0 ; x < len ; x++ ){
 			if ( strId == $("input[name='hAccount']").eq(x).val() ){
