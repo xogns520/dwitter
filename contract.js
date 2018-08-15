@@ -35,7 +35,7 @@ function transfer(from, to, amount, msg){
 		myaccount.transfer(from,to, amount + " " + "DAB", msg);
 });
 		
-exports.sendDab = function(account, amount, callback){
+exports.sendDab = function(account, callback){
 	//transfer DAB to real EOS account
 	//success : reset wallet count to zero
 	//fail : do nothing and show fail popup
@@ -59,7 +59,6 @@ exports.sendDab = function(account, amount, callback){
 				 });			 
 		 }); //end of findOne
 	}); //end of connect
-
 }
 
 exports.getTokenBalanceEach = async function(account, tokenCode, callback){
@@ -75,5 +74,5 @@ exports.getTokenBalanceEach = async function(account, tokenCode, callback){
     else
      callback(0);
 
-});
+}
 	
