@@ -26,7 +26,7 @@
 		for ( var x = 0 ; x < data.length ; x++ ){
 			
 			var btnVoteEnable = 'false' == data[x].votingenable ? 'disabled' : '';
-			var profilePath = (data[x].profile.length == 5) ? '"./images/user/' + data[x].profile : '"' + data[x].profile;
+			//var profilePath = (data[x].profile.length == 5) ? '"./images/user/' + data[x].profile : '"' + data[x].profile;
 	
 				
 			var strHtml	= '<div class="element tile-1 home calc bg-change">'
@@ -37,7 +37,7 @@
 //						+ '				<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom" aria-describedby="tooltip113771">Bottom</button>'
 						+ '			</td>'
 						+ '			<td  style="text-align:right; margin: 0px;" onClick="javascript:gfFollowPopup(' + x + ');">'
-						+ '				<img name="userImage" style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src=' + profilePath + '">'
+						+ '				<img name="userImage" style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src=' + data[x].profile + '">'
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
