@@ -92,10 +92,24 @@
 	 * 글 쓰기
 	 * @returns
 	 */
-	function gfContentWriteAction(){
-		var rand = Number(Math.floor(Math.random() * 8));
-		$("#frmWrite #user").val( $("#frmUserInfo #id").val() );
-		$("#frmWrite #data").val( $("#contentTextarea").val() );
+	//Teddy, get name call back test
+	function gfContentWrite(data){
+		gfContentWriteAction(data.id);	
+	}
+	//Teddy gfContentWriteAction with Author name
+	function gfContentWriteAction(userId){
+		$("#frmWrite #user").val(userId);
+		
+		var strText = $("#contentTextarea").val();
+		var strImg = "";
+		var len = $("input[name='imgUrl']").length;
+		
+		for ( var x = 0 ; x < len ; x++ ){
+			strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+		}
+		$("#frmWrite #data").val( strText + strImg );
+		$("#imgList1").empty();
+		
 		var sAction = "/write";
 		var fnCallback = gfContentWriteActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmWrite'),fnCallback,"POST");
@@ -111,15 +125,7 @@
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
-
-	//Teddy gfContentWriteAction with Author name
-	function gfContentWriteActionName(userId){
-		$("#frmWrite #user").val(userId);
-		$("#frmWrite #data").val($("#contentTextarea").val());
-		var sAction = "/write";
-		var fnCallback = gfContentWriteActionCallback;
-		gfAjaxCallWithForm(sAction,$('#frmWrite'),fnCallback,"POST");
-	}
+	
 	
 	/**
 	 * 글쓰기 취소
@@ -138,7 +144,19 @@
 	 */
 	function gfContentUpdate(idx){
 		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
-		$("#contentEditTextarea").text($("div[name='viewDefault']").eq(idx).html());
+		$("#imgList2").empty();
+		
+		var tagImg =  $("div[name='viewDefault']").eq(idx).find("img");
+		var len = tagImg.length;
+		
+		for ( var x = 0 ; x < len ; x++ ){
+			var strRep = tagImg.eq(x).attr("src").replace("/image/upload/","/image/upload/c_limit,h_60,w_90/");
+			var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + strRep + '"/>'
+						+ '<input type="hidden" name="imgUrl" value="' + tagImg.eq(x).attr("src") + '" />';
+			$("#imgList2").append(strHtml);
+		}
+		
+		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).text());
 		$("#btnContentEidt").click();
 	}
 
@@ -147,7 +165,17 @@
 	 * @returns
 	 */
 	function gfContentEditAction(){
-		$("#frmEdit #data").val( $("#contentEditTextarea").text() );
+		var strText = $("#contentEditTextarea").val();
+		var strImg = "";
+		var len = $("input[name='imgUrl']").length;
+		
+		for ( var x = 0 ; x < len ; x++ ){
+			strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+		}
+		$("#frmEdit #data").val( strText + strImg );
+		
+		$("#imgList2").empty();
+		
 		var sAction = "/edit";
 		var fnCallback = gfContentEditActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmEdit'),fnCallback,"POST");
@@ -155,7 +183,7 @@
 	function gfContentEditActionCallback(data){
 		if ( "success" == data ){
 			//alert("글쓰기 성공");
-			$("#contentEditTextarea").text("");
+			$("#contentEditTextarea").val("");
 			gfContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{

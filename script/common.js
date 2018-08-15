@@ -155,15 +155,6 @@
 
 	}
 	
-
-//Teddy, get name call back test
-	function gfContentWrite(data){
-		gfContentWriteActionName(data.id);	
-	}
-
-
-
-	
 	//http://osvaldas.info/elegant-css-and-jquery-tooltip-responsive-mobile-friendly
 	function gfTooltip(){
 		//tooltip = $( '<div id="tooltip" style="display: inline;"></div>' );
