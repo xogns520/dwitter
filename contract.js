@@ -30,11 +30,36 @@ exports.sendMessage = function(account, msg){
   transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,236));  
 }
 
-exports.sendDab = function(account, amount){
+function transfer(from, to, amount, msg){
+	eos.transaction("eoscafekorea").then(myaccount => {
+		myaccount.transfer(from,to, amount + " " + "DAB", msg);
+});
+		
+exports.sendDab = function(account, amount, callback){
 	//transfer DAB to real EOS account
 	//success : reset wallet count to zero
 	//fail : do nothing and show fail popup
-	;
+	MongoClient.connect(url, function(err, db) {
+		const dbo = db.db("heroku_dg3d93pq");
+		const findQuery = {account : account};
+		 dbo.collection("user").findOne(findQuery, function(err, resFind){
+			 if(err) throw err;
+			 const sendAmount = resFind.wallet;
+			 transfer("eoscafekorea",account,sendAmount, "https://dabble.cafe daily airdrop").then((output)=>{
+				 	callback("success");
+				 const updateQuery = {account : account};
+				 const myObj = {$set : {wallet : "0"}};
+				 dbo.collection("user").updateOne(updateQuery, myObj,function(err, resFind){
+					 if(err) throw err;
+					 db.close();
+				 }
+				 }).catch((err)=>{
+				 	db.close();
+				 	callback("fail");
+				 });			 
+		 });
+	});
+
 }
 
 exports.getTokenBalanceEach = async function(account, tokenCode, callback){
