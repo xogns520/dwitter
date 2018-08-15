@@ -47,14 +47,27 @@
 			if ( "true" == data.result ){
 				$("#userId").val(data.id)
 				$("#frmUserInfo #id").val(data.id);
+				fnGetProfileImage();
 			}else{
 				alert("로그인 후 사용하세요.");
 				$(location).attr("href", "index.html");
 			}
 		}
 		
+		
+		function fnGetProfileImage(){
+			var sAction = "/getprofilepicture";
+			var fnCallback = fnGetProfileImageCallback;
+			var param = "";
+			var sMethod = "POST";	// GET/POST
+			gfAjaxCallWithParam(sAction, param, fnCallback, sMethod);
+		}
+		function fnGetProfileImageCallback(data){
+			$("#frmUserInfoChange #url").val(data);
+			$("#imgThumbNail").attr("src", data );
+		}		
+		
 		function fnPassChangeAction(){
-			
 			var newPass = $("#newPassword").val();
 			var vrfPass = $("#verifyPassword").val();
 			
@@ -62,7 +75,6 @@
 				alert("새 비밀번호/새 비밀번호 확인이 다릅니다.");
 				return ;
 			}
-			
 			
 			$("#frmUserInfoChange #id").val( $("#frmUserInfo #id").val() );
 			$("#frmUserInfoChange #oldpass").val( $("#oldPassword").val() );
@@ -87,6 +99,53 @@
 				alert("비밀번호 변경 실패");
 			}
 		}
+		
+		
+		function fnProfileImagePopup(){
+			var param = {	cloud_name: 'hgnmrexj6'
+							, upload_preset: 'lnv4zcoi'
+							, sources : [ "local", "url"]
+				};
+			var fnCallback =  fnProfileImagePopupCallback;
+			cloudinary.openUploadWidget( param, fnCallback );
+			
+		}
+		function fnProfileImagePopupCallback( error, result ){
+			console.log(result);
+			if ( null != error ){
+				if ( "User closed widget" == error.message ) {
+					
+				}else{
+					alert("이미지 로드가 실패하였습니다.");
+					return ;
+				}
+			}
+			
+			if ( 0 < result.length  ){
+				
+				$("#btnProfileSet").hide();
+				$("#btnProfileReSet").show();
+				$("#btnProfileSave").show();
+				$("#imgThumbNail").attr("src", result[0].thumbnail_url );
+			}
+		}
+		
+		
+		function fnProfileImageChangeAction(){
+			$("#frmUserInfoChange #url").val( $("#imgThumbNail").attr("src") );
+			var sAction = "/setprofilepicture";
+			var fnCallback = fnProfileImageChangeActionCallback;
+			gfAjaxCallWithForm(sAction,$('#frmUserInfoChange'),fnCallback,"POST");
+		}
+		function fnProfileImageChangeActionCallback(data){
+			if ( "success" == data ){
+				alert("프로필 사진이 등록 되었습니다.");
+				
+			}else{
+				alert("프로필 사진이 등록 실패");
+			}
+		}
+		
 	</script>
 	<!-- Scripts -->
 </head>
@@ -115,7 +174,7 @@
 						<div class="center">
 							<div class="cursor">
 								<a href="index.html" style="align-self: center;" >
-									<img  src="./images/logo-dabble.png" style="width: 130px; height: 50px; vertical-align: super; display: inline;" />
+									<img src="./images/logo-dabble.png" style="width: 130px; height: 50px; vertical-align: super; display: inline;" />
 								</a>
 							</div>
 						</div>
@@ -171,6 +230,22 @@
 									<label for="userId">ID</label>
 									<input class="form-control" id="userId" type="text" placeholder="" readonly="readonly">
 								</div>
+								
+								<hr></hr>
+								프로필 사진 추가/변경<br/><br />
+								<div class="form-group">
+									<button type="button" id="btnProfileSet" class="btn btn-primary btn-block" onclick="javascript:fnProfileImagePopup();">프로필 사진 선택</button>
+								</div>
+								<div class="form-group">
+									<img id="imgThumbNail" style="width: auto;" src=""/> 
+								</div>
+								<div class="form-group">
+									<button type="button" id="btnProfileReSet" style="display: none;" class="btn btn-primary btn-block" onclick="javascript:fnProfileImagePopup();">프로필 사진 다시 올리기</button>
+									<button type="button" id="btnProfileSave" style="display: none;" class="btn btn-primary btn-block" onclick="javascript:fnProfileImageChangeAction();">프로필 사진 저장</button>
+								</div>
+								
+								<hr></hr>
+								비빌번호 변경 <br /><br />
 								<div class="form-group">
 									<label for="oldPassword">현재 비밀번호</label>
 									<input type="password" class="form-control" id="oldPassword" placeholder="현재 비밀번호">
