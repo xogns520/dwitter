@@ -557,6 +557,12 @@ function readData(account, page, cb){
 				    (result) => {res.send(result)});
  });
 
+ app.post("/getprofilepicture", function(req, res) { 
+	 console.log("getprofilepicture");
+	 profile.getProfilePicture(req.session.account,
+				    (result) => {res.send(result)});
+ });
+
   app.post("/readtotaluser", function(req, res) { 
 	  
 	/* some server side logic */
