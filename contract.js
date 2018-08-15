@@ -37,18 +37,18 @@ exports.sendDab = function(account, amount){
 	;
 }
 
-exports.getTokenBalanceEach = async function(account, tokenCode){
+exports.getTokenBalanceEach = async function(account, tokenCode, callback){
 	let bal = await eos.getTableRows({json : true,
                       code : tokenCode,
                  	scope: account,
                  	table: "accounts",
                  	}).catch((err) => {
-                  	return null});
+                  	callback(0)});
  
     if(bal != undefined && bal.rows.length != 0)
-     return bal.rows[0].balance;
+     callback(bal.rows[0].balance);
     else
-     return null;
+     callback(0);
 
 }
 	
