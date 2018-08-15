@@ -1,3 +1,9 @@
+//mongo DB
+var mongo = require('mongodb');
+var ObjectId = require('mongodb').ObjectId;
+var MongoClient = require('mongodb').MongoClient;
+var url = process.env.MONGODB_URI;
+
 const Eos = require('eosjs');
 
 config = {
@@ -60,9 +66,16 @@ exports.sendDab = function(account, callback){
 }
 
 exports.getTokenBalanceEach = async function(account, tokenCode, callback){
+	MongoClient.connect(url, function(err, db) {
+		const dbo = db.db("heroku_dg3d93pq");
+		const findQuery = {account : account};
+		dbo.collection("user").findOne(findQuery, function(err, resFind){
+			if(err) throw err;
+			eosAccount = resFind.walletAccount;
+		
 	let bal = await eos.getTableRows({json : true,
                       code : tokenCode,
-                 	scope: account,
+                 	scope: eosAccount,
                  	table: "accounts",
                  	}).catch((err) => {
                   	callback(0)});
@@ -71,8 +84,12 @@ exports.getTokenBalanceEach = async function(account, tokenCode, callback){
      callback(bal.rows[0].balance);
     else
      callback(0);
+			db.close();
+		});
 
 }
+
+
 
 
 
