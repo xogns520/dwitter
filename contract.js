@@ -88,6 +88,7 @@ exports.getTokenBalanceEach = function(account, tokenCode, callback){
  
 
 		});
+	});
 
 }
 
