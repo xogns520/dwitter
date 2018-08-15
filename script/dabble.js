@@ -108,7 +108,6 @@
 			strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
 		}
 		$("#frmWrite #data").val( strText + strImg );
-		$("#imgList1").empty();
 		
 		var sAction = "/write";
 		var fnCallback = gfContentWriteActionCallback;
@@ -143,8 +142,9 @@
 	 * @returns
 	 */
 	function gfContentUpdate(idx){
-		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
+		$("#imgList1").empty();
 		$("#imgList2").empty();
+		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
 		
 		var tagImg =  $("div[name='viewDefault']").eq(idx).find("img");
 		var len = tagImg.length;
@@ -173,8 +173,6 @@
 			strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
 		}
 		$("#frmEdit #data").val( strText + strImg );
-		
-		$("#imgList2").empty();
 		
 		var sAction = "/edit";
 		var fnCallback = gfContentEditActionCallback;

@@ -53,6 +53,8 @@
 		}
 		function fnLoginChkCallback(data){
 			if ( "true" == data.result ){
+				$("#imgList1").empty();
+				$("#imgList2").empty();
 				$("#btnContentWrite").click();
 			}else{
 				alert("로그인 후 사용하세요.");
