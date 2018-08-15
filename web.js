@@ -563,6 +563,23 @@ function readData(account, page, cb){
 				    (result) => {res.send(result)});
  });
 
+ app.post("/getbalance", function(req, res) { 
+	 console.log("getbalance");
+	 contract.getTokenBalanceEach (req.session.account, "eoscafekorea",
+				    (result) => {res.send(result)});
+ });
+
+ app.post("/transferbalance", function(req, res) { 
+	 console.log("transferbalance");
+	 contract.sendDab(req.session.account,
+				    (result) => {res.send(result)});
+ });
+
+
+
+
+
+
   app.post("/readtotaluser", function(req, res) { 
 	  
 	/* some server side logic */
