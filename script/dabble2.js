@@ -180,7 +180,7 @@
 	 * @returns
 	 */
 	function gfContentEditAction(){
-		$("#frmEdit #data").val( $("#contentEditTextarea").text() );
+		$("#frmEdit #data").val( $("#contentEditTextarea").val() );
 		$("#imgList2").empty();
 		
 		var sAction = "/edit";
@@ -190,7 +190,7 @@
 	function gfContentEditActionCallback(data){
 		if ( "success" == data ){
 			//alert("글쓰기 성공");
-			$("#contentEditTextarea").text("");
+			$("#contentEditTextarea").val("");
 			gfContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
