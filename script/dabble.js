@@ -67,7 +67,7 @@
 		var strId = $("#frmUserInfo #id").val();
 		for ( var x = 0 ; x < len ; x++ ){
 			if ( strId == $("input[name='hAccount']").eq(x).val() ){
-				$("input[name='btnUpdate']").eq(x).show();
+				$("button[name='btnUpdate']").eq(x).show();
 			}
 		}
 	}
