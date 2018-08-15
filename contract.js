@@ -42,7 +42,7 @@ exports.sendDab = function(account, amount, callback){
 	MongoClient.connect(url, function(err, db) {
 		const dbo = db.db("heroku_dg3d93pq");
 		const findQuery = {account : account};
-		 dbo.collection("user").findOne(findQuery, function(err, resFind){
+		dbo.collection("user").findOne(findQuery, function(err, resFind){
 			 if(err) throw err;
 			 const sendAmount = resFind.wallet;
 			 transfer("eoscafekorea",account,sendAmount, "https://dabble.cafe daily airdrop").then((output)=>{
@@ -52,13 +52,13 @@ exports.sendDab = function(account, amount, callback){
 				 dbo.collection("user").updateOne(updateQuery, myObj,function(err, resFind){
 					 if(err) throw err;
 					 db.close();
-				 });
+				 }); //end of updateOne
 				 }).catch((err)=>{
 				 	db.close();
 				 	callback("fail");
 				 });			 
-		 });
-	});
+		 }); //end of findOne
+	}); //end of connect
 
 }
 
