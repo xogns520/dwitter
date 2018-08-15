@@ -12,8 +12,6 @@
 	 * @returns
 	 */
 	function gfContentList(page){
-		//var rand = Number(Math.floor(Math.random() * 8));
-		//$("#frmRead user").val(gUserArray[rand]);
 		if ( undefined == page ){
 			page = 0;
 		}
@@ -49,31 +47,29 @@
 						+ '	<div class="hint" name="viewVoteCount">'+ data[x].voting + '명이 Voting</div>'
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:20%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i class="fa fa-thumbs-o-up"></i></button>'
-//						+ '	<abbr id="tooltiptDiv" title="' + data[x].data + '" rel="tooltip">상세보기1-툴팁</abbr>'
-						//+ '	<div style="margin: 5px;"></div>';
-			
-				if ( data[x].account == $("#frmUserInfo #id").val() ){
-					//strHtml +=	'	<div style="margin: 5px;"></div>'
-						strHtml	+=	'	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
- 							//+	'	<div style="margin: 5px;"></div>';
-				}
-
-				strHtml +='	<button type="button" name="btnDetail" style="width:20%; display: none;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
+						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
+						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 						+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
-						//+ '	<div name="divStyle" ></div>'
 						+ '</div>';
 			
 			$("div[id='contentList']").append(strHtml);
+			/*
 			var obj = $("div[name='viewDefault']").eq(x);
 			if ( gfTextOverCheck(obj) ){
 				$("button[name='btnDetail']").eq(x).show();
 			}
+			*/
 		}
-		//gfContentReadVoteAction();
-		//$("[data-toggle='tooltip']").tooltip();
-		//gfTooltip();
+		
+		var len = $("input[name='hAccount']").lenght;
+		var strId = $("#frmUserInfo #id").val();
+		for ( var x = 0 ; x < len ; x++ ){
+			if ( strId == $("input[name='hAccount']").eq(x).val() ){
+				$("input[name='btnUpdate']").eq(x).show();
+			}
+		}
 	}
 	
 	/**
