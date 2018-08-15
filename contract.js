@@ -61,7 +61,6 @@ exports.sendDab = function(account, callback){
 		 }); //end of findOne
 	}); //end of connect
 }
-*/
 
 exports.getTokenBalanceEach = async function(account, tokenCode, callback){
 	let bal = await eos.getTableRows({json : true,
@@ -77,4 +76,7 @@ exports.getTokenBalanceEach = async function(account, tokenCode, callback){
      callback(0);
 
 }
+
+*/
+
 	
