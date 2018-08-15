@@ -8,7 +8,7 @@
 	var gIndex = 0;
 	var gContentArray = new Array();
 	
-	var gUserArray = [ '김핡핡', '현피박군', '길막테디', '대대자손', '산타페후', 'Sting', '완전용용', 'thomas yoon', '이현'];
+	//var gUserArray = [ '김핡핡', '현피박군', '길막테디', '대대자손', '산타페후', 'Sting', '완전용용', 'thomas yoon', '이현'];
 	//////////////////////////////////////////////////////
 	$(document).ready(function(){
 		gfGetUserInfo();
