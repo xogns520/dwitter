@@ -180,7 +180,7 @@
 			$("#imgList2").append(strHtml);
 		}
 		
-		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).html());
+		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).text());
 		$("#btnContentEidt").click();
 	}
 
