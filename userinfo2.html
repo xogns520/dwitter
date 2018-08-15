@@ -47,11 +47,26 @@
 			if ( "true" == data.result ){
 				$("#userId").val(data.id)
 				$("#frmUserInfo #id").val(data.id);
+				fnGetProfileImage();
 			}else{
 				alert("로그인 후 사용하세요.");
 				$(location).attr("href", "index.html");
 			}
 		}
+		
+		
+		function fnGetProfileImage(){
+			var sAction = "/getprofilepicture";
+			var fnCallback = fnGetProfileImageCallback;
+			var param = "";
+			var sMethod = "POST";	// GET/POST
+			gfAjaxCallWithParam(sAction, param, fnCallback, sMethod);
+		}
+		
+		function fnGetProfileImageCallback(data){
+			$("#frmUserInfoChange #url").val(data);
+			$("#imgThumbNail").attr("src", data );
+		}		
 		
 		function fnPassChangeAction(){
 			
@@ -93,8 +108,8 @@
 							, upload_preset: 'lnv4zcoi'
 							, sources : [ "local", "url"]
 				};
-			var fnCallBack =  fnProfileImagePopupCallback;
-			cloudinary.openUploadWidget( param, fnCallBack );
+			var fnCallback =  fnProfileImagePopupCallback;
+			cloudinary.openUploadWidget( param, fnCallback );
 			
 		}
 		
@@ -133,8 +148,7 @@
 			}else{
 				alert("프로필 사진이 등록 실패");
 			}
-		}		
-		
+		}
 		
 	</script>
 	<!-- Scripts -->
