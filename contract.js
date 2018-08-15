@@ -30,12 +30,9 @@ exports.sendMessage = function(account, msg){
   transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,236));  
 }
 
-function transfer(from, to, amount, msg){
-	eos.transaction("eoscafekorea").then(myaccount => {
-		myaccount.transfer(from,to, amount + " " + "DAB", msg);
-});
+
 		
-	/*
+	
 exports.sendDab = function(account, callback){
 	//transfer DAB to real EOS account
 	//success : reset wallet count to zero
@@ -77,6 +74,6 @@ exports.getTokenBalanceEach = async function(account, tokenCode, callback){
 
 }
 
-*/
+
 
 	
