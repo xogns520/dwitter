@@ -75,5 +75,5 @@ exports.getTokenBalanceEach = async function(account, tokenCode, callback){
     else
      callback(0);
 
-}
+});
 	
