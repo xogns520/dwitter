@@ -65,7 +65,7 @@ exports.sendDab = function(account, callback){
 	}); //end of connect
 }
 
-exports.getTokenBalanceEach = async function(account, tokenCode, callback){
+exports.getTokenBalanceEach = function(account, tokenCode, callback){
 	MongoClient.connect(url, function(err, db) {
 		const dbo = db.db("heroku_dg3d93pq");
 		const findQuery = {account : account};
@@ -73,18 +73,20 @@ exports.getTokenBalanceEach = async function(account, tokenCode, callback){
 			if(err) throw err;
 			eosAccount = resFind.walletAccount;
 		
-	let bal = await eos.getTableRows({json : true,
+	eos.getTableRows({json : true,
                       code : tokenCode,
                  	scope: eosAccount,
                  	table: "accounts",
-                 	}).catch((err) => {
-                  	callback(0)});
- 
-    if(bal != undefined && bal.rows.length != 0)
-     callback(bal.rows[0].balance);
+                 	}).then((res) => {
+		    if(res != undefined && res.rows.length != 0)
+     callback(res.rows[0].balance);
     else
      callback(0);
 			db.close();
+	}).catch((err) => {
+                  	callback(0)});
+ 
+
 		});
 
 }
