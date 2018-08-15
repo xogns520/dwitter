@@ -52,7 +52,7 @@ exports.sendDab = function(account, amount, callback){
 				 dbo.collection("user").updateOne(updateQuery, myObj,function(err, resFind){
 					 if(err) throw err;
 					 db.close();
-				 }
+				 });
 				 }).catch((err)=>{
 				 	db.close();
 				 	callback("fail");
