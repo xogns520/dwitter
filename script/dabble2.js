@@ -170,8 +170,7 @@
 		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
 		
 		/* 여기서 이미지 정리 필요 */
-		
-		$("#contentEditTextarea").text($("div[name='viewDefault']").eq(idx).html());
+		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).html());
 		$("#btnContentEidt").click();
 	}
 
@@ -180,7 +179,15 @@
 	 * @returns
 	 */
 	function gfContentEditAction(){
-		$("#frmEdit #data").val( $("#contentEditTextarea").val() );
+		var strText = $("#contentEditTextarea").val();
+		var strImg = "";
+		var len = $("input[name='imgUrl']").length;
+		
+		for ( var x = 0 ; x < len ; x++ ){
+			strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+		}
+		$("#frmEdit #data").val( strText + strImg );
+		
 		$("#imgList2").empty();
 		
 		var sAction = "/edit";
