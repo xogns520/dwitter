@@ -20,7 +20,7 @@ exports.getProfilePicture = function(account, callback){
 	MongoClient.connect(url, function(err, db) {
 		const dbo = db.db("heroku_dg3d93pq");
 		const findQuery = {account : account};
-		dbo.collection("user").findOne(findQuery, myObj, function(err, res){
+		dbo.collection("user").findOne(findQuery, function(err, res){
 			if(err) throw err;
 			callback(res.profile);
 			db.close();
