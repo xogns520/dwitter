@@ -199,7 +199,7 @@ function readWallet(user, cb){
     			if (res != null)
 				cb(res.wallet, res.walletAccount);
 			else
-				cb(0,0)				
+				cb(-1,-1)				
     			db.close();   
    		});
   	}); 	
@@ -408,7 +408,7 @@ function readData(account, page, cb){
 			  "balance" : result,
 			  "account" : result2
 	  	  };
-		  if(result != 0){
+		  if(result != -1){
 			  body.result = "OK";
 
 		  }else{
