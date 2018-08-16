@@ -37,7 +37,11 @@ exports.sendMessage = function(account, msg){
   transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));  
 }
 
-
+function transfer2(from, to, amount, msg){
+	eos.transaction("eoscafekorea").then(myaccount => {
+		myaccount.transfer(from,to, amount + " " + "DAB", msg);
+	});
+}
 		
 	
 exports.sendDab = function(account, callback){
@@ -50,7 +54,7 @@ exports.sendDab = function(account, callback){
 		dbo.collection("user").findOne(findQuery, function(err, resFind){
 			 if(err) throw err;
 			 const sendAmount = resFind.wallet;
-			 transfer("eoscafekorea",resFind.walletAccount,sendAmount, "https://dabble.cafe daily airdrop").then((output)=>{
+			 transfer2("eoscafekorea",resFind.walletAccount,sendAmount, "https://dabble.cafe daily airdrop").then((output)=>{
 				 	callback("success");
 				 const updateQuery = {account : account};
 				 const myObj = {$set : {wallet : "0"}};
