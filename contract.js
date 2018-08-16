@@ -28,12 +28,13 @@ function transfer(from, to, amount, msg){
 exports.sendMessage = function(account, msg){  
   const adMsg = "Please visit https://dabble.cafe";
 	var resultMsg;
-  var maxLength = 255 - adMsg.length - 20 - account.length;
-  maxLength = maxLength < msg.length ? maxLength : msg.length;
+  //var maxLength = 255 - adMsg.length - 20 - account.length;
+	//const msgLength = msg.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g,"$&$1$2").length;
+  //maxLength = maxLength < msg.length ? maxLength : msg.length;
 	resultMsg = adMsg;
-		resultMsg += " id " + account;
-	resultMsg += " data : " + msg;
-  transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,236));  
+		resultMsg += " id: " + account;
+	resultMsg += " data: " + msg;
+  transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));  
 }
 
 
