@@ -48,19 +48,23 @@ exports.sendDab = function(account, callback){
 	//transfer DAB to real EOS account
 	//success : reset wallet count to zero
 	//fail : do nothing and show fail popup
+	console.log("sendDab", account);
 	MongoClient.connect(url, function(err, db) {
 		const dbo = db.db("heroku_dg3d93pq");
 		const findQuery = {account : account};
 		dbo.collection("user").findOne(findQuery, function(err, resFind){
 			 if(err) throw err;
+			console.log("sendDab findquery result", resFind);
 			 const sendAmount = resFind.wallet;
-			 transfer2("eoscafekorea",resFind.walletAccount,sendAmount, "https://dabble.cafe daily airdrop").then((output)=>{
-				 	callback("success");
+			console.log("calling transfer2", resFind.walletAccount, sendAmount);
+			 transfer2("eoscafekorea", resFind.walletAccount, sendAmount, "https://dabble.cafe daily airdrop").then((output)=>{
+
 				 const updateQuery = {account : account};
 				 const myObj = {$set : {wallet : "0"}};
 				 dbo.collection("user").updateOne(updateQuery, myObj,function(err, resFind){
 					 if(err) throw err;
 					 db.close();
+					 callback("success");
 				 }); //end of updateOne
 				 }).catch((err)=>{
 				 	db.close();
