@@ -98,7 +98,7 @@ function saveAccount(account, pass){
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
 		bcrypt.hash(pass, parseInt(process.env.SALT,10), function(err, hash){
-			var myobj = { account : account, pass : hash, date : tod, wallet : 0, profile : "8.png" };
+			var myobj = { account : account, pass : hash, date : tod, wallet : 0, profile : "https://res.cloudinary.com/hgnmrexj6/image/upload/v1534433033/NoneProfilePic.png" };
    			dbo.collection("user").insertOne(myobj).then(function(res){
     				console.log("1 user inserted");
     				db.close();   
