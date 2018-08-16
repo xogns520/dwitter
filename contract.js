@@ -50,7 +50,7 @@ exports.sendDab = function(account, callback){
 		dbo.collection("user").findOne(findQuery, function(err, resFind){
 			 if(err) throw err;
 			 const sendAmount = resFind.wallet;
-			 transfer("eoscafekorea",account,sendAmount, "https://dabble.cafe daily airdrop").then((output)=>{
+			 transfer("eoscafekorea",resFind.walletAccount,sendAmount, "https://dabble.cafe daily airdrop").then((output)=>{
 				 	callback("success");
 				 const updateQuery = {account : account};
 				 const myObj = {$set : {wallet : "0"}};
