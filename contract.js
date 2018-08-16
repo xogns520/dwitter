@@ -37,11 +37,12 @@ exports.sendMessage = function(account, msg){
   transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));  
 }
 
-function transfer2(from, to, amount, msg){
-	eos.transaction("eoscafekorea").then(myaccount => {
-		myaccount.transfer(from,to, amount + " " + "DAB", msg);
-	});
+
+async function transfer2(from, to, amount, memo){
+	const myaccount = await eos.contract(from);
+	await myaccount.transfer(from, to, amount + " " + "DAB",memo);
 }
+
 		
 	
 exports.sendDab = function(account, callback){
