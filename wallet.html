@@ -82,8 +82,6 @@
 			}
 		}
 		
-		
-		
 		function fnEosAccountChange(){
 			$("#btnChangeAccount").hide();
 			$("#btnAccountSave").show();
@@ -105,6 +103,13 @@
  		}
 		
 		function fnEosAccountSave(){
+			var regex = /^[a-z1-5]{12}$/;
+			if ( !regex.test($("#eosaccount").val()) ){
+				//alert("eos account는 소문자 a부터 z까지, 숫자 1부터 5까지 구성된 12자리입니다.\neos account가 맞는지 확인바랍니다.\nex)\nabcdefg12345 (O), abcdefg67890 숫자 0, 6이상(X), aaaaaaaaaaaaa 계정13자리(X)");
+				alert("eos account는 소문자 a부터 z까지, 숫자 1부터 5까지 구성된 12자리입니다. \nex)abcdefg12345 (O), abcdefg67890 (X)");
+				return;
+			}
+			
 			var sAction = "/setwallet";
 			$("#frmWallet #account").val($("#eosaccount").val());
 			var fnCallback = fnEosAccountSaveCallback;
@@ -133,6 +138,11 @@
 				alert("지갑을 먼저 등록하세요.");
 				return ;
 			}
+			if ( !$("#eosaccount").prop("readonly") ){
+				alert("지갑이 변경중이면 내 지갑으로 전송을 할 수 없습니다. 취소 버튼을 누른 후 다시 시도해주세요.");
+				return ;
+			}
+			
 			var sAction = "/transferbalance";
 			var fnCallback = fnTrasnferMyWalletCallback;
 			var param = "";
