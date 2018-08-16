@@ -50,7 +50,7 @@
 				getWalletAction();
 			}else{
 				alert("로그인 후 사용하세요.");
-				//$(location).attr("href", "index.html");
+				$(location).attr("href", "index.html");
 			}
 		}
 		
@@ -105,7 +105,6 @@
  		}
 		
 		function fnEosAccountSave(){
-			
 			var sAction = "/setwallet";
 			$("#frmWallet #account").val($("#eosaccount").val());
 			var fnCallback = fnEosAccountSaveCallback;
@@ -127,8 +126,31 @@
 				$("#btnAccountSaveCancel").show();
 				$("#eosaccount").attr("readonly", false);
 			}
-			
 		}
+		
+		function fnTrasnferMyWallet(){
+			if ( "" == $("#eosaccount").val().trim() ){
+				alert("지갑을 먼저 등록하세요.");
+				return ;
+			}
+			var sAction = "/transferbalance";
+			var fnCallback = fnTrasnferMyWalletCallback;
+			var param = "";
+			var sMethod = "POST";
+			gfAjaxCallWithParam(sAction, param, fnCallback, sMethod);
+		
+		}
+		
+		function fnTrasnferMyWalletCallback(data){
+			if ( "success" == data ){
+				alert("내 지갑으로 전송하였습니다.");
+				getWalletAction();
+			}else{
+				alert("내 지갑으로 전송을 실패 하였습니다.");
+			}
+		}
+		
+		
 		
 	</script>
     
@@ -209,8 +231,10 @@
 				<h4 id="headertitle-inner"></h4>
 				<div id="container">
 					<div id="contentList">
-						<div class="element tile-2 home bg-change">토큰송금
-							<h4 id="tokenBalance" class="header icon-to-the-right">0</h4>
+						<div class="element tile-2 home bg-change">
+						<h4 style="text-align: center;">내 토큰 관리</h4>
+						토큰잔액
+							<h4 id="tokenBalance" class="header icon-to-the-right">0 DAB</h4>
 		                
 							<div class="form-group">
 								<label class="col-form-label" for="inputDefault">내 지갑주소</label>
@@ -222,148 +246,13 @@
 								<!-- <button type="button" id="btnChangeAccount" onClick="javascript:fnEosAccountChange();" style="width: 40%;" class="btn btn-primary">변경</button> -->
 								<button type="button" id="btnAccountSave" style="width: 49%; display: none;" onClick="javascript:fnEosAccountSave();" class="btn btn-primary">저장</button>
 								<button type="button" id="btnAccountSaveCancel" style="width: 49%; display: none;" onClick="javascript:fnEosAccountChangeCancel();" class="btn btn-primary">취소</button>
-								
-								<!-- 
-								<select class="form-control" style="width: 100%; id="exampleSelect1">
-									<option>gm3dkgenesis</option>
-									<option>ge4dsmzvguge</option>
-									<option>gyytsnigenes</option>
-									<option>gy4tsmzwguge</option>
-								</select>
-								 -->
 							</div>
 
 							<div class="form-group">
-								<button type="button" class="btn btn-primary btn-block">지갑주소복사</button>
-							</div>
-						
-							<hr style="margin-top: 10px; margin-bottom: 10px;">
-						
-							<div class="form-group">
-								<fieldset>
-									<label class="control-label" for="readOnlyInput">송금 정보</label>
-									<input class="form-control" id="readOnlyInput" type="text" placeholder="송금할 주소">
-								</fieldset>
-							</div>
-						
-							<div class="form-group">
-								<input type="text" class="form-control" style="width: 50%; display: inline-block;" placeholder="보낼 수량" id="inputDefault">
-								<select class="form-control" style="width: 30%; display: inline-block;" id="exampleSelect1">
-									<option>DAB(Dabble)</option>
-									<option>EOS(EOS)</option>
-									<option>HARK(HarkHark)</option>
-									<option>BTC(Bitcoin)</option>
-									<option>ETH(Ethereum)</option>
-								</select>
-								<button type="button" style="width: 18%;" class="btn btn-primary">최대 수량</button>
-							</div>
-						
-							<div class="form-group">
-								<input class="form-control" id="readOnlyInput" type="text" placeholder="메모">
-							</div>
-							<div class="form-group">
-								<button type="button" class="btn btn-primary btn-block">전송</button>
+								<button type="button" class="btn btn-primary btn-block" onClick="javascript:fnTrasnferMyWallet();">내 지갑으로 전송</button>
 							</div>
 						</div>
-			            
-			            
-			            
-						<div class="element tile-2 home bg-change">
-							<!-- <p class="small">저자 보상 내역</p> -->
-							<h4 class="header icon-to-the-right">저자 보상 내역</h4>
-							<table class="table table-hover">
-								<colgroup>
-									<col style="width: 50px;">
-									<col style="width: 50px;">
-									<col style="width: 50px;">
-								</colgroup>
-								<thead>
-									<tr class="table-active">
-										<th scope="row" style="width: 50px; padding: 10px;">시간</th>
-										<td scope="col" style="width: 50px; padding: 10px;">수량</td>
-										<td scope="col" style="width: 50px; padding: 10px;">보상자</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row" style="width: 50px; padding: 10px;">1 일전</th>
-										<td style="width: 50px; padding: 10px;">5,000 DAB</td>
-										<td style="width: 50px; padding: 10px;">김병철</td>
-									</tr>
-									<tr>
-										<th scope="row" style="width: 50px; padding: 10px;">3 일전</th>
-										<td style="width: 50px; padding: 10px;">2,300 DAB</td>
-										<td style="width: 50px; padding: 10px;">현대페이</td>
-									</tr>
-								</tbody>
-							</table>
-
-										              
-							<hr class="my-4">
-							
-							<h4 class="header icon-to-the-right">큐레이션 보상 내역</h4>
-							<table class="table table-hover">
-								<colgroup>
-									<col style="width: 50px;">
-									<col style="width: 50px;">
-									<col style="width: 50px;">
-								</colgroup>
-								<thead>
-									<tr class="table-active">
-										<th scope="row" style="width: 50px; padding: 10px;">시간</th>
-										<td scope="col" style="width: 50px; padding: 10px;">수량</td>
-										<td scope="col" style="width: 50px; padding: 10px;">본문링크</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row" style="width: 50px; padding: 10px;">1 일전</th>
-										<td style="width: 50px; padding: 10px;">5,000 DAB</td>
-										<td style="width: 50px; padding: 10px;">노영주</td>
-									</tr>
-									<tr>
-										<th scope="row" style="width: 50px; padding: 10px;">3 일전</th>
-										<td style="width: 50px; padding: 10px;">5,500 DAB</td>
-										<td style="width: 50px; padding: 10px;">현대 BS&C</td>
-									</tr>
-								</tbody>
-							</table>
-			            </div>
-			            
-			            
-			            <div class="element tile-2 home bg-change">
-							<h4 class="header icon-to-the-right">송금내역</h4>
-							<table class="table table-hover">
-								<colgroup>
-									<col style="width: 50px;">
-									<col style="width: 50px;">
-									<col style="width: 50px;">
-								</colgroup>
-								<thead>
-									<tr class="table-active">
-										<th scope="row" style="width: 50px; padding: 10px;">시간</th>
-										<td scope="col" style="width: 50px; padding: 10px;">수량</td>
-										<td scope="col" style="width: 50px; padding: 10px;">받는사람</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row" style="width: 50px; padding: 10px;">1 일전</th>
-										<td style="width: 50px; padding: 10px;">100 DAB</td>
-										<td style="width: 50px; padding: 10px;">노영주</td>
-									</tr>
-									<tr>
-										<th scope="row" style="width: 50px; padding: 10px;">3 일전</th>
-										<td style="width: 50px; padding: 10px;">200 DAB</td>
-										<td style="width: 50px; padding: 10px;">현대 BS&C </td>
-									</tr>
-								</tbody>
-							</table>			            
-			            
-			            
-			            </div>
-			            
-			            
+						
 			            <!-- END LANDING PAGE ITEMS -->
 			
 			            <!-- CALCULATE PAGE ITEMS -->
