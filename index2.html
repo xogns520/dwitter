@@ -10,20 +10,14 @@
 	<meta name="Description" content="">
 	
 	<!-- Favicons -->
-	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="apple-touch-icon-60x60.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="apple-touch-icon-76x76.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="apple-touch-icon-152x152.png" />
+	<link rel="apple-touch-icon" sizes="196x196" href="favicon-196x196.png" />
+	<link rel="shortcut icon" href="favicon-196x196.png" />
 	<link rel="icon" type="image/png" href="favicon-196x196.png" sizes="196x196" />
 	<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
 	<link rel="icon" type="image/png" href="favicon-128.png" sizes="128x128" />
-	<meta name="application-name" content="EOS Resource Planner"/>
+	<meta name="application-name" content="Dabble"/>
 	<meta name="msapplication-TileColor" content="#FFFFFF" />
 	<meta name="msapplication-TileImage" content="mstile-144x144.png" />
 	<meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
@@ -49,11 +43,12 @@
 		});
 		
 		function fnLoginChk(){
-			//gfIsLoginAction(fnLoginChkCallback);
-			$("#btnContentWrite").click();
+			gfIsLoginAction(fnLoginChkCallback);
 		}
 		function fnLoginChkCallback(data){
 			if ( "true" == data.result ){
+				$("#imgList1").empty();
+				$("#imgList2").empty();
 				$("#btnContentWrite").click();
 			}else{
 				alert("로그인 후 사용하세요.");
@@ -192,8 +187,8 @@
 			<!-- start main nav -->
 			<h4 id="headertitle"></h4>
 			<nav id="main-nav">
-				<ul class="clearfix" id="options">
-					<li> <a href="./auth/Dabble_Legal_Protection.pdf">저작권증명</a></li>	  
+				<ul class="clearfix" id="options">					
+					<li> <a href="/intro/index.html">데블소개</a></li>	  
 					<li style="display: none;" id="linkUserInfo"> <a href="./userinfo.html">회원정보</a></li>
 					<li style="display: none;" id="linkFollow"> <a href="./follow.html">친구정보</a></li>
 					<li style="display: none;" id="linkLogin" >   <a href="./login.html">로그인</a></li>
@@ -214,9 +209,16 @@
 				<!-- <center>현재 데블러 <span id="userCount">5000</span>명.</center> --> 
 				<div class="alert alert-info" id="headeralert" role="alert">
 					<div style="text-align: center;"><strong>Heads Up!</strong></div>
-					<div style="text-align: right">현재 데블러 <span id="userCount"></span>명</div>
-					<div style="text-align: left;">짧은 글에도 큰 가치를... <br> 지갑 기능은 개발 중이고, 현재 보이는 잔고는 앞으로 Airdrop하게 되면 받으실 잔고 입니다. 
-						<BR> 개인 프로필 사진 변경, 글에 사진 추가기능은 개발 중에 있습니다. <BR> 다른 내용들도 알려 주시면 최대한 빨리 수정하겠습니다.
+					<!-- <div style="text-align: right">현재 데블러 <span id="userCount"></span>명</div>-->
+					<div style="text-align: left;"><b>짧은 글에도 큰 가치를... </b>
+						<ul>
+							<li>EOS생태계를 위해 EOSCAFEBLOCK, EOSEOUL에 투표해 주세요.</li>
+							<li>세계 최초 EOS 기반 <b>탈중앙화 거래소</b> <a href = "https://dexeos.io">dexeos.io</a> 에서 에어드랍 토큰 거래하세요.</li>
+							<li>CDD 특별 Airdrop 완료!!(8/18)</li>
+							<li>데블, 팀 소개 기능 추가(8/18) </li>
+							<li>데블 대굴(댓글) 기능 UX디자인 시작.</li>
+							<li>조만간 백서를 공개 합니다.!!!!</li>
+						</ul>
 					</div>
 				</div>
 				<!-- END GLOBAL ALERT BANNER -->
@@ -237,7 +239,7 @@
 					<button type="button" class="button" style="width: 100%; margin-left: 0px; margin-right: 0px;" onClick="javascript:gfContentList(-2);">Prev</button>
 				</div>
 				<div style="text-align: right; display: inline-block; width: calc(50% - 2px); margin-left: 0px; margin-right: 0px;">
-					<button type="button" class="button" style="width: 100%; margin-left: 0px; margin-right: 0px;" onClick="javascript:gfContentList(-1);">Next</button>
+					<button type="button" class="button" style="width: 100%; margin-left: 0px; margin-right: 0px;" onClick="javascript:gfContentList(-1);$(window).scrollTop(0);">Next</button>
 				</div>
 			</div>
 			
@@ -259,7 +261,6 @@
 		        	<!-- 
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
-						<!-- <button type="button" data-dismiss="modal">&times;</button>
 		        	</button>-->
 		        	<h4 class="modal-title" id="myModalLabel">무슨 생각을 하고 계세요?</h4>
 				</div>
@@ -282,10 +283,11 @@
 		<div class="modal-dialog" style="margin-top: 100px;">
 			<div class="modal-content">
 				<div class="modal-header">
+					<!--
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
-						<!-- <button type="button" data-dismiss="modal">&times;</button> -->
 		        	</button>
+		        	-->
 		        	<h4 class="modal-title" id="myModalLabel">다른 생각을 하고 계세요?</h4>
 				</div>
 				<div class="modal-body">
@@ -307,10 +309,11 @@
 		<div class="modal-dialog" style="margin-top: 100px;">
 			<div class="modal-content">
 				<div class="modal-header">
+					<!--
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
-						<!-- <button type="button" data-dismiss="modal">&times;</button> -->
 		        	</button>
+		        	-->
 		        	<h4 class="modal-title" id="myModalLabelFollow"><span id="myModalLabelFollowId"></span> 님과 친하게 지내시려구요?</h4>
 		        	<img id="userImage" src="/images/user/0.png" style="width:20%; height: 20%; ">
 				</div>
@@ -367,6 +370,6 @@
 <script src="./script/bootstrap.min.js" type="text/javascript"></script>
 <script src="./script/jquery.fancybox.pack.js" type="text/javascript"></script>
 <script src="./script/common.js" type="text/javascript"></script>
-<script src="./script/dabble2.js" type="text/javascript"></script>
+<script src="./script/dabble.js" type="text/javascript"></script>
 <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 </html>
