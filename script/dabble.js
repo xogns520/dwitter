@@ -198,31 +198,25 @@
 	function gfContentVoteAction(id){
 		$("#frmVote #id").val(id);
 		$("#frmVote #vote").val(1);
-
+		var idx = $("input[name='hBoardId']").index($("input[name='hBoardId'][value='"+ id+"']"));
+		$("button[name='btnVote']").eq(idx).attr("disabled","");
+		gVoteIdx = idx ;
 		gfIsLoginAction(gfContentVoteActionCallback1);
 	}
 	function gfContentVoteActionCallback1(data){
 		if ( "true" == data.result ){
-			
-			for ( var x = 0 ; x < $("input[name='hBoardId']").length ; x++ ){
-				if ( $("#frmVote #id").val() == $("input[name='hBoardId']").eq(x).val() ){
-					$("button[name='btnVote']").eq(x).attr("disabled","");
-					
-					var vCnt = Number($("input[name='hVoteCnt']").eq(x).val());
-					vCnt++;
-					$("input[name='hVoteCnt']").eq(x).val(vCnt);
-					$("div[name='viewVoteCount']").eq(x).text(vCnt + "명이 Voting");
-					
-					gVoteIdx = x;
-					break;
-				}
-			}			
+			var idx = gVoteIdx;
+			var vCnt = Number($("input[name='hVoteCnt']").eq(idx).val());
+			vCnt++;
+			$("input[name='hVoteCnt']").eq(idx).val(vCnt);
+			$("div[name='viewVoteCount']").eq(idx).text(vCnt + "명이 Voting");
 			
 			var sAction = "/vote";
 			var fnCallback = gfContentVoteActionCallback2;
 			gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
 			
 		}else{
+			$("button[name='btnVote']").eq(gVoteIdx).attr("disabled",false);
 			alert("로그인 후 사용하세요.");
 			/*
 			for ( var x = 0 ; x < $("input[name='hBoardId'").length ; x++ ){
@@ -241,7 +235,7 @@
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
 			alert("보팅실패");
-			$("button[name='btnVote'").eq(gVoteIdx).attr("disabled",false);
+			$("button[name='btnVote']").eq(gVoteIdx).attr("disabled",false);
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
