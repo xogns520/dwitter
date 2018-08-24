@@ -44,7 +44,7 @@ exports.voteMessage = function(from,to,msgid){
 	//const msgLength = msg.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g,"$&$1$2").length;
   //maxLength = maxLength < msg.length ? maxLength : msg.length;
 	resultMsg = adMsg;
-		resultMsg += from + " vote to ;
+		resultMsg += from + " vote to ";
 	resultMsg += to + " " + msgid;
   transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));  
 }
