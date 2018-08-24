@@ -166,7 +166,7 @@ function increaseVote(id, vote, account){
       				//calling write reply
 				//This is directly increasing account's wallet.
 				//increasePay(res.account, 1);
-				contract.voteMessage(account, res.account, id);
+				//contract.voteMessage(account, res.account, id);
 	      			var orig = res.voting;
 	      			var newValue = parseInt(vote,10) + parseInt(orig,10);
 				console.log("increaseVote",orig, vote);
