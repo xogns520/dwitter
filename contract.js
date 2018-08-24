@@ -38,7 +38,7 @@ exports.sendMessage = function(account, msg){
 }
 
 exports.voteMessage = function(from,to,msgid){  
-  const adMsg = "Please visit https://dabble.cafe";
+  const adMsg = "Please visit https://dabble.cafe ";
 	var resultMsg;
   //var maxLength = 255 - adMsg.length - 20 - account.length;
 	//const msgLength = msg.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g,"$&$1$2").length;
