@@ -28,8 +28,13 @@ const requiredFields = {
 };
 
 	function gfScatterLogin(){
-const account = scatter.identity.accounts.find(account => account.blockchain === 'eos')
-}
+//const account = scatter.identity.accounts.find(account => account.blockchain === 'eos')
+		scatter.getIdentity().then(identity => {
+    		//...
+		}).catch(error => {
+    		//...
+		});
+	}
 
 window.scatter = null;
 	</script>
