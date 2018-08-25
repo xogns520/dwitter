@@ -32,6 +32,11 @@ const requiredFields = {
 		const requiredFields = {
     		accounts:[ { blockchain:'eos', chainId:'aca....' } ]
 		};
+		const eos = scatter.eos( network, Eos, eosOptions, 'https' );
+		eos.contract('hello').then(contract => {
+    		contract.hi(...args)
+		});
+ 
 		scatter.getIdentity().then(identity => {
     		//...
 		}).catch(error => {
