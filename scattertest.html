@@ -27,12 +27,18 @@ const requiredFields = {
     accounts:[ { blockchain:'eos', chainId:'aca....' } ]
 };
 
+	function gfScatterLogin(){
 const account = scatter.identity.accounts.find(account => account.blockchain === 'eos')
+}
 
 window.scatter = null;
 	</script>
 </head>
 <body>
 	test
+	
+	<div class="form-group">
+								<button type="button" id="btnScatterLogin" class="btn btn-primary btn-block" onClick="javascript:gfScatterLogin();">스캐터 로그인 </button>
+							</div>
     </body>
 </html>
