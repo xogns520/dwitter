@@ -29,6 +29,9 @@ const requiredFields = {
 
 	function gfScatterLogin(){
 //const account = scatter.identity.accounts.find(account => account.blockchain === 'eos')
+		const requiredFields = {
+    		accounts:[ { blockchain:'eos', chainId:'aca....' } ]
+		};
 		scatter.getIdentity().then(identity => {
     		//...
 		}).catch(error => {
