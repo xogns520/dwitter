@@ -1,7 +1,7 @@
 //require("./steembot");
 //require("./pass");
 
-//require("./airdrop");
+const airdrop = require("./airdrop");
 const bcrypt = require('bcrypt');
 const ObjectID = require('mongodb');
 
@@ -93,7 +93,7 @@ function editData(postid, data, cb){
 }
 
 //return done, fail and duplicated
-function saveAccount(account, pass){
+function saveAccount(account, pass, callback){
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
@@ -101,9 +101,11 @@ function saveAccount(account, pass){
 			var myobj = { account : account, pass : hash, date : tod, wallet : 0, profile : "https://res.cloudinary.com/hgnmrexj6/image/upload/v1534433033/NoneProfilePic.png" };
    			dbo.collection("user").insertOne(myobj).then(function(res){
     				console.log("1 user inserted");
+				callback("done");
     				db.close();   
 			}).catch(function(e){
 				console.log('catch in test');
+				callback("duplicated");
 				db.close();
 				console.log(e);	
 				throw e;
@@ -459,8 +461,9 @@ function readData(account, page, cb){
 	  var pass = req.body.pass;
 	  console.log("register event", id, pass);
 	  //save this data to mongoDB//
-	  saveAccount(id, pass);
-	  res.send("done");
+	  saveAccount(id, pass, (result)=>{
+		  res.send(result);
+	  });
   });
 
   app.post("/isLogin", function(req, res) { 
@@ -630,6 +633,16 @@ function readData(account, page, cb){
 	  console.log("edit event", postid, data);
 	  //query Mongo DB
 	  editData(postid, data,(result) => {res.send(result)});
+  });
+
+
+  app.post("/isairdrop", function(req, res) { 
+	/* some server side logic */
+	  
+	  const account = req.body.account;
+	  console.log("isairdrop event", account);
+	  //query Mongo DB
+	  airdrop.isAirDrop(account,(result) => {res.send(result)});
   });
 
  /* serves all the static files */
