@@ -3,6 +3,7 @@ var mongo = require('mongodb');
 var ObjectId = require('mongodb').ObjectId;
 var MongoClient = require('mongodb').MongoClient;
 var url = process.env.MONGODB_URI;
+var url2 = process.env.MONGODB_URI2;
 
 function airDrop(){
 	  MongoClient.connect(url, function(err, db) {
@@ -25,6 +26,22 @@ function airDrop(){
 		});
 	  });
 }
-			
 
-airDrop();
+
+			
+exports.isAirDrop = function(account, callback){
+	MongoClient.connect(url2, function(err, db) {
+		const dbo = db.db("heroku_23gbks9t");
+		const findQuery = {account : account};
+		dbo.collection("snapshot0824").findOne(findQuery, function(err, resFind){
+			if(resFind != null){
+				callback("fail");
+				 db.close();
+			}else{
+				callback("success");
+				db.close();
+			}
+		});
+	});				
+}
+
