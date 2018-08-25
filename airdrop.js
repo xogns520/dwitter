@@ -35,10 +35,10 @@ exports.isAirDrop = function(account, callback){
 		const findQuery = {account : account};
 		dbo.collection("snapshot0824").findOne(findQuery, function(err, resFind){
 			if(resFind != null){
-				callback("fail");
+				callback("success");
 				 db.close();
 			}else{
-				callback("success");
+				callback("fail");
 				db.close();
 			}
 		});
