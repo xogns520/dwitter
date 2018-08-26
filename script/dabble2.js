@@ -47,8 +47,8 @@
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<div class="hint" name="viewVoteCount">'+ data[x].voting + '명이 Voting</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:20%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i class="fa fa-thumbs-o-up"></i></button>'
-						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
+						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i class="fa fa-thumbs-o-up"></i></button>'
+						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i name="viewVoteCount"class="fa fa-edit"> (' + data[x].voting + ')</i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
@@ -92,36 +92,12 @@
 	 * 글 쓰기
 	 * @returns
 	 */
-	/*
-	function gfContentWriteAction(){
-		$("#frmWrite #user").val( $("#frmUserInfo #id").val() );
-		
-		var strText = $("#contentTextarea").val();
-		var strImg = "";
-		var len = $("input[name='imgUrl']").length;
-		
-		for ( var x = 0 ; x < len ; x++ ){
-			strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
-		}
-		$("#frmWrite #data").val( strText + strImg );
-		console.log($("#frmWrite #data").val());
-		
-		
-		
-		var sAction = "/write";
-		var fnCallback = gfContentWriteActionCallback;
-		gfAjaxCallWithForm(sAction,$('#frmWrite'),fnCallback,"POST");
-	}
-	*/
-
 	//Teddy, get name call back test
-	//function gfContentWrite(data){
-		//gfContentWriteActionName(data.id);	
-	//}
-
-
+	function gfContentWrite(data){
+		gfContentWriteAction(data.id);	
+	}
 	//Teddy gfContentWriteAction with Author name
-	function gfContentWriteActionName(userId){
+	function gfContentWriteAction(userId){
 		$("#frmWrite #user").val(userId);
 		
 		var strText = $("#contentTextarea").val();
@@ -132,7 +108,6 @@
 			strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
 		}
 		$("#frmWrite #data").val( strText + strImg );
-		$("#imgList1").empty();
 		
 		var sAction = "/write";
 		var fnCallback = gfContentWriteActionCallback;
@@ -167,8 +142,9 @@
 	 * @returns
 	 */
 	function gfContentUpdate(idx){
-		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
+		$("#imgList1").empty();
 		$("#imgList2").empty();
+		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
 		
 		var tagImg =  $("div[name='viewDefault']").eq(idx).find("img");
 		var len = tagImg.length;
@@ -198,8 +174,6 @@
 		}
 		$("#frmEdit #data").val( strText + strImg );
 		
-		$("#imgList2").empty();
-		
 		var sAction = "/edit";
 		var fnCallback = gfContentEditActionCallback;
 		gfAjaxCallWithForm(sAction,$('#frmEdit'),fnCallback,"POST");
@@ -224,31 +198,25 @@
 	function gfContentVoteAction(id){
 		$("#frmVote #id").val(id);
 		$("#frmVote #vote").val(1);
-
+		var idx = $("input[name='hBoardId']").index($("input[name='hBoardId'][value='"+ id+"']"));
+		$("button[name='btnVote']").eq(idx).attr("disabled","");
+		gVoteIdx = idx ;
 		gfIsLoginAction(gfContentVoteActionCallback1);
 	}
 	function gfContentVoteActionCallback1(data){
 		if ( "true" == data.result ){
-			
-			for ( var x = 0 ; x < $("input[name='hBoardId']").length ; x++ ){
-				if ( $("#frmVote #id").val() == $("input[name='hBoardId']").eq(x).val() ){
-					$("button[name='btnVote']").eq(x).attr("disabled","");
-					
-					var vCnt = Number($("input[name='hVoteCnt']").eq(x).val());
-					vCnt++;
-					$("input[name='hVoteCnt']").eq(x).val(vCnt);
-					$("div[name='viewVoteCount']").eq(x).text(vCnt + "명이 Voting");
-					
-					gVoteIdx = x;
-					break;
-				}
-			}			
+			var idx = gVoteIdx;
+			var vCnt = Number($("input[name='hVoteCnt']").eq(idx).val());
+			vCnt++;
+			$("input[name='hVoteCnt']").eq(idx).val(vCnt);
+			$("i[name='viewVoteCount']").eq(idx).text(" " + vCnt);
 			
 			var sAction = "/vote";
 			var fnCallback = gfContentVoteActionCallback2;
 			gfAjaxCallWithForm(sAction,$('#frmVote'),fnCallback,"POST");
 			
 		}else{
+			$("button[name='btnVote']").eq(gVoteIdx).attr("disabled",false);
 			alert("로그인 후 사용하세요.");
 			/*
 			for ( var x = 0 ; x < $("input[name='hBoardId'").length ; x++ ){
@@ -267,7 +235,7 @@
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
 			alert("보팅실패");
-			$("button[name='btnVote'").eq(gVoteIdx).attr("disabled",false);
+			$("button[name='btnVote']").eq(gVoteIdx).attr("disabled",false);
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
