@@ -4,9 +4,8 @@
  * @코멘트   : dabble common 
  */
 
-	function timeConverter(UNIX_timestamp){
-		  var a = new Date(UNIX_timestamp * 1000);
-		  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+	function timeConverter(timestamp){
+		  var a = new Date(timestamp);
 		  //var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 		  var year = a.getFullYear();
 		  var month = a.getMonth()+1;
@@ -57,7 +56,7 @@
 						+ '	</table>'
 						+ '	<div name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<div class="hint" name="createTime">작성시간'+ timeConverter(data[x].date) + '</div>'
+						+ '	<div class="hint" name="createTime">작성시간 '+ timeConverter(data[x].date) + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> (' + data[x].voting + ')</i></button>'
 						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
