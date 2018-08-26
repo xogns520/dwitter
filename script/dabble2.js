@@ -4,7 +4,20 @@
  * @코멘트   : dabble common 
  */
 
-
+	function timeConverter(UNIX_timestamp){
+		  var a = new Date(UNIX_timestamp * 1000);
+		  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+		  //var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+		  var year = a.getFullYear();
+		  var month = a.getMonth()+1;
+		  var date = a.getDate();
+		  var hour = a.getHours();
+		  var min = a.getMinutes();
+		  var sec = a.getSeconds();
+		  //var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+		  var time = year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec ;
+		  return time;
+	}
 
 	var gVoteIdx = null;
 	/**
@@ -44,7 +57,7 @@
 						+ '	</table>'
 						+ '	<div name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						//+ '	<div class="hint" name="viewVoteCount">'+ data[x].voting + '명이 Voting</div>'
+						+ '	<div class="hint" name="createTime">작성시간'+ timeConverter(data[x].date) + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> (' + data[x].voting + ')</i></button>'
 						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
@@ -208,7 +221,7 @@
 			var vCnt = Number($("input[name='hVoteCnt']").eq(idx).val());
 			vCnt++;
 			$("input[name='hVoteCnt']").eq(idx).val(vCnt);
-			$("i[name='viewVoteCount']").eq(idx).text(" " + vCnt);
+			$("i[name='viewVoteCount']").eq(idx).text(" (" + vCnt + ")");
 			
 			var sAction = "/vote";
 			var fnCallback = gfContentVoteActionCallback2;
