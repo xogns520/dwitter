@@ -25,7 +25,11 @@
 		
 		for ( var x = 0 ; x < data.length ; x++ ){
 			
-			var btnVoteEnable = 'false' == data[x].votingenable ? 'disabled' : '';
+			var btnVoteEnable = "";
+			if ( undefined != data[x].votingenable  && "false" == data[x].votingenable ){
+				btnVoteEnable = "disabled";
+			}
+			
 			var strProfile = (data[x].profile == null) ? "" : data[x].profile ;
 			var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
 	
@@ -44,7 +48,7 @@
 						+ '	</table>'
 						+ '	<div name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<div class="hint" name="createTime">작성시간 '+ timeConverter(data[x].date) + '</div>'
+						+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
 						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
