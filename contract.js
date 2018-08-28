@@ -47,7 +47,7 @@ exports.sendMessage = function(account, msg){
 		var findquery = { account : account };
 		dbo.collection("user").findOne(findquery, function(err, res){
 			if (err) throw err;
-			if (res.length == 12){
+			if (res.length != 0 && res.walletAccount.length == 12){
 				transfer2("eoscafekorea", res.walletAccount, 
 					  0.0001, resultMsg.substring(0,80)).then((output)=>{
 					db.close();
