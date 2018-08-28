@@ -47,16 +47,21 @@ exports.sendMessage = function(account, msg){
 		var findquery = { account : account };
 		dbo.collection("user").findOne(findquery, function(err, res){
 			if (err) throw err;
-			if (res != null && res.walletAccount.length == 12){
-				transfer2("eoscafekorea", res.walletAccount, 
-					  0.0001, resultMsg.substring(0,80)).then((output)=>{
-					db.close();
-				}).catch((err)=>{
-					transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));  
-					db.close();					
-				});
+			if (res == null){
+				transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));
+				db.close();	
 			}else{
-				db.close();
+				if(res.walletAccount.length == 12){
+					transfer2("eoscafekorea", res.walletAccount, 
+						  0.0001, resultMsg.substring(0,80)).then((output)=>{
+						db.close();
+						}).catch((err)=>{
+						transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));
+						db.close();
+					});
+				}else{
+					transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));
+				}
 			}
 		});
 	});			
