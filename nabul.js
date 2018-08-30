@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const url = process.env.MONGODB_URI;
 
 
-export.readNabul = function(account, page, cb){
+exports.readNabul = function(account, page, cb){
 	console.log("in reaData", account, page);
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
