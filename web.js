@@ -9,6 +9,8 @@ const follower = require("./follower");
 const profile = require("./profile");
 const contract = require("./contract");
 
+const nabul = require("./nabul");
+
 
 var express = require('express');
 var bodyParser     =        require("body-parser");
@@ -623,6 +625,28 @@ function readData(account, page, cb){
 		  req.session.page = page;
 	  console.log("calling readData", req.session.account);
 	  readData(req.session.account, req.session.page,(result) => {res.send(result)});
+  });
+
+  app.post("/readnabul", function(req, res) { 
+	/* some server side logic */
+	  
+	  var user = req.body.user;
+	  var page = req.body.page;
+	  console.log("read event", user, page);
+	  //query Mongo DB
+	  if(page == 0)
+	  	req.session.page = page + 1;
+	  else if(page == -1)
+		  req.session.page++;
+	  else if(page == -2){
+		  req.session.page--;
+		  if(req.session.page == 0)
+			  req.session.page = 1;
+	  }
+	  else
+		  req.session.page = page;
+	  console.log("calling readNabul", req.session.account);
+	  nabul.readNabul(req.session.account, req.session.page,(result) => {res.send(result)});
   });
 
   app.post("/edit", function(req, res) { 
