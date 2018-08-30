@@ -17,68 +17,65 @@ exports.addReply = function(account, parentId){
 	});
 }
 
-exports.readDetailPage = function(postid, cb){
-	var body = [];
-	var picUrl;
-	
-	//read main post
+exports.readDetailPage = function(postid, account, page, cb){
+	console.log("in reaData", account, page);
 	MongoClient.connect(url, function(err, db) {
-		var dbo = db.db("heroku_dg3d93pq");
-		var findQuery = { _id : ObjectId(postid)};
-		dbo.collection("board").findOne(findQuery, function(err, item){
-			const votingenable = "true";
-			body.push({id: item._id, account: item.account, data : item.data, date : item.date,
-					   voting : result[i].voting,  profile : picUrl, votingenable : votingenable, parentid : 0 });
-			//read replies
-			var findReplyQuery = { parentId : ObjectId(postid)};
-			dbo.collection("board").find(findReplyQuery).toArray(function(err, replies){
-				if(replies.length == 0){
-					cb.
-					db.close();
-				}
-			
-		});
-	});
-
-	MongoClient.connect(url, function(err, db) {
-		var dbo = db.db("heroku_dg3d93pq");
-		var agr = [
-			{ $match : { _id : ObjectId(postid)}, 
+   		var dbo = db.db("heroku_dg3d93pq");
+		var tod = Date.now();
+		//ToDo : add image path to response
+   		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
+		
+		var agr = [	
+			{ $match: { $or:[{_id : ObjectId(postid)},{ parentid : postid}] }},
 			{ $lookup:
 			    { from: 'user',
 			   localField: 'account',
 			   foreignField : 'account',
 			   as : 'userdetails'
 			    }
-			   },
-
-			  {$sort: {"date" : -1}}			
+			   }
 			];
 		
 		dbo.collection("board").aggregate(agr).toArray(function(err, result){
-			if (err) throw err;
-			var body = [];
+			    			if (err) throw err;
+			var body = []; // empty array
 			var picUrl;
-			for(i = 0; i < result.length ; i++){
+			console.log("Readdata size", result.length);
+			//console.log("aggregate data", result);
+			//onsole.log("before for loop");
+			
+			for(i = 0; i < result.length ; i++){				
+				//console.log("in for loop");
 				if(result[i].userdetails[0] == undefined){
 					picUrl = "0.png";
-				}else{
+					//console.log("undefined case");
+				}
+				else{
+					//console.log("define case");
 					var picUrl = result[i].userdetails[0].profile;
 				}
-				var findQuery = { account : account };
-				dbo.collection("voting").find(findQuery).toArray(function(err, votingTable){
-					if(err) throw err;
-					console.log("voting table query result",votingTable.length, account, body.length);
-					for(i = 0;i < body.length;i++){
-						for(j = 0;j<votingTable.length;j++)
-							if(body[i].id == votingTable[j].boardId){
-								body[i].votingenable = "false";
-								break;
-							}
-					}
+				
+
+				const votingenable = "true";				
+				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
+					  voting : result[i].voting,  profile : picUrl, votingenable : votingenable });
+				
+			}
+			//generating votingenable flag
+			var findQuery = { account : account };
+			dbo.collection("voting").find(findQuery).toArray(function(err, votingTable){
+				if(err) throw err;
+				console.log("voting table query result",votingTable.length, account, body.length);
+				for(i = 0;i < body.length;i++){
+					for(j = 0;j<votingTable.length;j++)
+						if(body[i].id == votingTable[j].boardId){
+							body[i].votingenable = "false";
+							break;
+						}
+				}
 				cb(body);
     				db.close();   
-				});
-   			});
-  		}); 
+			});
+   		});
+  	}); 
 }
