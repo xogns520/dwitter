@@ -138,6 +138,7 @@
 			
 			$("#linkWallet").show();
 			$("#linkUserInfo").show();
+			$("#linkMyContents").show();
 			$("#linkFollow").show();
 			$("#linkLogin").hide();
 			$("#linkLogout").show();
@@ -146,6 +147,7 @@
 		}else{
 			$("#linkWallet").hide();
 			$("#linkUserInfo").hide();
+			$("#linkMyContents").hide();
 			$("#linkFollow").hide();
 			$("#linkLogin").show();
 			$("#linkSingup").show();
