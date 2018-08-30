@@ -645,7 +645,13 @@ function readData(account, page, cb){
 	  }
 	  else
 		  req.session.page = page;
-	  console.log("calling readNabul", req.session.account);
+	  
+	  if(req.session.page < 0){
+		  console.log("page number correction", req.session.page);
+		  req.session.page = 1;
+	  }
+	  
+	  console.log("calling readNabul", req.session.account, req.session.page);
 	  nabul.readNabul(req.session.account, req.session.page,(result) => {res.send(result)});
   });
 
