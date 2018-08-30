@@ -57,9 +57,15 @@
 			
 			for ( var x = 0 ; x < data.length ; x++ ){
 				
+				var btnVoteEnable = "";
+				if ( undefined != data[x].votingenable  && "false" == data[x].votingenable ){
+					btnVoteEnable = "disabled";
+				}
+				
 				var strProfile = (data[x].profile == null) ? "" : data[x].profile ;
 				var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
 		
+					
 				var strHtml	= '<div class="element tile-1 home calc bg-change">'
 							+ '	<table style="width: 100%;">'
 							+ '		<tr>'
@@ -76,7 +82,9 @@
 							+ '	<div style="margin: 5px;"></div>'
 							+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 							+ '	<div style="margin: 5px;"></div>'
-							+ '	<button type="button" name="btnUpdate" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
+							+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
+							+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
+							//+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 							+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 							+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 							+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
@@ -91,7 +99,15 @@
 				*/
 			}
 			
-		}		
+			var len = $("input[name='hAccount']").length;
+			var strId = $("#frmUserInfo #id").val();
+			for ( var x = 0 ; x < len ; x++ ){
+				if ( strId == $("input[name='hAccount']").eq(x).val() ){
+					$("button[name='btnUpdate']").eq(x).show();
+				}
+			}
+		}
+		
 		
 	</script>
 	<!-- Scripts -->
@@ -168,20 +184,6 @@
 			<div class="container clearfix">
 				<!-- GLOBAL ALERT BANNER -->
 				<!-- <center>현재 데블러 <span id="userCount">5000</span>명.</center> --> 
-				<div class="alert alert-info" id="headeralert" role="alert">
-					<div style="text-align: center;"><strong>Heads Up!</strong></div>
-					<!-- <div style="text-align: right">현재 데블러 <span id="userCount"></span>명</div>-->
-					<div style="text-align: left;"><b>짧은 글에도 큰 가치를... </b>
-						<ul>
-							<li>EOS생태계를 위해 EOSCAFEBLOCK, EOSEOUL에 투표해 주세요.</li>
-							<li>세계 최초 EOS 기반 <b>탈중앙화 거래소</b> <a href = "https://dexeos.io">dexeos.io</a> 에서 에어드랍 토큰 거래하세요.</li>
-							<li>글 작성 시간 표시(8/27)</li>
-							<li>에어드랍 대상자 확인 기능 추가(8/27) </li>
-							<li>데블 대굴(댓글) 기능 UX디자인 진행 중</li>
-							<li>한국 축구팀 4강 기원 데블데블 이벤트. 자세한 내용을 텔방을 참조해 주세요.</li>
-						</ul>
-					</div>
-				</div>
 				<!-- END GLOBAL ALERT BANNER -->
 				<!-- ITEMS PERSISTED ON ALL PAGES -->
 				<h4 id="headertitle-inner"></h4>
