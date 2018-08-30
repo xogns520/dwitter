@@ -13,7 +13,7 @@ export.readNabul = function(account, page, cb){
    		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
 		
 		var agr = [	
-      { $match : { 
+      			{ $match : { account : account}},
 			{ $lookup:
 			    { from: 'user',
 			   localField: 'account',
