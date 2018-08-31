@@ -8,6 +8,7 @@ const ObjectID = require('mongodb');
 const follower = require("./follower");
 const profile = require("./profile");
 const contract = require("./contract");
+const reply = require("./reply");
 
 const nabul = require("./nabul");
 
@@ -387,6 +388,20 @@ function readData(account, page, cb){
 	res.send("OK");
   });
 
+  app.post("/addreply", function(req, res) { 
+	  
+	/* some server side logic */
+
+	  var user = req.session.account;
+	  var data = req.body.data;
+	  var parentid = req.body.parentid
+	  console.log("addreply event", user, data, parentid);
+	  //save this data to mongoDB//
+	  reply.addReply (user, data);
+	  res.send("done");
+	  contract.sendMessage(user, data);
+  });
+
   app.post("/write", function(req, res) { 
 	  
 	/* some server side logic */
@@ -399,6 +414,7 @@ function readData(account, page, cb){
 	  res.send("done");
 	  contract.sendMessage(user, data);
   });
+
 
   app.post("/getWallet", function(req, res) { 
 	  
@@ -632,7 +648,7 @@ function readData(account, page, cb){
 	  
 	  var user = req.body.user;
 	  var page = req.body.page;
-	  console.log("read event", user, page);
+	  console.log("readnabul event", user, page);
 	  //query Mongo DB
 	  if(page == 0)
 	  	req.session.page = page + 1;
@@ -653,6 +669,35 @@ function readData(account, page, cb){
 	  
 	  console.log("calling readNabul", req.session.account, req.session.page);
 	  nabul.readNabul(req.session.account, req.session.page,(result) => {res.send(result)});
+  });
+
+  app.post("/readdetailpage ", function(req, res) { 
+	/* some server side logic */
+	  
+	  var user = req.body.user;
+	  var page = req.body.page;
+	  var postid = req.body.postid;
+	  console.log("readdetailpage  event", postid, user, page);
+	  //query Mongo DB
+	  if(page == 0)
+	  	req.session.page = page + 1;
+	  else if(page == -1)
+		  req.session.page++;
+	  else if(page == -2){
+		  req.session.page--;
+		  if(req.session.page == 0)
+			  req.session.page = 1;
+	  }
+	  else
+		  req.session.page = page;
+	  
+	  if(req.session.page < 0){
+		  console.log("page number correction", req.session.page);
+		  req.session.page = 1;
+	  }
+	  
+	  console.log("calling readdetailpage ", postid, req.session.account, req.session.page);
+	  reply.readDetailPage (postid, req.session.account, req.session.page,(result) => {res.send(result)});
   });
 
   app.post("/edit", function(req, res) { 
