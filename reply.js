@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const url = process.env.MONGODB_URI;
 
 
-exports.addReply = function(account, parentId){
+exports.addReply = function(account, parentid, data){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
