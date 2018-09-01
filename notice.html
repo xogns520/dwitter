@@ -36,7 +36,7 @@
 		
 		function fnNoticeDetail(idx){
 			var len = $("div[name='noticeView']").length;
-			$("div[name='noticeView']").eq( len - idx ).show();
+			$("div[name='noticeView']").eq( len - idx ).toggle();
 		}
 		
 		
@@ -121,13 +121,11 @@
 				<!-- ITEMS PERSISTED ON ALL PAGES -->
 				<h4 id="headertitle-inner"></h4>
 				<div id="contentList">
-						<div class="element tile-2 home bg-change">
-						<h4 style="text-align: center;">Dabble x DEXEOS 상장 이벤트</h4>
+					<div class="element tile-2 home bg-change" style="padding: 10px 30px 1px 30px;">
+						<h4 style="text-align: center;">Dabble x DEXEOS 상장 이벤트 <button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnNoticeDetail(1);" >자세히 보기 </button> </h4>
 						<div name="noticeView" style="display: none;" class="preConDetail">
-							Dabble x DEXEOS 입니다.
+						<div class="hint" name="createTime">2018-9-1 19:04:38</div>
 							이오스카페의 EOS기반 소셜앱 Dabble과 DEXEOS가 DAB상장 및 에어드랍 이벤트를 진행합니다.
-							
-							
 							[DAB 상장]
 							
 							1. 거래소
@@ -169,7 +167,7 @@
 							- https://dexeos.io (Dexeos/덱시오스)
 						
 						</div>
-					</div>					
+					</div>
 				</div>
 			</div>
 		</div>
