@@ -639,6 +639,11 @@ function readData(account, page, cb){
 	  }
 	  else
 		  req.session.page = page;
+	  
+	  if(req.session.page < 0){
+		  console.log("page number correction", req.session.page);
+		  req.session.page = 1;
+	  }
 	  console.log("calling readData", req.session.account);
 	  readData(req.session.account, req.session.page,(result) => {res.send(result)});
   });
