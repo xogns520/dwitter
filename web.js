@@ -640,7 +640,7 @@ function readData(account, page, cb){
 	  else
 		  req.session.page = page;
 	  
-	  if(req.session.page < 0){
+	  if(req.session.page <= 0){
 		  console.log("page number correction", req.session.page);
 		  req.session.page = 1;
 	  }
@@ -667,7 +667,7 @@ function readData(account, page, cb){
 	  else
 		  req.session.page = page;
 	  
-	  if(req.session.page < 0){
+	  if(req.session.page <= 0){
 		  console.log("page number correction", req.session.page);
 		  req.session.page = 1;
 	  }
