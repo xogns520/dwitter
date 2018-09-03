@@ -397,7 +397,7 @@ function readData(account, page, cb){
 	  var parentid = req.body.parentid
 	  console.log("addreply event", user, data, parentid);
 	  //save this data to mongoDB//
-	  reply.addReply (user, data);
+	  reply.addReply (user, parentid, data);
 	  res.send("done");
 	  contract.sendMessage(user, data);
   });
