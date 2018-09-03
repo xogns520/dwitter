@@ -676,7 +676,7 @@ function readData(account, page, cb){
 	  nabul.readNabul(req.session.account, req.session.page,(result) => {res.send(result)});
   });
 
-  app.post("/readdetailpage ", function(req, res) { 
+  app.post("/readdetailpage", function(req, res) { 
 	/* some server side logic */
 	  
 	  var user = req.body.user;
