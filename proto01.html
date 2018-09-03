@@ -82,9 +82,10 @@
 			var fnCallback;
 			if ( 1 == idx ){
 				fnCallback = fnContentWriteImagePopupCallback;
-			}else{
+			}else if ( 2 == idx ){
 				fnCallback = fnContentEditImagePopupCallback;
-				
+			}else if ( 3 == idx ){
+				fnCallback = fnContentReplyImagePopupCallback;
 			}		
 			cloudinary.openUploadWidget( param, fnCallback );
 			
@@ -111,6 +112,18 @@
 				var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + result[x].thumbnail_url + '"/>'
 							+ '<input type="hidden" name="imgUrl" value="' + url + '" />';
 				$("#imgList2").append(strHtml);
+			}
+		}
+		function fnContentReplyImagePopupCallback( error, result ){
+			if ( null != error ){
+				return ;
+			}
+			for ( var x = 0 ; x < result.length ; x++ ){
+				var splitArray = result[x].url.split("/image/upload/");
+				var url = splitArray[0] + "/image/upload/c_limit,h_"+ result[x].height +",w_"+ result[x].width +"/" + splitArray[1];
+				var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + result[x].thumbnail_url + '"/>'
+							+ '<input type="hidden" name="imgUrl" value="' + url + '" />';
+				$("#imgList3").append(strHtml);
 			}
 		}
 		function fnImageDelete(obj){
@@ -344,7 +357,7 @@
 				</div>
 				<div class="modal-body" style="padding-top: 0px; padding-bottom: 5px;">
 					<button type="button" class="btn btn-default" onClick="javascript:fnContentImagePopup(3)">이미지 업로드</button> 썸네일을 누르면 이미지가 삭제됩니다.
-					<div id="imgList2" style="padding-top: 10px;"></div>
+					<div id="imgList3" style="padding-top: 10px;"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
