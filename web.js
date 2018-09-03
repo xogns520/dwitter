@@ -644,6 +644,12 @@ function readData(account, page, cb){
 		  console.log("page number correction", req.session.page);
 		  req.session.page = 1;
 	  }
+	  
+	  if(isNaN(req.session.page)){
+		  console.log("page number correction for NaN case", req.session.page);
+		  req.session.page = 1;
+	  }
+		  
 	  console.log("calling readData", req.session.account);
 	  readData(req.session.account, req.session.page,(result) => {res.send(result)});
   });
@@ -669,6 +675,10 @@ function readData(account, page, cb){
 	  
 	  if(req.session.page <= 0){
 		  console.log("page number correction", req.session.page);
+		  req.session.page = 1;
+	  }
+	  if(isNaN(req.session.page)){
+		  console.log("page number correction for NaN case", req.session.page);
 		  req.session.page = 1;
 	  }
 	  
