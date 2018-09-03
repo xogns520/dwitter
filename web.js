@@ -398,7 +398,7 @@ function readData(account, page, cb){
 	  console.log("addreply event", user, data, parentid);
 	  //save this data to mongoDB//
 	  reply.addReply (user, parentid, data);
-	  res.send("done");
+	  res.send("success");
 	  contract.sendMessage(user, data);
   });
 
