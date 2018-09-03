@@ -4,19 +4,7 @@
  * @코멘트   : dabble common 
  */
 
-	function timeConverter(timestamp){
-		  var a = new Date(timestamp);
-		  //var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-		  var year = a.getFullYear();
-		  var month = a.getMonth()+1;
-		  var date = a.getDate();
-		  var hour = a.getHours();
-		  var min = a.getMinutes();
-		  var sec = a.getSeconds();
-		  //var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-		  var time = year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec ;
-		  return time;
-	}
+
 
 	var gVoteIdx = null;
 	/**
@@ -37,7 +25,11 @@
 		
 		for ( var x = 0 ; x < data.length ; x++ ){
 			
-			var btnVoteEnable = 'false' == data[x].votingenable ? 'disabled' : '';
+			var btnVoteEnable = "";
+			if ( undefined != data[x].votingenable  && "false" == data[x].votingenable ){
+				btnVoteEnable = "disabled";
+			}
+			
 			var strProfile = (data[x].profile == null) ? "" : data[x].profile ;
 			var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
 	
@@ -56,11 +48,12 @@
 						+ '	</table>'
 						+ '	<div name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<div class="hint" name="createTime">작성시간 '+ timeConverter(data[x].date) + '</div>'
+						+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> (' + data[x].voting + ')</i></button>'
+						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
 						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
+						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnInsertReply(' + x + ');" >댓글달기</button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 						+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
@@ -220,7 +213,7 @@
 			var vCnt = Number($("input[name='hVoteCnt']").eq(idx).val());
 			vCnt++;
 			$("input[name='hVoteCnt']").eq(idx).val(vCnt);
-			$("i[name='viewVoteCount']").eq(idx).text(" (" + vCnt + ")");
+			$("i[name='viewVoteCount']").eq(idx).text(" " + vCnt );
 			
 			var sAction = "/vote";
 			var fnCallback = gfContentVoteActionCallback2;
