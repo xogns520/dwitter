@@ -142,6 +142,7 @@
 		
 		function fnInsertReplyAction(){
 			var sAction = "/addreply";
+			$("#frmReply #data").val( $("#contentReplyTextarea").val() );
 			var fnCallback = fnInsertReplyActionCallback;
 			gfAjaxCallWithForm(sAction,$('#frmReply'),fnCallback,"POST");
 		}
