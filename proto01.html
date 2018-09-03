@@ -45,6 +45,7 @@
 			if ( "true" == data.result ){
 				$("#imgList1").empty();
 				$("#imgList2").empty();
+				$("#imgList3").empty();
 				$("#btnContentWrite").click();
 			}else{
 				alert("로그인 후 사용하세요.");
@@ -141,8 +142,16 @@
 		}
 		
 		function fnInsertReplyAction(){
+			var strText = $("#contentReplyTextarea").val();
+			var strImg = "";
+			var len = $("input[name='imgUrl']").length;
+			
+			for ( var x = 0 ; x < len ; x++ ){
+				strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+			}
+			$("#frmReply #data").val( strText + strImg );
+			
 			var sAction = "/addreply";
-			$("#frmReply #data").val( $("#contentReplyTextarea").val() );
 			var fnCallback = fnInsertReplyActionCallback;
 			gfAjaxCallWithForm(sAction,$('#frmReply'),fnCallback,"POST");
 		}
