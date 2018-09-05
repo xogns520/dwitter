@@ -163,6 +163,56 @@
 			}
 		}
 		
+		function fnContentDetail(idx){
+			$("#frmDetail #postid").val($("input[name='hBoardId']").eq(idx).val());
+			var sAction = "/readdetailpage";
+			var fnCallback = fnContentDetailCallback;
+			gfAjaxCallWithForm(sAction,$('#frmDetail'),fnCallback,"POST");
+			$("div[id='popupContentData']").empty();
+			$("#btnContentDetailPopup").click();
+		}
+		function fnContentDetailCallback(data){
+			
+			for ( var x = 0 ; x < data.length ; x++ ){
+				
+				var btnVoteEnable = "";
+				if ( undefined != data[x].votingenable  && "false" == data[x].votingenable ){
+					btnVoteEnable = "disabled";
+				}
+				
+				var strProfile = (data[x].profile == null) ? "" : data[x].profile ;
+				var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
+		
+					
+				var strHtml	= '<div class="element tile-1 home calc bg-change">'
+							+ '	<table style="width: 100%;">'
+							+ '		<tr>'
+							+ '			<td>'
+							+ '				<h4 class="header icon-to-the-right">' + data[x].account + '</h4>'
+//							+ '				<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom" aria-describedby="tooltip113771">Bottom</button>'
+							+ '			</td>'
+							+ '			<td  style="text-align:right; margin: 0px;" onClick="javascript:gfFollowPopup(' + x + ');">'
+							+ '				<img name="userImage" style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="' + profilePath + '">'
+							+ '			</td>'
+							+ '		</tr>'
+							+ '	</table>'
+							+ '	<div onClick="javascript:fnContentDetail(' + x + ')" name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
+							+ '	<div style="margin: 5px;"></div>'
+							+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
+							+ '	<div style="margin: 5px;"></div>'
+							+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
+							+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
+							+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
+							+ '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(' + x + ');" >댓글달기</button>'
+							+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
+							+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
+							+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
+							+ '</div>';
+				
+				$("div[id='popupContentData']").append(strHtml);
+			}			
+		}
+		
 		
 		
 	</script>
@@ -276,7 +326,7 @@
 						<button type="button" class="button" id="btnContentEidt" data-toggle="modal" data-target="#contentEdit"></button>
 						<button type="button" class="button" id="btnFollowPopup" data-toggle="modal" data-target="#followPopup"></button>
 						<button type="button" class="button" id="btnReplyPopup" data-toggle="modal" data-target="#popupReply"></button>
-						
+						<button type="button" class="button" id="btnContentDetailPopup" data-toggle="modal" data-target="#popupContentDetail"></button>
 					</div>
 				</div>
 				<div id="contentList"></div>
@@ -402,6 +452,18 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<div class="modal fade" id="popupContentDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="margin-top: 100px;">
+			<div class="modal-content" id="popupContentData" >
+				<div class="element tile-1 home calc bg-change">	<table style="width: 100%;">		<tbody><tr>			<td>				<h4 class="header icon-to-the-right">KimHark</h4>			</td>			<td style="text-align:right; margin: 0px;" onclick="javascript:gfFollowPopup(0);">				<img name="userImage" style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="http://res.cloudinary.com/hgnmrexj6/image/upload/c_limit,h_60,w_90/v1534337537/KimHark_gzyd3t.png">			</td>		</tr>	</tbody></table>	<div name="viewDefault" class="preConSimple">핡핡 오늘은 즐거운 수요일 가정의 날~!</div>	<div style="margin: 5px;"></div>	<div class="hint" name="createTime">2018-9-5 10:32:6</div>	<div style="margin: 5px;"></div>	<button type="button" name="btnVote" style="width:30%;" class="btn btn-default" onclick="javascript:gfContentVoteAction('5b8f3216ec54bd000486d482');"><i name="viewVoteCount" class="fa fa-thumbs-o-up"> 0</i></button>	<button type="button" name="btnUpdate" style="width: 20%;" class="btn btn-default" onclick="javascript:gfContentUpdate(0);"><i class="fa fa-edit"></i></button>	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onclick="javascript:fnContentDetail(0);"><i class="fa fa-folder-open"></i></button>	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onclick="javascript:fnInsertReplyPopup(0);">댓글달기</button>	<input type="hidden" name="hBoardId" value="5b8f3216ec54bd000486d482">	<input type="hidden" name="hVoteCnt" value="0">	<input type="hidden" name="hAccount" value="KimHark"></div>
+				
+				
+			</div>
+		</div>
+	</div>	
+	
 	<!-- Modal End-->
 
 	<form id="frmWrite">
@@ -435,7 +497,9 @@
 		<input type="hidden" id="data" name="data" />
 	</form>
 	
-	
+	<form id="frmDetail">
+		<input type="hidden" id="postid" name="postid" />
+	</form>
 	
 	
 </body>
