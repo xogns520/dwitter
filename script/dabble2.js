@@ -46,7 +46,7 @@
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
-						+ '	<div onClick="javascript:fnContentDetail(' + x + ')" name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
+						+ '	<div onClick="javascript:fnContentDetailPopup(' + x + ')" name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
