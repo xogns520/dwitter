@@ -169,6 +169,7 @@
 			var sAction = "/readdetailpage";
 			var fnCallback = fnContentDetailPopupCallback;
 			gfAjaxCallWithForm(sAction,$('#frmDetail'),fnCallback,"POST");
+			$("#container").hide();
 			$("#contentList").hide();
 			$("#pageButton").hide();
 			$("#contentDetail").show();
@@ -215,6 +216,8 @@
 		
 		function fnCloseDetail(){
 			$("div[id='contentDetailReply']").empty();
+			
+			$("#container").show();
 			$("#contentList").show();
 			$("#pageButton").show();
 			$("#contentDetail").hide();
