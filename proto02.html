@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+	<!-- Global String Sripts -->
+	<script src="./script/string.js" type="text/javascript"></script>
+	<meta charset="utf-8">
+	<title>Dabble</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="author" content="Hark Hark Hark">
+	<meta name="Description" content="">
+	
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" sizes="196x196" href="favicon-196x196.png" />
+	<link rel="shortcut icon" href="favicon-196x196.png" />
+	<link rel="icon" type="image/png" href="favicon-196x196.png" sizes="196x196" />
+	<meta name="application-name" content="Dabble"/>
+	<meta name="msapplication-TileColor" content="#FFFFFF" />
+	<meta name="msapplication-TileImage" content="mstile-144x144.png" />
+	<meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
+	<meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
+	<meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
+	<meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+	<!-- Favicons -->
+
+	<!-- Sripts -->
+	<link href="./style/common.import.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<script src="./script/modernizr.js" type="text/javascript"></script>
+	<script src="./script/jquery-1.12.4.min.js" type="text/javascript"></script>
+	<script src="./script/jquery.isotope.load.js" type="text/javascript"></script>
+	<script>
+		$(function(){
+			gfGetUserInfo();
+			//fnGetUserCount();
+			gfContentList();
+			//gfTooltip();
+			//시스템 기본 색상 
+			//00548e
+		});
+		
+		function fnLoginChk(){
+			gfIsLoginAction(fnLoginChkCallback);
+		}
+		function fnLoginChkCallback(data){
+			if ( "true" == data.result ){
+				$("#imgList1").empty();
+				$("#imgList2").empty();
+				$("#imgList3").empty();
+				$("#btnContentWrite").click();
+			}else{
+				alert("로그인 후 사용하세요.");
+			}
+		}
+		
+		function fnGetUserCount(){
+			var sAction = "/readtotaluser";
+			var fnCallback = fnGetUserCountCallback;
+			var param = "";
+			var sMethod = "POST";	// GET/POST
+			gfAjaxCallWithParam(sAction, param, fnCallback, sMethod);
+		}		
+		
+		function fnGetUserCountCallback(data){
+			var count = Number(data.count)+5000;
+			$("#userCount").text(count);
+			/*
+			var userCnt = $("#userCount");
+			$({ Counter: 0 }).animate({ Counter: count  }, {
+                duration: 3000,
+                easing: 'swing',
+                step: function (curValue) {
+                	userCnt.text(Math.ceil(curValue));
+                }
+            });
+			*/
+		}
+		
+		function fnContentImagePopup(idx){
+			var param = {	cloud_name: 'hgnmrexj6'
+							, upload_preset: 'lnv4zcoi'
+							, sources : [ "local", "url"]
+				};
+			var fnCallback;
+			if ( 1 == idx ){
+				fnCallback = fnContentWriteImagePopupCallback;
+			}else if ( 2 == idx ){
+				fnCallback = fnContentEditImagePopupCallback;
+			}else if ( 3 == idx ){
+				fnCallback = fnContentReplyImagePopupCallback;
+			}		
+			cloudinary.openUploadWidget( param, fnCallback );
+			
+		}
+		function fnContentWriteImagePopupCallback( error, result ){
+			if ( null != error ){
+				return ;
+			}
+			for ( var x = 0 ; x < result.length ; x++ ){
+				var splitArray = result[x].url.split("/image/upload/");
+				var url = splitArray[0] + "/image/upload/c_limit,h_"+ result[x].height +",w_"+ result[x].width +"/" + splitArray[1];
+				var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + result[x].thumbnail_url + '"/>'
+							+ '<input type="hidden" name="imgUrl" value="' + url + '" />';
+				$("#imgList1").append(strHtml);
+			}
+		}
+		function fnContentEditImagePopupCallback( error, result ){
+			if ( null != error ){
+				return ;
+			}
+			for ( var x = 0 ; x < result.length ; x++ ){
+				var splitArray = result[x].url.split("/image/upload/");
+				var url = splitArray[0] + "/image/upload/c_limit,h_"+ result[x].height +",w_"+ result[x].width +"/" + splitArray[1];
+				var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + result[x].thumbnail_url + '"/>'
+							+ '<input type="hidden" name="imgUrl" value="' + url + '" />';
+				$("#imgList2").append(strHtml);
+			}
+		}
+		function fnContentReplyImagePopupCallback( error, result ){
+			if ( null != error ){
+				return ;
+			}
+			for ( var x = 0 ; x < result.length ; x++ ){
+				var splitArray = result[x].url.split("/image/upload/");
+				var url = splitArray[0] + "/image/upload/c_limit,h_"+ result[x].height +",w_"+ result[x].width +"/" + splitArray[1];
+				var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + result[x].thumbnail_url + '"/>'
+							+ '<input type="hidden" name="imgUrl" value="' + url + '" />';
+				$("#imgList3").append(strHtml);
+			}
+		}
+		function fnImageDelete(obj){
+			var imgArray = $("img[name='imgThumbNail']");
+			var hideArray = $("input[name='imgUrl']");
+			var idx = imgArray.index(obj);
+			imgArray.eq(idx).remove();
+			hideArray.eq(idx).remove();
+		}
+		
+		
+		function fnInsertReplyPopup(idx){
+			$("#frmReply #parentid").val($("input[name='hBoardId']").eq(idx).val());
+			$("#btnReplyPopup").click();
+		}
+		
+		function fnInsertReplyAction(){
+			var strText = $("#contentReplyTextarea").val();
+			var strImg = "";
+			var len = $("input[name='imgUrl']").length;
+			
+			for ( var x = 0 ; x < len ; x++ ){
+				strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+			}
+			$("#frmReply #data").val( strText + strImg );
+			
+			var sAction = "/addreply";
+			var fnCallback = fnInsertReplyActionCallback;
+			gfAjaxCallWithForm(sAction,$('#frmReply'),fnCallback,"POST");
+		}
+		function fnInsertReplyActionCallback(data){
+			if ( "success" == data ){
+				alert("댓글작성을 하였습니다");
+			}else{
+				alert("댓글작성 실패");
+			}
+		}
+		
+		function fnContentDetailPopup(idx){
+			
+			$("#frmDetail #postid").val($("input[name='hBoardId']").eq(idx).val());
+			var sAction = "/readdetailpage";
+			var fnCallback = fnContentDetailPopupCallback;
+			gfAjaxCallWithForm(sAction,$('#frmDetail'),fnCallback,"POST");
+			$("#contentList").hide();
+			$("#contentDetail").show();
+			$("div[id='contentDetailReply']").empty();
+		}
+		function fnContentDetailPopupCallback(data){
+			
+			var x = 0 ;
+			var btnVoteEnable = "";
+			if ( undefined != data[x].votingenable  && "false" == data[x].votingenable ){
+				btnVoteEnable = "disabled";
+			}
+			
+			var strProfile = (data[x].profile == null) ? "" : data[x].profile ;
+			var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
+			$("#detailAccount").text(data[x].account);
+			$("#detailUserImage").attr("src", profilePath);
+			$("#contentDetailData").html(data[x].data);
+			
+				
+			for ( var x = 1 ; x < data.length ; x++ ){
+				
+				btnVoteEnable = "";
+				if ( undefined != data[x].votingenable  && "false" == data[x].votingenable ){
+					btnVoteEnable = "disabled";
+				}
+				
+				strProfile = (data[x].profile == null) ? "" : data[x].profile ;
+				profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
+		
+					
+				strHtml	= '<div class="element tile-1 home calc bg-change">'
+						+ '		<h4 class="header icon-to-the-right">' + data[x].account 
+						+ '			<img name="userImage" style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="' + profilePath + '">'
+						+ '		</h4>'
+						+ '	<div onClick="javascript:fnContentDetail(' + x + ');" name="viewDefault" class="preConDetail">' + data[x].data + '</div>'
+						+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
+						+ '</div>';
+				
+				$("div[id='contentDetailReply']").append(strHtml);
+			}			
+		}
+		
+		
+		
+	</script>
+	<!-- Scripts -->
+</head>
+<body>
+	<!-- start preloader -->
+	<!-- 
+	<div id="preloader">
+		<div id="status">
+			<div class="parent">
+				<div class="child"><p>loading</p></div>
+			</div>
+		</div>
+	</div>
+	 -->
+	<!-- end preloader -->
+	<div id="wrap">
+		<div id="menu-button">
+			<table style="width: 100%;">
+			<colgroup>
+			<col width="25%;">
+			<col width="50%;">
+			<col width="25%;">
+			</colgroup>
+				<tr>
+					<td> 
+						<div class="left">
+							<div class="cursor">
+								<div id="nav-button">
+									<span class="nav-bar"></span>
+									<span class="nav-bar"></span>
+									<span class="nav-bar"></span>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="center">
+							<div class="cursor">
+								<a href="index.html" style="align-self: center;" >
+									<img  src="./images/logo-dabble.png" style="width: 130px; height: 50px; vertical-align: super; display: inline;" />
+								</a>
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="right">
+							<div class="cursor">
+								<div id="nav-button">
+									<span class="nav-bar"> </span>
+									<span class="nav-bar"></span>
+									<span class="nav-bar"></span>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<!-- start header -->
+		<header id="header" class="clearfix">
+			<h1 id="logo"><a href="index.html">Dabble</a></h1>
+			<!-- start main nav -->
+			<h4 id="headertitle"></h4>
+			<nav id="main-nav">
+				<ul class="clearfix" id="options">					
+					<li> <a href="/intro/index.html">데블소개</a></li>
+					<li> <a href="/Dabble_White_Paper.pdf" target="_blank">백서</a></li>
+					<li> <a href="/notice.html">공지사항</a></li>
+					<li> <a href="/snapshot.html">에어드랍 확인</a></li>
+					<li style="display: none;" id="linkUserInfo"> <a href="./userinfo.html">회원정보</a></li>
+					<li style="display: none;" id="linkMyContents"> <a href="./myContentList.html">나불데블</a></li>
+					<li style="display: none;" id="linkFollow"> <a href="./follow.html">친구정보</a></li>
+					<li style="display: none;" id="linkLogin" >   <a href="./login.html">로그인</a></li>
+					<li style="display: none;" id="linkWallet"> <a href="./wallet.html">지갑</a></li>
+					<li style="display: none;" id="linkSingup"> <a href="./signup.html">회원가입</a></li>
+					<!-- coming soon <li> <a href="#faq">FAQ</a> </li> coming soon <li> <a href="#about">About</a> </li> -->
+					<li style="display: none;" id="linkLogout" >  <a href="javascript:gfLogoutAction();">로그아웃</a></li>
+				</ul>
+			</nav>
+			<!-- end main nav -->
+		</header>
+		<!-- end header -->
+
+		<!-- start content -->
+		<div id="content">
+			<div class="container clearfix">
+				<!-- GLOBAL ALERT BANNER -->
+				<!-- <center>현재 데블러 <span id="userCount">5000</span>명.</center> --> 
+				<div class="alert alert-info" id="headeralert" role="alert">
+					<div style="text-align: center;"><strong>Heads Up!</strong></div>
+					<!-- <div style="text-align: right">현재 데블러 <span id="userCount"></span>명</div>-->
+					<div style="text-align: left;"><b>짧은 글에도 큰 가치를... </b>
+						<ul>
+							<li>EOS생태계를 위해 EOSCAFEBLOCK, EOSEOUL에 투표해 주세요.</li>
+							<li>세계 최초 EOS 기반 <b>탈중앙화 거래소</b> <a href = "https://dexeos.io">dexeos.io</a> 에서 에어드랍 토큰 거래하세요. <b>(2018. 9. 4 11:00 상장예정)</b></li>
+							<li><b>에어드랍 완료 2018. 9. 1. 18:32:31</b> Block Number 14,148,744 </li>
+							<li>한국 축구팀 4강 기원 데블데블 이벤트. 자세한 내용을 텔방을 참조해 주세요.</li>
+						</ul>
+					</div>
+				</div>
+				<!-- END GLOBAL ALERT BANNER -->
+				<!-- ITEMS PERSISTED ON ALL PAGES -->
+				<h4 id="headertitle-inner"></h4>
+				<div id="container">
+					<button type="button" class="button" id="btnContentWriteView" onClick="javascript:fnLoginChk();">글쓰기</button>
+					<div style="display: none;">
+						<button type="button" class="button" id="btnContentWrite" data-toggle="modal" data-target="#myModal"></button>
+						<button type="button" class="button" id="btnContentEidt" data-toggle="modal" data-target="#contentEdit"></button>
+						<button type="button" class="button" id="btnFollowPopup" data-toggle="modal" data-target="#followPopup"></button>
+						<button type="button" class="button" id="btnReplyPopup" data-toggle="modal" data-target="#popupReply"></button>
+						<button type="button" class="button" id="btnContentDetailPopup" data-toggle="modal" data-target="#popupContentDetail"></button>
+					</div>
+				</div>
+				<div id="contentList"></div>
+				<div id="contentDetail" style="display: none;">
+						<div class="element tile-2 home bg-change">
+						<h4 style="text-align: center;"></h4>
+						
+							<h4 id="detailAccount" class="header icon-to-the-right"></h4>
+		                	<img id="detailUserImage" style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" >
+							<div style="margin: 5px;"></div>
+							<div id="contentDetailData"></div>
+							<div id="contentDetailReply"></div>
+		                	
+						</div>					
+					
+				</div>
+			</div>
+			<div class="container clearfix">
+				<div style="text-align: left; display: inline-block; width: calc(50% - 3px); margin-left: 0px; margin-right: 0px;">
+					<button type="button" class="button" style="width: 100%; margin-left: 0px; margin-right: 0px;" onClick="javascript:gfContentList(-2);">Prev</button>
+				</div>
+				<div style="text-align: right; display: inline-block; width: calc(50% - 2px); margin-left: 0px; margin-right: 0px;">
+					<button type="button" class="button" style="width: 100%; margin-left: 0px; margin-right: 0px;" onClick="javascript:gfContentList(-1);$(window).scrollTop(0);">Next</button>
+				</div>
+			</div>
+			
+		</div>
+		<!-- end content -->
+
+		<!-- start footer -->
+		<!-- end footer -->
+	</div>
+    <!-- end wrap -->
+    
+    
+    
+	<!-- Modal Start-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="margin-top: 100px;">
+			<div class="modal-content">
+				<div class="modal-header">
+		        	<!-- 
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+		        	</button>-->
+		        	<h4 class="modal-title" id="myModalLabel">무슨 생각을 하고 계세요?</h4>
+				</div>
+				<div class="modal-body">
+					<textarea id="contentTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
+				</div>
+				<div class="modal-body" style="padding-top: 0px; padding-bottom: 5px;">
+					<button type="button" class="btn btn-default" onClick="javascript:fnContentImagePopup(1)">이미지 업로드</button> 썸네일을 누르면 이미지가 삭제됩니다.
+					<div id="imgList1" style="padding-top: 10px;"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" onClick="javascript:gfIsLoginAction(gfContentWrite);" data-dismiss="modal">완료</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="contentEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="margin-top: 100px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!--
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+		        	</button>
+		        	-->
+		        	<h4 class="modal-title" id="myModalLabel">다른 생각을 하고 계세요?</h4>
+				</div>
+				<div class="modal-body">
+					<textarea id="contentEditTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
+				</div>
+				<div class="modal-body" style="padding-top: 0px; padding-bottom: 5px;">
+					<button type="button" class="btn btn-default" onClick="javascript:fnContentImagePopup(2)">이미지 업로드</button> 썸네일을 누르면 이미지가 삭제됩니다.
+					<div id="imgList2" style="padding-top: 10px;"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" onClick="javascript:gfContentEditAction();" data-dismiss="modal">완료</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="popupReply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="margin-top: 100px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!--
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+		        	</button>
+		        	-->
+		        	<h4 class="modal-title" id="myModalLabel">댓글 단다</h4>
+				</div>
+				<div class="modal-body">
+					<textarea id="contentReplyTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
+				</div>
+				<div class="modal-body" style="padding-top: 0px; padding-bottom: 5px;">
+					<button type="button" class="btn btn-default" onClick="javascript:fnContentImagePopup(3)">이미지 업로드</button> 썸네일을 누르면 이미지가 삭제됩니다.
+					<div id="imgList3" style="padding-top: 10px;"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" onClick="javascript:fnInsertReplyAction();" data-dismiss="modal">완료</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="followPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabelFollow" aria-hidden="true">
+		<div class="modal-dialog" style="margin-top: 100px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!--
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+		        	</button>
+		        	-->
+		        	<h4 class="modal-title" id="myModalLabelFollow"><span id="myModalLabelFollowId"></span> 님과 친하게 지내시려구요?</h4>
+		        	<img id="userImage" src="/images/user/0.png" style="width:20%; height: 20%; ">
+				</div>
+				<!--
+				<div class="modal-body">
+					<textarea id="contentEditTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
+				</div>
+				 -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" onClick="javascript:gfFollowAction();" data-dismiss="modal">Follow</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="popupContentDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="margin-top: 100px;">
+			<div class="modal-content" id="popupContentData" ></div>
+		</div>
+	</div>	
+	
+	<!-- Modal End-->
+
+	<form id="frmWrite">
+		<input type="hidden" id="user" name="user" />
+		<input type="hidden" id="data" name="data" />
+	</form>
+	<form id="frmEdit">
+		<input type="hidden" id="postid" name="postid" />
+		<input type="hidden" id="data" name="data" />
+	</form>
+	<form id="frmRead">
+		<input type="hidden" id="user" name="user" />
+		<input type="hidden" id="page" name="page" />
+	</form>
+	<form id="frmReadVote">
+		<input type="hidden" id="id" name="id" />
+	</form>
+	<form id="frmVote">
+		<input type="hidden" id="id"   name="id" />
+		<input type="hidden" id="vote" name="vote" />
+	</form>
+	<form id="frmUserInfo">
+		<input type="hidden" id="id"   name="id" />
+	</form>
+	<form id="frmFollow">
+		<input type="hidden" id="account"   name="account" />
+	</form>
+
+	<form id="frmReply">
+		<input type="hidden" id="parentid" name="parentid" />
+		<input type="hidden" id="data" name="data" />
+	</form>
+	
+	<form id="frmDetail">
+		<input type="hidden" id="postid" name="postid" />
+	</form>
+	
+	
+</body>
+<script src="./script/jquery-easing-1.3.js" type="text/javascript"></script>
+<script src="./script/jquery.touchSwipe.min.js" type="text/javascript"></script>
+<script src="./script/jquery.isotope2.min.js" type="text/javascript"></script>
+<script src="./script/jquery.ba-bbq.min.js" type="text/javascript"></script>
+<script src="./script/packery-mode.pkgd.min.js" type="text/javascript"></script>
+<script src="./script/main.js" type="text/javascript"></script>
+<script src="./script/jquery.form.js" type="text/javascript"></script>
+<!-- <script src="./script/input.fields.js" type="text/javascript"></script> -->
+<!-- <script src="./script/preloader.js" type="text/javascript"></script> -->
+<script src="./script/bootstrap.min.js" type="text/javascript"></script>
+<script src="./script/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="./script/common.js" type="text/javascript"></script>
+<script src="./script/dabble2.js" type="text/javascript"></script>
+<script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+</html>
