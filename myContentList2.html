@@ -116,7 +116,7 @@
 		function fnContentUpdate(idx){
 			$("#imgList1").empty();
 			$("#imgList2").empty();
-			$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
+			$("#frmMyContentEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
 			
 			var tagImg =  $("div[name='viewDefault']").eq(idx).find("img");
 			var len = tagImg.length;
@@ -144,11 +144,11 @@
 			for ( var x = 0 ; x < len ; x++ ){
 				strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
 			}
-			$("#frmEdit #data").val( strText + strImg );
+			$("#frmMyContentEdit #data").val( strText + strImg );
 			
 			var sAction = "/edit";
 			var fnCallback = fnContentEditActionCallback;
-			gfAjaxCallWithForm(sAction,$('#frmEdit'),fnCallback,"POST");
+			gfAjaxCallWithForm(sAction,$('#frmMyContentEdit'),fnCallback,"POST");
 		}
 		function fnContentEditActionCallback(data){
 			if ( "success" == data ){
