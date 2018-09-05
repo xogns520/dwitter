@@ -83,7 +83,7 @@
 							+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 							+ '	<div style="margin: 5px;"></div>'
 							+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
-							+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
+							+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:fnContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
 							//+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 							+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 							+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
@@ -107,6 +107,60 @@
 				}
 			}
 		}
+		
+		/**
+		 * 글수정 팝업
+		 * @param idx
+		 * @returns
+		 */
+		function fnContentUpdate(idx){
+			$("#imgList1").empty();
+			$("#imgList2").empty();
+			$("#frmMyContentEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
+			
+			var tagImg =  $("div[name='viewDefault']").eq(idx).find("img");
+			var len = tagImg.length;
+			
+			for ( var x = 0 ; x < len ; x++ ){
+				var strRep = tagImg.eq(x).attr("src").replace("/image/upload/","/image/upload/c_limit,h_60,w_90/");
+				var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + strRep + '"/>'
+							+ '<input type="hidden" name="imgUrl" value="' + tagImg.eq(x).attr("src") + '" />';
+				$("#imgList2").append(strHtml);
+			}
+			
+			$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).text());
+			$("#btnContentEidt").click();
+		}
+		
+		/**
+		 * 글 수정
+		 * @returns
+		 */
+		function fnContentEditAction(){
+			var strText = $("#contentEditTextarea").val();
+			var strImg = "";
+			var len = $("input[name='imgUrl']").length;
+			
+			for ( var x = 0 ; x < len ; x++ ){
+				strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+			}
+			$("#frmMyContentEdit #data").val( strText + strImg );
+			
+			var sAction = "/edit";
+			var fnCallback = fnContentEditActionCallback;
+			gfAjaxCallWithForm(sAction,$('#frmMyContentEdit'),fnCallback,"POST");
+		}
+		function fnContentEditActionCallback(data){
+			if ( "success" == data ){
+				//alert("글쓰기 성공");
+				$("#contentEditTextarea").val("");
+				fnMyContentList(0);
+				//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
+			}else{
+				alert("글수정 실패");
+				//gfMsgBox(data.resultMsg, "핡~!");
+			}
+		}		
 		
 		
 	</script>
@@ -189,7 +243,6 @@
 				<!-- ITEMS PERSISTED ON ALL PAGES -->
 				<h4 id="headertitle-inner"></h4>
 				<div id="container">
-					
 					<div style="display: none;">
 						<button type="button" class="button" id="btnContentWrite" data-toggle="modal" data-target="#myModal"></button>
 						<button type="button" class="button" id="btnContentEidt" data-toggle="modal" data-target="#contentEdit"></button>
@@ -263,42 +316,23 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary" onClick="javascript:gfContentEditAction();" data-dismiss="modal">완료</button>
+					<button type="button" class="btn btn-primary" onClick="javascript:fnContentEditAction();" data-dismiss="modal">완료</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<div class="modal fade" id="followPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabelFollow" aria-hidden="true">
-		<div class="modal-dialog" style="margin-top: 100px;">
-			<div class="modal-content">
-				<div class="modal-header">
-					<!--
-		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-		        	</button>
-		        	-->
-		        	<h4 class="modal-title" id="myModalLabelFollow"><span id="myModalLabelFollowId"></span> 님과 친하게 지내시려구요?</h4>
-		        	<img id="userImage" src="/images/user/0.png" style="width:20%; height: 20%; ">
-				</div>
-				<!--
-				<div class="modal-body">
-					<textarea id="contentEditTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
-				</div>
-				 -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary" onClick="javascript:gfFollowAction();" data-dismiss="modal">Follow</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- Modal End-->
 
 	<form id="frmMyContentList">
 		<input type="hidden" id="user" name="user" />
 		<input type="hidden" id="page" name="page" />
 	</form>
+	<form id="frmMyContentEdit">
+		<input type="hidden" id="postid" name="postid" />
+		<input type="hidden" id="data" name="data" />
+	</form>
+	
 	<form id="frmUserInfo">
 		<input type="hidden" id="id"   name="id" />
 	</form>
