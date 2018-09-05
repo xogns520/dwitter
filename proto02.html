@@ -170,6 +170,7 @@
 			var fnCallback = fnContentDetailPopupCallback;
 			gfAjaxCallWithForm(sAction,$('#frmDetail'),fnCallback,"POST");
 			$("#contentList").hide();
+			$("#pageButton").hide();
 			$("#contentDetail").show();
 			$("div[id='contentDetailReply']").empty();
 		}
@@ -209,6 +210,15 @@
 				
 				$("div[id='contentDetailReply']").append(strHtml);
 			}			
+		}
+		
+		
+		function fnCloseDetail(){
+			$("div[id='contentDetailReply']").empty();
+			$("#contentList").show();
+			$("#pageButton").show();
+			$("#contentDetail").hide();
+
 		}
 		
 		
@@ -329,20 +339,23 @@
 				</div>
 				<div id="contentList"></div>
 				<div id="contentDetail" style="display: none;">
+						
+						<div class="form-group">
+							<button type="button" class="btn btn-primary btn-block" onClick="javascript:fnCloseDetail();" id="btnCloseDetail" >닫기</button>
+						</div>						
+						
 						<div class="element tile-2 home bg-change">
 						<h4 style="text-align: center;"></h4>
-						
 							<h4 id="detailAccount" class="header icon-to-the-right"></h4>
 		                	<img id="detailUserImage" style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" >
 							<div style="margin: 5px;"></div>
 							<div id="contentDetailData"></div>
 							<div id="contentDetailReply"></div>
-		                	
 						</div>					
 					
 				</div>
 			</div>
-			<div class="container clearfix">
+			<div class="container clearfix" id="pageButton">
 				<div style="text-align: left; display: inline-block; width: calc(50% - 3px); margin-left: 0px; margin-right: 0px;">
 					<button type="button" class="button" style="width: 100%; margin-left: 0px; margin-right: 0px;" onClick="javascript:gfContentList(-2);">Prev</button>
 				</div>
