@@ -654,15 +654,15 @@ function readData(account, page, cb){
 	 console.log("transferbalance");
 	 //duplication check
 	 if(req.session.transferProgress != true){
-		session.transferProgress = true;
+		req.session.transferProgress = true;
 	 	contract.sendDab(req.session.account,
 				    	(result) => {
-			session.transferProgress = false;
+			req.session.transferProgress = false;
 			res.send(result)
 		});
 	 }else{
 		 res.send("fail");
-		 session.transferProgress = false;
+		 req.session.transferProgress = false;
 	 }
  });
 
