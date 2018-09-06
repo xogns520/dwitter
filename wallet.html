@@ -132,6 +132,7 @@
 				return ;
 			}
 			
+			$("#btnTransfer").attr("readonly", true);
 			var sAction = "/transferbalance";
 			var fnCallback = fnTrasnferMyWalletCallback;
 			var param = "";
@@ -147,6 +148,7 @@
 			}else{
 				alert("내 지갑으로 전송을 실패 하였습니다.");
 			}
+			$("#btnTransfer").attr("readonly", false);
 		}
 		
 		
@@ -251,7 +253,7 @@
 							</div>
 
 							<div class="form-group">
-								<button type="button" class="btn btn-primary btn-block" onClick="javascript:fnTrasnferMyWallet();">내 지갑으로 전송</button>
+								<button type="button" id="btnTransfer" class="btn btn-primary btn-block" onClick="javascript:fnTrasnferMyWallet();">내 지갑으로 전송</button>
 							</div>
 						</div>
 						
