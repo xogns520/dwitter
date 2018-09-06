@@ -195,6 +195,51 @@ function increaseVote(id, vote, account){
         });
 
 }
+function increaseVote2(id, vote, account){
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dg3d93pq");
+		var findquery = {_id : ObjectId(id)};		  
+		dbo.collection("board").findOne(findquery, function(err, res){
+			if(res == null){
+				//if result is null, then return -1
+				//do nothing
+				console.log("nothing to increase vote");
+			}else{
+				//calling write reply
+				//This is directly increasing account's wallet.
+				//increasePay(res.account, 1);
+				//contract.voteMessage(account, res.account, id);
+				
+   				var myobj = { boardId : ObjectId(id),  account : account };
+   				dbo.collection("voting").findOne(myobj, function(sub_err, sub_res){
+   					if(sub_res == null){
+	   					var orig = res.voting;
+	   					var newValue = parseInt(vote,10) + parseInt(orig,10);
+	   					console.log("increaseVote",orig, vote);
+	   					var newvalues = { $set: {voting : newValue } };
+	   					dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
+	   						if (err) throw err;
+	   						db.close();
+	   					});
+	   					var tod = Date.now();
+	   					
+	   					var myobj = { boardId : id,  account : account , date : tod };
+	   					dbo.collection("voting").insertOne(myobj, function(err, res){
+	   						if (err) throw err;
+	   						console.log("1 document inserted");
+	   						db.close();   
+	   					});
+   					}
+   					
+   				});
+				
+			}
+			
+			
+		});
+	});
+	
+}
 
 function readWallet(user, cb){
 	MongoClient.connect(url, function(err, db) {
@@ -558,6 +603,18 @@ function readData(account, page, cb){
 	  console.log("vote event", id, vote, req.session.account);
 	  //save this data to mongoDB//
 	  increaseVote(id, vote, req.session.account);
+	  res.send("done");
+  });
+  
+  app.post("/vote2", function(req, res) { 
+	  
+	  /* some server side logic */
+	  
+	  var id = req.body.id;
+	  var vote = req.body.vote;
+	  console.log("vote event", id, vote, req.session.account);
+	  //save this data to mongoDB//
+	  increaseVote2(id, vote, req.session.account);
 	  res.send("done");
   });
 
