@@ -555,7 +555,7 @@ function readData(account, page, cb){
 
 	  var id = req.body.id;
 	  var vote = req.body.vote;
-	  console.log("vote event", id, vote);
+	  console.log("vote event", id, vote, req.session.account);
 	  //save this data to mongoDB//
 	  increaseVote(id, vote, req.session.account);
 	  res.send("done");
