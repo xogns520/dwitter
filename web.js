@@ -195,7 +195,7 @@ function increaseVote(id, vote, account){
         });
 
 }
-function increaseVote2(id, account){
+function increaseVote2(id, account, callback){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dg3d93pq");
 		var findquery = {_id : ObjectId(id)};		  
@@ -232,7 +232,7 @@ function increaseVote2(id, account){
 	   					});
 	   					callback("success");
    					}else{
-   						console.log("nothing to increase vote");
+   						console.log("duplicated");
    						callback("duplicated");
    					}
    				});
