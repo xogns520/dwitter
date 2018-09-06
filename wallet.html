@@ -131,8 +131,7 @@
 				alert("지갑이 변경중이면 내 지갑으로 전송을 할 수 없습니다. 취소 버튼을 누른 후 다시 시도해주세요.");
 				return ;
 			}
-			
-			$("#btnTransfer").attr("readonly", true);
+			$("#btnTransfer").attr("disabled", true);
 			var sAction = "/transferbalance";
 			var fnCallback = fnTrasnferMyWalletCallback;
 			var param = "";
@@ -148,7 +147,7 @@
 			}else{
 				alert("내 지갑으로 전송을 실패 하였습니다.");
 			}
-			$("#btnTransfer").attr("readonly", false);
+			$("#btnTransfer").attr("disabled", false);
 		}
 		
 		
