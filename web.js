@@ -210,7 +210,7 @@ function increaseVote2(id, vote, account){
 				//increasePay(res.account, 1);
 				//contract.voteMessage(account, res.account, id);
 				
-   				var myobj = { boardId : ObjectId(id),  account : account };
+   				var myobj = { boardId : id,  account : account };
    				dbo.collection("voting").findOne(myobj, function(sub_err, sub_res){
    					if(sub_res == null){
 	   					var orig = res.voting;
