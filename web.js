@@ -652,8 +652,18 @@ function readData(account, page, cb){
 
  app.post("/transferbalance", function(req, res) { 
 	 console.log("transferbalance");
-	 contract.sendDab(req.session.account,
-				    (result) => {res.send(result)});
+	 //duplication check
+	 if(req.session.transferProgress != true){
+		session.transferProgress = true;
+	 	contract.sendDab(req.session.account,
+				    	(result) => {
+			session.transferProgress = false;
+			res.send(result)
+		});
+	 }else{
+		 res.send("fail");
+		 session.transferProgress = false;
+	 }
  });
 
 
