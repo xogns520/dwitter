@@ -602,14 +602,16 @@ function readData(account, page, cb){
 	  var vote = req.body.vote;
 	  console.log("vote event", id, vote, req.session.account);
 	  //save this data to mongoDB//
+	  /*
 	  increaseVote(id, vote, req.session.account);
 	  res.send("done");
+	  */
+	  // 2018-09-07 HarkHark Edit
+	  increaseVote2(id, req.session.account, (result) => {res.send(result)});
   });
   
   app.post("/vote2", function(req, res) { 
-	  
 	  /* some server side logic */
-	  
 	  var id = req.body.id;
 	  var vote = req.body.vote;
 	  console.log("vote event", id, vote, req.session.account);

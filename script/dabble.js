@@ -232,10 +232,12 @@
 		}
 	}
 	function gfContentVoteActionCallback2(data){
-		if ( "done" == data ){
+		if ( "success" == data ){
 			//alert("보팅성공");
 			//gfContentList();
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
+		}else if ( "duplicated" == data ){
+			alert("중복투표입니다.");
 		}else{
 			alert("보팅실패");
 			$("button[name='btnVote']").eq(gVoteIdx).attr("disabled",false);
