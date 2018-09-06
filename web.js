@@ -195,7 +195,7 @@ function increaseVote(id, vote, account){
         });
 
 }
-function increaseVote2(id, vote, account){
+function increaseVote2(id, account){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dg3d93pq");
 		var findquery = {_id : ObjectId(id)};		  
@@ -204,12 +204,13 @@ function increaseVote2(id, vote, account){
 				//if result is null, then return -1
 				//do nothing
 				console.log("nothing to increase vote");
+				callback("fail");
 			}else{
 				//calling write reply
 				//This is directly increasing account's wallet.
 				//increasePay(res.account, 1);
 				//contract.voteMessage(account, res.account, id);
-				
+				var vote = 1;
    				var myobj = { boardId : id,  account : account };
    				dbo.collection("voting").findOne(myobj, function(sub_err, sub_res){
    					if(sub_res == null){
@@ -229,16 +230,15 @@ function increaseVote2(id, vote, account){
 	   						console.log("1 document inserted");
 	   						db.close();   
 	   					});
+	   					callback("success");
+   					}else{
+   						console.log("nothing to increase vote");
+   						callback("duplicated");
    					}
-   					
    				});
-				
 			}
-			
-			
 		});
 	});
-	
 }
 
 function readWallet(user, cb){
@@ -614,8 +614,8 @@ function readData(account, page, cb){
 	  var vote = req.body.vote;
 	  console.log("vote event", id, vote, req.session.account);
 	  //save this data to mongoDB//
-	  increaseVote2(id, vote, req.session.account);
-	  res.send("done");
+	  increaseVote2(id, req.session.account, (result) => {res.send(result)});
+	  
   });
 
   app.post("/readvote", function(req, res) { 
