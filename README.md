@@ -2,7 +2,7 @@
 
 
 ## Usage
-1. goto https://dabbledabble.herokuapp.com/
+1. goto https://dabble.cafe
 2. Writing anything but legal and safe for children contents
 3. Get DAB token rewards
 
