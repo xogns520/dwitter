@@ -158,39 +158,43 @@ function increasePay(id, vote){
 }
 
 
-function increaseVote(id, vote, account){
+function increaseVote(id, vote, account, callback){
 	  MongoClient.connect(url, function(err, db) {
-   		 var dbo = db.db("heroku_dg3d93pq");
+   		var dbo = db.db("heroku_dg3d93pq");
     		var findquery = {_id : ObjectId(id)};		  
     		dbo.collection("board").findOne(findquery, function(err, res){
-     			 if(res == null){
-      			//if result is null, then return -1
-      			//do nothing
-	     		 console.log("nothing to increase vote");
+     			 if(res){
+	     			 console.log("nothing to increase vote");
+				 callback("fail");
+				 db.close()
       			}else{
-      				//calling write reply
-				//This is directly increasing account's wallet.
-				//increasePay(res.account, 1);
-				//contract.voteMessage(account, res.account, id);
-	      			var orig = res.voting;
-	      			var newValue = parseInt(vote,10) + parseInt(orig,10);
-				console.log("increaseVote",orig, vote);
-	      			var newvalues = { $set: {voting : newValue } };
-	      			dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
-		      			if (err) throw err;
-	      		        	db.close();
-      				});
-				var tod = Date.now();
+				//check whether duplicated request or not
+				var duplicatedQuery = { boardId : id, account : account};
+				dbo.collection("voting").findOne(duplicatedQuery, function(err, dupres){
+					if(!dupres){      				
+						//contract.voteMessage(account, res.account, id);
+	      					var orig = res.voting;
+	      					var newValue = parseInt(vote,10) + parseInt(orig,10);
+						console.log("increaseVote",orig, vote);
+	      					var newvalues = { $set: {voting : newValue } };
+	      					dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
+		      					if (err) throw err;
+      						});
+						var tod = Date.now();
 
-   				var myobj = { boardId : id,  account : account , date : tod };
-   				dbo.collection("voting").insertOne(myobj, function(err, res){
-    					if (err) throw err;
-    					console.log("1 document inserted");
-    					db.close();   
-   				});
-			}
-      		
-    
+   						var myobj = { boardId : id,  account : account , date : tod };
+   						dbo.collection("voting").insertOne(myobj, function(err, res){
+    							if (err) throw err;
+    							console.log("1 document inserted");
+    							db.close();   
+   						});
+					}else{
+						console.log("increase vote duplication");
+						db.close();
+						callback("duplicated");
+					}
+				});
+			}    
         	});
         });
 
@@ -607,18 +611,11 @@ function readData(account, page, cb){
 	  res.send("done");
 	  */
 	  // 2018-09-07 HarkHark Edit
-	  increaseVote2(id, req.session.account, (result) => {res.send(result)});
+	  // 2018-09-08 DB response correction when there is no result and adding vote parameter again
+	  increaseVote(id, vote, req.session.account, (result) => {res.send(result)});
   });
   
-  app.post("/vote2", function(req, res) { 
-	  /* some server side logic */
-	  var id = req.body.id;
-	  var vote = req.body.vote;
-	  console.log("vote event", id, vote, req.session.account);
-	  //save this data to mongoDB//
-	  increaseVote2(id, req.session.account, (result) => {res.send(result)});
-	  
-  });
+
 
   app.post("/readvote", function(req, res) { 
 	  
