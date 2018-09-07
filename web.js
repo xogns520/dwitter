@@ -651,7 +651,7 @@ function readData(account, page, cb){
  });
 
  app.post("/transferbalance", function(req, res) { 
-	 console.log("transferbalance");
+	 console.log("transferbalance", req.session.transferProgress, req.session.account);
 	 //duplication check
 	 if(req.session.transferProgress != true){
 		req.session.transferProgress = true;
