@@ -662,7 +662,7 @@ function readData(account, page, cb){
 			res.send(result)
 		});
 	 }else{
-		 console.log("currenlty transfer working);
+		 console.log("currenlty transfer working");
 		 res.send("fail");
 		 req.session.transferProgress = false;
 	 }
