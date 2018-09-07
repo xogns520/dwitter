@@ -186,6 +186,7 @@ function increaseVote(id, vote, account, callback){
    						dbo.collection("voting").insertOne(myobj, function(err, res){
     							if (err) throw err;
     							console.log("1 document inserted");
+							callback("success");
     							db.close();   
    						});
 					}else{
