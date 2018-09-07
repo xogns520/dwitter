@@ -654,6 +654,7 @@ function readData(account, page, cb){
 	 console.log("transferbalance", req.session.transferProgress, req.session.account);
 	 //duplication check
 	 if(req.session.transferProgress != true){
+		console.log("enter transfer");
 		req.session.transferProgress = true;
 	 	contract.sendDab(req.session.account,
 				    	(result) => {
@@ -661,6 +662,7 @@ function readData(account, page, cb){
 			res.send(result)
 		});
 	 }else{
+		 console.log("currenlty transfer working);
 		 res.send("fail");
 		 req.session.transferProgress = false;
 	 }
