@@ -165,8 +165,8 @@ function increaseVote(id, vote, account, callback){
     		dbo.collection("board").findOne(findquery, function(err, res){
      			 if(!res){
 	     			 console.log("nothing to increase vote");
-				 callback("fail");
 				 db.close()
+				 callback("fail");
       			}else{
 				//check whether duplicated request or not
 				var duplicatedQuery = { boardId : id, account : account};
@@ -179,16 +179,17 @@ function increaseVote(id, vote, account, callback){
 	      					var newvalues = { $set: {voting : newValue } };
 	      					dbo.collection("board").updateOne(findquery, newvalues, function(err, result){
 		      					if (err) throw err;
-      						});
-						var tod = Date.now();
+							var tod = Date.now();
 
-   						var myobj = { boardId : id,  account : account , date : tod };
-   						dbo.collection("voting").insertOne(myobj, function(err, res){
-    							if (err) throw err;
-    							console.log("1 document inserted");
-							callback("success");
-    							db.close();   
-   						});
+   							var myobj = { boardId : id,  account : account , date : tod };
+   							dbo.collection("voting").insertOne(myobj, function(err, res){
+    								if (err) throw err;
+    								console.log("1 document inserted");
+								db.close();
+								callback("success");    							   
+   							});
+      						});
+
 					}else{
 						console.log("increase vote duplication");
 						db.close();
