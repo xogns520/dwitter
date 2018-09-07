@@ -163,7 +163,7 @@ function increaseVote(id, vote, account, callback){
    		var dbo = db.db("heroku_dg3d93pq");
     		var findquery = {_id : ObjectId(id)};		  
     		dbo.collection("board").findOne(findquery, function(err, res){
-     			 if(res){
+     			 if(!res){
 	     			 console.log("nothing to increase vote");
 				 callback("fail");
 				 db.close()
