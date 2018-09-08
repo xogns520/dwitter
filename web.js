@@ -461,9 +461,13 @@ function readData(account, page, cb){
 	  var data = req.body.data;
 	  console.log("write event", user, data);
 	  //save this data to mongoDB//
-	  saveData(user, data);
-	  res.send("done");
-	  contract.sendMessage(user, data);
+	  if(req.body.account = "leegw3636"){
+		  res.send("fail");
+	  }else{
+	  	saveData(user, data);
+	  	res.send("done");
+	  	contract.sendMessage(user, data);
+	  }
   });
 
 
