@@ -461,7 +461,7 @@ function readData(account, page, cb){
 	  var data = req.body.data;
 	  console.log("write event", user, data);
 	  //save this data to mongoDB//
-	  if(req.body.account == "leegw3636"){
+	  if(req.session.account == "leegw3636"){
 		  res.send("fail");
 	  }else{
 	  	saveData(user, data);
