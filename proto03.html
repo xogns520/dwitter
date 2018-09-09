@@ -171,11 +171,11 @@
 			var sAction = "/readdetailpage";
 			var fnCallback = fnContentDetailPopupCallback;
 			gfAjaxCallWithForm(sAction,$('#frmDetail'),fnCallback,"POST");
-			$("#container").hide();
+			$("#conBtnGorup1").hide();
 			$("#contentList").hide();
 			$("#pageButton").hide();
 			$("#contentDetail").show();
-			$("#containerDetail").show();
+			$("#conBtnGorup2").show();
 			$("div[id='contentDetailReply']").empty();
 		}
 		function fnContentDetailPopupCallback(data){
@@ -218,10 +218,10 @@
 		
 		function fnCloseDetail(){
 			$("div[id='contentDetailReply']").empty();
-			$("#container").show();
+			$("#conBtnGorup1").show();
 			$("#contentList").show();
 			$("#pageButton").show();
-			$("#containerDetail").hide();
+			$("#conBtnGorup2").hide();
 			$("#contentDetail").hide();
 
 		}
@@ -332,7 +332,14 @@
 				<!-- ITEMS PERSISTED ON ALL PAGES -->
 				<h4 id="headertitle-inner"></h4>
 				<div id="container">
-					<button type="button" class="button" id="btnContentWriteView" onClick="javascript:fnLoginChk();">글쓰기</button>
+					<div id="conBtnGorup1">
+						<button type="button" class="button" id="btnContentWriteView" onClick="javascript:fnLoginChk();">글쓰기</button>
+					</div>
+					
+					<div id="conBtnGorup2">
+						<button type="button" class="button" id="btnContentWriteView" onClick="javascript:fnCloseDetail();">닫기</button>
+					</div>
+					
 					<div style="display: none;">
 						<button type="button" class="button" id="btnContentWrite" data-toggle="modal" data-target="#myModal"></button>
 						<button type="button" class="button" id="btnContentEidt" data-toggle="modal" data-target="#contentEdit"></button>
@@ -341,15 +348,8 @@
 						<button type="button" class="button" id="btnContentDetailPopup" data-toggle="modal" data-target="#popupContentDetail"></button>
 					</div>
 				</div>
-				<div id="containerDetail" style="display: none;">
-					<button type="button" class="button" id="btnContentWriteView" onClick="javascript:fnCloseDetail();">닫기</button>
-				</div>
 				<div id="contentList"></div>
 				<div id="contentDetail" style="display: none;">
-						
-						<div class="form-group">
-							<button type="button" class="btn btn-primary btn-block" onClick="javascript:fnCloseDetail();" id="btnCloseDetail" >닫기</button>
-						</div>						
 						
 						<div class="element tile-2 home bg-change">
 						<h4 style="text-align: center;"></h4>
