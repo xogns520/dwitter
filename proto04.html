@@ -172,7 +172,7 @@
 		}
 		
 		function fnContentDetailPopup(idx){
-			$("div[id='contentDetailReply']").empty();
+			$("#contentDetail").empty();
 			$("#frmDetail #postid").val($("input[name='hBoardId']").eq(idx).val());
 			var sAction = "/readdetailpage";
 			var fnCallback = fnContentDetailPopupCallback;
@@ -185,7 +185,6 @@
 			
 		}
 		function fnContentDetailPopupCallback(data){
-			$("#contentDetail").empty();
 			for ( var x = 0 ; x < data.length ; x++ ){
 				
 				var btnVoteEnable = "";
@@ -199,7 +198,7 @@
 				var editBtn = '';
 				var replyBtn = '';
 				if ( $("#frmUserInfo #id").val() == data[x].account ){
-					editBtn = '	<button type="button" name="btnUpdate" style="width:20%; class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>';
+					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>';
 				}
 				if ( 0 == x ) {
 					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(' + x + ');" >댓글달기</button>';
