@@ -78,6 +78,11 @@
 	    width: calc(50% - 20px);
 	    padding: 30px 35px 20px 35px;
 	}
+	.tile-reply {
+		width: 380px;
+		padding: 30px 35px 20px 35px;
+		margin-left:calc( (100% - 380px) / 2 );
+	}
 	
 }
 
@@ -133,6 +138,11 @@ h4#headertitle {
 	.tile-5 {
 		height: 1190px;
 	}
+	.tile-reply {
+	    width: calc(100% - 20px);
+	    text-overflow: ellipsis;
+	}	
+	
 	/*
 	.element, .image-overlay {
 		width: 300px !important;

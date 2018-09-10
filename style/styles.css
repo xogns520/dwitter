@@ -878,6 +878,11 @@ section.same-color-as-previous-section {
 	text-align: center;
 	padding: 30px 20px 20px 20px;
 }
+.tile-reply {
+	width: 380px;
+	padding: 30px 35px 20px 35px;
+	margin-left:calc( (100% - 380px) / 2 );
+}
 
 
 .element.bg-change {
