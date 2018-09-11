@@ -7,6 +7,7 @@
 
 
 	var gVoteIdx = null;
+	var pageCount = 20;
 	/**
 	 * 목록 조회
 	 * @returns
@@ -50,7 +51,7 @@
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
+						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\'' + data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
 						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(0, ' + x + ');" ><i class="fa fa-edit"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(0,' + x + ');" >댓글달기</button>'
@@ -223,7 +224,7 @@
 		if ( "success" == data ){
 			//alert("글쓰기 성공");
 			$("#contentEditTextarea").val("");
-			var idx = $("input[name='hBoardId']").index($("input[name='hBoardId'][value='"+ $("#frmEdit #postid").val() +"']"));
+			var idx = $("input[name='hBoardId']").index($("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(pageCount).val() +"']"));
 			fnContentDetailPopup(idx);
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
@@ -260,10 +261,14 @@
 	function gfContentVoteActionCallback1(data){
 		if ( "true" == data.result ){
 			var idx = gVoteIdx;
-			var vCnt = Number($("input[name='hVoteCnt']").eq(idx).val());
-			vCnt++;
-			$("input[name='hVoteCnt']").eq(idx).val(vCnt);
-			$("i[name='viewVoteCount']").eq(idx).text(" " + vCnt );
+			var valCnt = $("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(idx).val()+"']").length;
+			for ( var cnt = 0 ; cnt < valCnt ; cnt++ ){
+				var tmpIdx = $("input[name='hBoardId']").index( $("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(idx).val()+"']").eq(cnt) );
+				var vCnt = Number($("input[name='hVoteCnt']").eq(tmpIdx).val());
+				vCnt++;
+				$("input[name='hVoteCnt']").eq(tmpIdx).val(vCnt);
+				$("i[name='viewVoteCount']").eq(tmpIdx).text(" " + vCnt );
+			}
 			
 			var sAction = "/vote";
 			var fnCallback = gfContentVoteActionCallback2;
