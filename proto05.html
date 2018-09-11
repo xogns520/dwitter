@@ -138,10 +138,23 @@
 		/*
 			댓글 단다
 		*/
-		function fnInsertReplyPopup(idx){
+		function fnInsertReplyPopup(type, idx){
+			
 			$("#frmReply #parentid").val($("input[name='hBoardId']").eq(idx).val());
 			$("#frmReply #account").val($("input[name='hAccount']").eq(idx).val());
-			$("#btnReplyPopup").click();
+			$("#contentReplyTextarea").val("");
+
+			//취소버튼 액션
+			//0:일반댓글, 1:상세댓글
+			if ( 0 == type ){
+				$("#popupReply").modal("show");
+				$("#btnReplyInsertCancel").on("click",fnReplyCancel);
+			}else if ( 1 == type ){
+				$("#popupReply").modal("show");
+				$("#popupContentDetail").modal("hide");
+				$("#btnReplyInsertCancel").on("click",fnDetailReplyCancel);
+			}
+			
 		}
 		
 		function fnInsertReplyAction(){
@@ -169,6 +182,17 @@
 			}else{
 				alert("댓글작성 실패");
 			}
+		}
+	
+		/*
+			댓글 닫는다
+		*/
+		function fnReplyCancel(){
+			$("#popupReply").modal("hide");
+		}
+		function fnDetailReplyCancel(){
+			$("#popupReply").modal("hide");
+			$("#popupContentDetail").modal("show");
 		}
 		
 		function fnContentDetailPopup(idx){
@@ -204,7 +228,7 @@
 					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>';
 				}
 				if ( 0 == x ) {
-					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(' + x + ');" >댓글달기</button>';
+					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(1,' + x + ');" >댓글달기</button>';
 				}
 		
 					
@@ -251,8 +275,8 @@
 			$("#pageButton").show();
 			$("#conBtnGorup2").hide();
 			$("#contentDetail").hide();
-
 		}
+		
 		
 		
 		
@@ -372,7 +396,6 @@
 						<button type="button" class="button" id="btnContentWrite" data-toggle="modal" data-target="#myModal"></button>
 						<button type="button" class="button" id="btnContentEidt" data-toggle="modal" data-target="#contentEdit"></button>
 						<button type="button" class="button" id="btnFollowPopup" data-toggle="modal" data-target="#followPopup"></button>
-						<button type="button" class="button" id="btnReplyPopup" data-toggle="modal" data-target="#popupReply"></button>
 						<button type="button" class="button" id="btnContentDetailPopup" data-toggle="modal" data-target="#popupContentDetail"></button>
 					</div>
 				</div>
@@ -480,7 +503,7 @@
 					<div id="imgList3" style="padding-top: 10px;"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" id="btnReplyInsertCancel" class="btn btn-default" >취소</button>
 					<button type="button" class="btn btn-primary" onClick="javascript:fnInsertReplyAction();" data-dismiss="modal">완료</button>
 				</div>
 			</div>
