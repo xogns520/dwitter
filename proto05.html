@@ -46,7 +46,7 @@
 				$("#imgList1").empty();
 				$("#imgList2").empty();
 				$("#imgList3").empty();
-				$("#btnContentWrite").click();
+				$("#myModal").modal("show");
 			}else{
 				alert("로그인 후 사용하세요.");
 			}
@@ -193,7 +193,6 @@
 		}
 		function fnDetailReplyCancel(){
 			$("#popupReply").modal("hide");
-			//$("#btnContentDetailPopup").click();
 			$("#popupContentDetail").modal("show");
 		}
 		
@@ -205,7 +204,7 @@
 			var sAction = "/readdetailpage";
 			var fnCallback = fnContentDetailPopupCallback;
 			gfAjaxCallWithForm(sAction,$('#frmDetail'),fnCallback,"POST");
-			$("#btnContentDetailPopup").click();
+			$("#popupContentDetail").modal("show");
 			//$("#conBtnGorup1").hide();
 			//$("#contentList").hide();
 			//$("#pageButton").hide();
