@@ -44,9 +44,14 @@
 		});
 
 		function fnRegisterAction(){
-			var usrId = $("#userId").val();
+			var usrId = $("#userId").val().trim();
 			var usrPass = $("#userPassword").val();
 			var vrfPass = $("#verifyPassword").val();
+			
+			if ( "" == usrId ){
+				alert("ID 가 공란입니다.");
+				return ;
+			}
 			
 			if ( usrPass != vrfPass ){
 				alert("비밀번호/비밀번호 확인이 다릅니다.");
