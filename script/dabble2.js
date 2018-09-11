@@ -254,7 +254,12 @@
 		$("#frmVote #id").val(id);
 		$("#frmVote #vote").val(1);
 		var idx = $("input[name='hBoardId']").index($("input[name='hBoardId'][value='"+ id+"']"));
-		$("button[name='btnVote']").eq(idx).attr("disabled","");
+		
+		var valCnt = $("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(idx).val()+"']").length;
+		for ( var cnt = 0 ; cnt < valCnt ; cnt++ ){
+			var tmpIdx = $("input[name='hBoardId']").index( $("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(idx).val()+"']").eq(cnt) );
+			$("button[name='btnVote']").eq(tmpIdx).attr("disabled","");
+		}		
 		gVoteIdx = idx ;
 		gfIsLoginAction(gfContentVoteActionCallback1);
 	}
