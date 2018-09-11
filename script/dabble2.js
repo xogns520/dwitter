@@ -165,10 +165,10 @@
 		//취소버튼 액션
 		//0:일반댓글, 1:상세댓글
 		if ( 0 == type ){
-			$("#btnContentEidt").modal("show");
+			$("#contentEdit").modal("show");
 			$("#btnUpdateCancel").on("click",fnUpdateCancel);
 		}else if ( 1 == type ){
-			$("#popupReply").modal("show");
+			$("#contentEdit").modal("show");
 			$("#popupContentDetail").modal("hide");
 			$("#btnUpdateCancel").on("click",fnDetailUpdateCancel);
 		}
@@ -211,8 +211,8 @@
 		$("#popupReply").modal("hide");
 	}
 	function fnDetailUpdateCancel(){
-		$("#popupReply").modal("hide");
-		$("#btnContentDetailPopup").click();
+		$("#contentEdit").modal("hide");
+		$("#popupContentDetail").click();
 	}
 		
 	
