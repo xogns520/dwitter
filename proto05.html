@@ -152,6 +152,7 @@
 			}else if ( 1 == type ){
 				$("#popupReply").modal("show");
 				$("#popupContentDetail").modal("hide");
+				
 				$("#btnReplyInsertCancel").on("click",fnDetailReplyCancel);
 			}
 			
@@ -192,7 +193,7 @@
 		}
 		function fnDetailReplyCancel(){
 			$("#popupReply").modal("hide");
-			$("#popupContentDetail").modal("show");
+			$("#btnContentDetailPopup").click();
 		}
 		
 		function fnContentDetailPopup(idx){
@@ -212,6 +213,7 @@
 			
 		}
 		function fnContentDetailPopupCallback(data){
+			var arrCnt = $("input[name='hBoardId']").length;
 			for ( var x = 0 ; x < data.length ; x++ ){
 				
 				var btnVoteEnable = "";
@@ -219,16 +221,19 @@
 					btnVoteEnable = "disabled";
 				}
 				
+				
+				
+				
 				var strProfile = (data[x].profile == null) ? "" : data[x].profile ;
 				var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
 				
 				var editBtn = '';
 				var replyBtn = '';
 				if ( $("#frmUserInfo #id").val() == data[x].account ){
-					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>';
+					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + (x+arrCnt) + ');" ><i class="fa fa-edit"></i></button>';
 				}
 				if ( 0 == x ) {
-					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(1,' + x + ');" >댓글달기</button>';
+					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(1,' + (x+arrCnt) + ');" >댓글달기</button>';
 				}
 		
 					
@@ -239,7 +244,7 @@
 							+ '				<h4 class="header icon-to-the-right">' + data[x].account + '</h4>'
 //							+ '				<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom" aria-describedby="tooltip113771">Bottom</button>'
 							+ '			</td>'
-							+ '			<td  style="text-align:right; margin: 0px;" onClick="javascript:gfFollowPopup(' + x + ');">'
+							+ '			<td  style="text-align:right; margin: 0px;" onClick="javascript:gfFollowPopup(' + (x+arrCnt) + ');">'
 							+ '				<img name="userImage" style="padding: 0px 0px 0px 0px; display: inline; max-height: 40px; max-width: 40px;" src="' + profilePath + '">'
 							+ '			</td>'
 							+ '		</tr>'
