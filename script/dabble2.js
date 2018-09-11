@@ -212,9 +212,8 @@
 	}
 	function fnDetailUpdateCancel(){
 		$("#contentEdit").modal("hide");
-		$("#popupContentDetail").click();
+		$("#popupContentDetail").modal("show");
 	}
-		
 	
 	/**
 	 * 보팅
@@ -280,7 +279,7 @@
 		$("span[id='myModalLabelFollowId']").text($("input[name='hAccount']").eq(idx).val());
 		$("#userImage").attr("src", $("img[name='userImage']").eq(idx).attr("src") );
 		//$("#userImage").attr("src", "/images/user/0.png");
-		$("#btnFollowPopup").click();
+		$("#followPopup").modal("show");
 	}
 	
 	/**
