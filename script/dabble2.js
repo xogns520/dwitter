@@ -223,7 +223,8 @@
 		if ( "success" == data ){
 			//alert("글쓰기 성공");
 			$("#contentEditTextarea").val("");
-			fnContentDetailPopup(20);
+			var idx = $("input[name='hBoardId']").index($("input[name='hBoardId'][value='"+ $("#frmEdit #postid").val() +"']"));
+			fnContentDetailPopup(idx);
 			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
 		}else{
 			alert("글수정 실패");
