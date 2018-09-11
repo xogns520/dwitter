@@ -51,7 +51,7 @@
 						+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
-						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
+						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(0, ' + x + ');" ><i class="fa fa-edit"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(0,' + x + ');" >댓글달기</button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
@@ -145,7 +145,7 @@
 	 * @param idx
 	 * @returns
 	 */
-	function gfContentUpdate(idx){
+	function gfContentUpdate(type, idx){
 		$("#imgList1").empty();
 		$("#imgList2").empty();
 		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
@@ -161,7 +161,17 @@
 		}
 		
 		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).text());
-		$("#btnContentEidt").click();
+		
+		//취소버튼 액션
+		//0:일반댓글, 1:상세댓글
+		if ( 0 == type ){
+			$("#btnContentEidt").modal("show");
+			$("#btnUpdateCancel").on("click",fnUpdateCancel);
+		}else if ( 1 == type ){
+			$("#popupReply").modal("show");
+			$("#popupContentDetail").modal("hide");
+			$("#btnUpdateCancel").on("click",fnDetailUpdateCancel);
+		}
 	}
 
 	/**
@@ -193,6 +203,18 @@
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
+
+	/*
+	 * 글 수정 닫기
+	 */
+	function fnUpdateCancel(){
+		$("#popupReply").modal("hide");
+	}
+	function fnDetailUpdateCancel(){
+		$("#popupReply").modal("hide");
+		$("#btnContentDetailPopup").click();
+	}
+		
 	
 	/**
 	 * 보팅
