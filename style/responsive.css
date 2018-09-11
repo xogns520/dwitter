@@ -140,6 +140,7 @@ h4#headertitle {
 	}
 	.tile-reply {
 	    width: calc(100% - 20px);
+	    padding: 30px 35px 20px 35px;
 	    text-overflow: ellipsis;
 	}	
 	
