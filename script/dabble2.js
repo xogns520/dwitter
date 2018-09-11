@@ -166,10 +166,12 @@
 		//0:일반댓글, 1:상세댓글
 		if ( 0 == type ){
 			$("#contentEdit").modal("show");
-			$("#btnUpdateCancel").on("click",fnUpdateCancel);
+			$("#btnUpdateCancel").on("click", fnUpdateCancel);
+			$("#btnUpdateAction").on("click", gfContentEditAction);
 		}else if ( 1 == type ){
 			$("#contentEdit").modal("show");
 			$("#popupContentDetail").modal("hide");
+			$("#btnUpdateAction").on("click", gfContentDetailEditAction);
 			$("#btnUpdateCancel").on("click",fnDetailUpdateCancel);
 		}
 	}
@@ -203,6 +205,32 @@
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
+	function gfContentDetailEditAction(){
+		var strText = $("#contentEditTextarea").val();
+		var strImg = "";
+		var len = $("input[name='imgUrl']").length;
+		
+		for ( var x = 0 ; x < len ; x++ ){
+			strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+		}
+		$("#frmEdit #data").val( strText + strImg );
+		
+		var sAction = "/edit";
+		var fnCallback = gfContentDetailEditActionCallback;
+		gfAjaxCallWithForm(sAction,$('#frmEdit'),fnCallback,"POST");
+	}
+	function gfContentDetailEditActionCallback(data){
+		if ( "success" == data ){
+			//alert("글쓰기 성공");
+			$("#contentEditTextarea").val("");
+			fnContentDetailPopup(20);
+			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
+		}else{
+			alert("글수정 실패");
+			//gfMsgBox(data.resultMsg, "핡~!");
+		}
+	}
+	
 
 	/*
 	 * 글 수정 닫기
