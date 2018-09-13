@@ -31,9 +31,7 @@
 	<script>
 		$(function(){
 			gfGetUserInfo();
-			//fnGetUserCount();
 			gfContentList();
-			//gfTooltip();
 			//시스템 기본 색상 
 			//00548e
 		});
@@ -50,29 +48,6 @@
 			}else{
 				alert("로그인 후 사용하세요.");
 			}
-		}
-		
-		function fnGetUserCount(){
-			var sAction = "/readtotaluser";
-			var fnCallback = fnGetUserCountCallback;
-			var param = "";
-			var sMethod = "POST";	// GET/POST
-			gfAjaxCallWithParam(sAction, param, fnCallback, sMethod);
-		}		
-		
-		function fnGetUserCountCallback(data){
-			var count = Number(data.count)+5000;
-			$("#userCount").text(count);
-			/*
-			var userCnt = $("#userCount");
-			$({ Counter: 0 }).animate({ Counter: count  }, {
-                duration: 3000,
-                easing: 'swing',
-                step: function (curValue) {
-                	userCnt.text(Math.ceil(curValue));
-                }
-            });
-			*/
 		}
 		
 		function fnContentImagePopup(idx){
@@ -199,8 +174,13 @@
 		function fnContentDetailPopup(idx){
 			$("#popupContentData").empty();
 			
+			var postId = $("input[name='hBoardParentId']").eq(idx).val()
+			if ( "" == postId ){
+				postId = $("input[name='hBoardId']").eq(idx).val();
+			}
+			
 			//$("#contentDetail").empty();
-			$("#frmDetail #postid").val($("input[name='hBoardId']").eq(idx).val());
+			$("#frmDetail #postid").val(postId);
 			var sAction = "/readdetailpage";
 			var fnCallback = fnContentDetailPopupCallback;
 			gfAjaxCallWithForm(sAction,$('#frmDetail'),fnCallback,"POST");
@@ -248,7 +228,7 @@
 							+ '			</td>'
 							+ '		</tr>'
 							+ '	</table>'
-							+ '	<div name="viewDefault" class="preConDetail">' + data[x].data + '</div>'
+							+ '	<div name="viewDefault" onClick="javascript:fnCloseDetail();" class="preConDetail">' + data[x].data + '</div>'
 							+ '	<div style="margin: 5px;"></div>'
 							+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 							+ '	<div style="margin: 5px;"></div>'
@@ -269,7 +249,6 @@
 				}
 				*/
 			}				
-
 		}
 		
 		function fnCloseDetail(){
@@ -389,11 +368,11 @@
 				<h4 id="headertitle-inner"></h4>
 				<div id="container">
 					<div id="conBtnGorup1">
-						<button type="button" class="button" id="btnContentWriteView" onClick="javascript:fnLoginChk();">글쓰기</button>
+						<button type="button" class="button" onClick="javascript:fnLoginChk();">글쓰기</button>
 					</div>
 					
 					<div id="conBtnGorup2" style="display: none;">
-						<button type="button" class="button" id="btnContentWriteView" onClick="javascript:fnCloseDetail();">닫기</button>
+						<button type="button" class="button" onClick="javascript:fnCloseDetail();">닫기</button>
 					</div>
 					
 					<div style="display: none;">
