@@ -33,8 +33,9 @@
 			
 			var strProfile = (data[x].profile == null) ? "" : data[x].profile ;
 			var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
-	
-				
+			
+			var parentId = data[x].parentid == null ? "" :data[x].parentid;
+			
 			var strHtml	= '<div class="element tile-1 home calc bg-change">'
 						+ '	<table style="width: 100%;">'
 						+ '		<tr>'
@@ -56,7 +57,7 @@
 						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(0,' + x + ');" >댓글</button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
-						+ '	<input type="hidden" name="hBoardParentId" value="' + data[x].parentid + '" >'
+						+ '	<input type="hidden" name="hBoardParentId" value="' + parentId + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 						+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
 						+ '</div>';
