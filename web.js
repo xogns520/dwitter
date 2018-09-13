@@ -394,9 +394,15 @@ function readData(account, page, cb){
 				}
 				
 
-				const votingenable = "true";				
+				const votingenable = "true";
+				//check parent id
+				var parentId = null;
+				if(result[i].hasOwnProperty("parentid"))
+					parentId = result[i].parentid
+					
+				
 				body.push({id: result[i]._id, account: result[i].account, data : result[i].data, date : result[i].date,
-					  voting : result[i].voting,  profile : picUrl, votingenable : votingenable });
+					  voting : result[i].voting,  profile : picUrl, votingenable : votingenable, parentid : parentId });
 				
 			}
 			//generating votingenable flag
