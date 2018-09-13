@@ -56,17 +56,12 @@
 						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(0,' + x + ');" >댓글</button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
+						+ '	<input type="hidden" name="hBoardParentId" value="' + data[x].parentid + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 						+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
 						+ '</div>';
 			
 			$("div[id='contentList']").append(strHtml);
-			/*
-			var obj = $("div[name='viewDefault']").eq(x);
-			if ( gfTextOverCheck(obj) ){
-				$("button[name='btnDetail']").eq(x).show();
-			}
-			*/
 		}
 		
 		var len = $("input[name='hAccount']").length;
@@ -164,11 +159,11 @@
 		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).text());
 		
 		//취소버튼 액션
-		//0:일반댓글, 1:상세댓글
+		//0:목록에서수정, 1:상세댓글
 		if ( 0 == type ){
-			$("#contentEdit").modal("show");
 			$("#btnUpdateCancel").on("click", fnUpdateCancel);
 			$("#btnUpdateAction").on("click", gfContentEditAction);
+			$("#contentEdit").modal("show");
 		}else if ( 1 == type ){
 			$("#contentEdit").modal("show");
 			$("#popupContentDetail").modal("hide");
@@ -239,6 +234,8 @@
 	 */
 	function fnUpdateCancel(){
 		$("#popupReply").modal("hide");
+		$("#contentEdit").modal("hide");
+		
 	}
 	function fnDetailUpdateCancel(){
 		$("#contentEdit").modal("hide");
