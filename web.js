@@ -353,6 +353,7 @@ function setPassword(id,oldPass,newPass,cb){
 
 function readData(account, page, cb){
 	console.log("in reaData", account, page);
+	const pageSize = 10;
 	MongoClient.connect(url, function(err, db) {
    		var dbo = db.db("heroku_dg3d93pq");
 		var tod = Date.now();
@@ -369,8 +370,8 @@ function readData(account, page, cb){
 			   },
 
 			  {$sort: {"date" : -1}},
-			{$skip : (20 * page) - 20},
-			   {$limit : 20}
+			{$skip : (pageSize * page) - pageSize},
+			   {$limit : pageSize}
 			];
 		
 		dbo.collection("board").aggregate(agr).toArray(function(err, result){
