@@ -123,11 +123,12 @@
 			//0:일반댓글, 1:상세댓글
 			if ( 0 == type ){
 				$("#popupReply").modal("show");
-				$("#btnReplyInsertCancel").on("click",fnReplyCancel);
+				$("#btnReplyInsertCancel").on("click", fnReplyCancel);
+				$("#btnReplyInsertCancel").on("click", fnReplyCancel);
 			}else if ( 1 == type ){
 				$("#popupReply").modal("show");
 				$("#popupContentDetail").modal("hide");
-				
+				$("#btnReplyInsertCancel").on("click",fnDetailReplyCancel);
 				$("#btnReplyInsertCancel").on("click",fnDetailReplyCancel);
 			}
 			
@@ -164,9 +165,11 @@
 			댓글 닫는다
 		*/
 		function fnReplyCancel(){
+			console.log("fnReplyCancel");
 			$("#popupReply").modal("hide");
 		}
 		function fnDetailReplyCancel(){
+			console.log("fnDetailReplyCancel");
 			$("#popupReply").modal("hide");
 			$("#popupContentDetail").modal("show");
 		}
