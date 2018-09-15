@@ -123,12 +123,12 @@
 			//0:일반댓글, 1:상세댓글
 			if ( 0 == type ){
 				$("#popupReply").modal("show");
-				console.log("fnInsertReplyPopup0");
+				console.log("일반 댓글달기");
 				$("#btnReplyInsertCancel").on("click", fnReplyCancel);
 			}else if ( 1 == type ){
 				$("#popupReply").modal("show");
 				$("#popupContentDetail").modal("hide");
-				console.log("fnInsertReplyPopup1");
+				console.log("상세 댓글달기");
 				$("#btnReplyInsertCancel").on("click",fnDetailReplyCancel);
 			}
 			
@@ -165,11 +165,11 @@
 			댓글 닫는다
 		*/
 		function fnReplyCancel(){
-			console.log("fnReplyCancel");
+			console.log("일반 댓글달기 닫기");
 			$("#popupReply").modal("hide");
 		}
 		function fnDetailReplyCancel(){
-			console.log("fnDetailReplyCancel");
+			console.log("상세 댓글달기 닫기");
 			$("#popupReply").modal("hide");
 			$("#popupContentDetail").modal("show");
 		}
