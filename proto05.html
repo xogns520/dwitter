@@ -121,6 +121,7 @@
 
 			//취소버튼 액션
 			//0:일반댓글, 1:상세댓글
+			$("#btnReplyInsertCancel").off("click");
 			if ( 0 == type ){
 				$("#popupReply").modal("show");
 				console.log("일반 댓글달기");
