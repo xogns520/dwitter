@@ -215,7 +215,7 @@
 				if ( $("#frmUserInfo #id").val() == data[x].account ){
 					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentUpdate(1, ' + (x+arrCnt) + ');" ><i class="fa fa-edit"></i></button>';
 				}
-				if ( 0 == x ) {
+				if ( 0 == x && "" != $("#frmUserInfo #id").val() ) {
 					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(1,' + (x+arrCnt) + ');" ><i class="fa fa-commenting-o"></i></button>';
 				}
 				
