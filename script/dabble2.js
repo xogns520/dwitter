@@ -38,7 +38,7 @@
 			
 			var replyBtn = '';
 			if ( "" == parentId && "" != $("#frmUserInfo #id").val() ){
-				replyBtn = '	<button type="button" name="btnDetail" style="width:25%; display: none;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(0,' + x + ');" ><i class="fa fa-commenting-o"></i></button>'
+				replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(0,' + x + ');" ><i class="fa fa-commenting-o"></i></button>'
 			}
 			
 			
