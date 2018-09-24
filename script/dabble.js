@@ -7,6 +7,7 @@
 
 
 	var gVoteIdx = null;
+	var pageCount = 20;
 	/**
 	 * 목록 조회
 	 * @returns
@@ -32,8 +33,15 @@
 			
 			var strProfile = (data[x].profile == null) ? "" : data[x].profile ;
 			var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
-	
-				
+			
+			var parentId = data[x].parentid == null ? "" :data[x].parentid;
+			
+			var replyBtn = '';
+			if ( "" == parentId && "" != $("#frmUserInfo #id").val() ){
+				replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(0,' + x + ');" ><i class="fa fa-commenting-o"></i></button>'
+			}
+			
+			
 			var strHtml	= '<div class="element tile-1 home calc bg-change">'
 						+ '	<table style="width: 100%;">'
 						+ '		<tr>'
@@ -46,25 +54,21 @@
 						+ '			</td>'
 						+ '		</tr>'
 						+ '	</table>'
-						+ '	<div name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
+						+ '	<div onClick="javascript:fnContentDetailPopup(' + x + ')" name="viewDefault" class="preConSimple">' + data[x].data + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
-						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
-						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
+						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\'' + data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
+						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(0, ' + x + ');" ><i class="fa fa-edit"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
+						+ replyBtn
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
+						+ '	<input type="hidden" name="hBoardParentId" value="' + parentId + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 						+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
 						+ '</div>';
 			
 			$("div[id='contentList']").append(strHtml);
-			/*
-			var obj = $("div[name='viewDefault']").eq(x);
-			if ( gfTextOverCheck(obj) ){
-				$("button[name='btnDetail']").eq(x).show();
-			}
-			*/
 		}
 		
 		var len = $("input[name='hAccount']").length;
@@ -144,7 +148,7 @@
 	 * @param idx
 	 * @returns
 	 */
-	function gfContentUpdate(idx){
+	function gfContentUpdate(type, idx){
 		$("#imgList1").empty();
 		$("#imgList2").empty();
 		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
@@ -160,7 +164,19 @@
 		}
 		
 		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).text());
-		$("#btnContentEidt").click();
+		
+		//취소버튼 액션
+		//0:목록에서수정, 1:상세댓글
+		if ( 0 == type ){
+			$("#btnUpdateCancel").on("click", fnUpdateCancel);
+			$("#btnUpdateAction").on("click", gfContentEditAction);
+			$("#contentEdit").modal("show");
+		}else if ( 1 == type ){
+			$("#contentEdit").modal("show");
+			$("#popupContentDetail").modal("hide");
+			$("#btnUpdateAction").on("click", gfContentDetailEditAction);
+			$("#btnUpdateCancel").on("click",fnDetailUpdateCancel);
+		}
 	}
 
 	/**
@@ -192,6 +208,45 @@
 			//gfMsgBox(data.resultMsg, "핡~!");
 		}
 	}
+	function gfContentDetailEditAction(){
+		var strText = $("#contentEditTextarea").val();
+		var strImg = "";
+		var len = $("input[name='imgUrl']").length;
+		
+		for ( var x = 0 ; x < len ; x++ ){
+			strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+		}
+		$("#frmEdit #data").val( strText + strImg );
+		
+		var sAction = "/edit";
+		var fnCallback = gfContentDetailEditActionCallback;
+		gfAjaxCallWithForm(sAction,$('#frmEdit'),fnCallback,"POST");
+	}
+	function gfContentDetailEditActionCallback(data){
+		if ( "success" == data ){
+			//alert("글쓰기 성공");
+			$("#contentEditTextarea").val("");
+			var idx = $("input[name='hBoardId']").index($("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(pageCount).val() +"']"));
+			fnContentDetailPopup(idx);
+			//gfMsgBox(data.resultMsg, "핡~!", false, fnInsertAccountSuccessCallback);
+		}else{
+			alert("글수정 실패");
+			//gfMsgBox(data.resultMsg, "핡~!");
+		}
+	}
+	
+
+	/*
+	 * 글 수정 닫기
+	 */
+	function fnUpdateCancel(){
+		$("#popupReply").modal("hide");
+		$("#contentEdit").modal("hide");
+	}
+	function fnDetailUpdateCancel(){
+		$("#contentEdit").modal("hide");
+		$("#popupContentDetail").modal("show");
+	}
 	
 	/**
 	 * 보팅
@@ -202,17 +257,26 @@
 		$("#frmVote #id").val(id);
 		$("#frmVote #vote").val(1);
 		var idx = $("input[name='hBoardId']").index($("input[name='hBoardId'][value='"+ id+"']"));
-		$("button[name='btnVote']").eq(idx).attr("disabled","");
+		
+		var valCnt = $("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(idx).val()+"']").length;
+		for ( var cnt = 0 ; cnt < valCnt ; cnt++ ){
+			var tmpIdx = $("input[name='hBoardId']").index( $("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(idx).val()+"']").eq(cnt) );
+			$("button[name='btnVote']").eq(tmpIdx).attr("disabled","");
+		}		
 		gVoteIdx = idx ;
 		gfIsLoginAction(gfContentVoteActionCallback1);
 	}
 	function gfContentVoteActionCallback1(data){
 		if ( "true" == data.result ){
 			var idx = gVoteIdx;
-			var vCnt = Number($("input[name='hVoteCnt']").eq(idx).val());
-			vCnt++;
-			$("input[name='hVoteCnt']").eq(idx).val(vCnt);
-			$("i[name='viewVoteCount']").eq(idx).text(" " + vCnt );
+			var valCnt = $("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(idx).val()+"']").length;
+			for ( var cnt = 0 ; cnt < valCnt ; cnt++ ){
+				var tmpIdx = $("input[name='hBoardId']").index( $("input[name='hBoardId'][value='"+ $("input[name='hBoardId']").eq(idx).val()+"']").eq(cnt) );
+				var vCnt = Number($("input[name='hVoteCnt']").eq(tmpIdx).val());
+				vCnt++;
+				$("input[name='hVoteCnt']").eq(tmpIdx).val(vCnt);
+				$("i[name='viewVoteCount']").eq(tmpIdx).text(" " + vCnt );
+			}
 			
 			var sAction = "/vote";
 			var fnCallback = gfContentVoteActionCallback2;
@@ -257,7 +321,7 @@
 		$("span[id='myModalLabelFollowId']").text($("input[name='hAccount']").eq(idx).val());
 		$("#userImage").attr("src", $("img[name='userImage']").eq(idx).attr("src") );
 		//$("#userImage").attr("src", "/images/user/0.png");
-		$("#btnFollowPopup").click();
+		$("#followPopup").modal("show");
 	}
 	
 	/**
