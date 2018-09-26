@@ -776,24 +776,24 @@ function readData(account, page, cb){
 	  console.log("readdetailpage  event", postid, user, page);
 	  //query Mongo DB
 	  if(page == 0)
-	  	req.session.page = page + 1;
+	  	req.session.replypage = page + 1;
 	  else if(page == -1)
-		  req.session.page++;
+		  req.session.replypage++;
 	  else if(page == -2){
-		  req.session.page--;
-		  if(req.session.page == 0)
-			  req.session.page = 1;
+		  req.session.replypage--;
+		  if(req.session.replypage == 0)
+			  req.session.replypage = 1;
 	  }
 	  else
-		  req.session.page = page;
+		  req.session.replypage = page;
 	  
-	  if(req.session.page < 0){
-		  console.log("page number correction", req.session.page);
-		  req.session.page = 1;
+	  if(req.session.replypage < 0){
+		  console.log("page number correction", req.session.replypage);
+		  req.session.replypage = 1;
 	  }
 	  
-	  console.log("calling readdetailpage ", postid, req.session.account, req.session.page);
-	  reply.readDetailPage (postid, req.session.account, req.session.page,(result) => {res.send(result)});
+	  console.log("calling readdetailpage ", postid, req.session.account, req.session.replypage);
+	  reply.readDetailPage (postid, req.session.account, req.session.replypage,(result) => {res.send(result)});
   });
 
   app.post("/edit", function(req, res) { 
