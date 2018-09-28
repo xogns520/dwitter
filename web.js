@@ -772,6 +772,7 @@ function readData(account, page, cb){
 	  
 	  //check postid field
 	  if(!req.body.hasOwnProperty("postid")){
+		  console.log("readdetailpage postid did not exist");
 		  res.send("fail");
 		  return -1;
 	  }
