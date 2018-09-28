@@ -771,6 +771,11 @@ function readData(account, page, cb){
 	/* some server side logic */
 	  
 	  console.log("readdetailpage postid type", typeof req.body.postid);
+	  if((typeof req.body.postid) !== "string"){
+		  console.log("readdetailpage postid is not string error");
+		  res.send("fail");
+		  return -1;
+	  }
 	  
 
 	  var user = req.body.user;
