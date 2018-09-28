@@ -770,6 +770,8 @@ function readData(account, page, cb){
   app.post("/readdetailpage", function(req, res) { 
 	/* some server side logic */
 	  
+	  console.log("readdetailpage postid type", typeof req.body.postid);
+	  
 
 	  var user = req.body.user;
 	  var page = req.body.page;
