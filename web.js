@@ -770,6 +770,11 @@ function readData(account, page, cb){
   app.post("/readdetailpage", function(req, res) { 
 	/* some server side logic */
 	  
+	  //check postid field
+	  if(!req.body.hasOwnProperty("postid")){
+		  res.send("fail");
+		  return -1;
+	  }
 	  var user = req.body.user;
 	  var page = req.body.page;
 	  var postid = req.body.postid;
