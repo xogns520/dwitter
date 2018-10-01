@@ -50,7 +50,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //  apply to all requests
-app.use(limiter);
+app.use("/transferbalance", limiter);
 
 //mongo DB
 var mongo = require('mongodb');
