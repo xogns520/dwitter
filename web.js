@@ -41,8 +41,8 @@ store.on('error', function(error) {
 
 app.enable("trust proxy");
 const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000, // 15 minutes
-	max: 15 * 60 // limit each IP to 100 requests per windowMs
+	windowMs: 500, // 15 minutes
+	max: 1 // limit each IP to 100 requests per windowMs
 });
 
 
