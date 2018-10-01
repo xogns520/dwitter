@@ -12,6 +12,9 @@ const reply = require("./reply");
 
 const nabul = require("./nabul");
 
+const rateLimit = require("express-rate-limit");
+
+
 
 var express = require('express');
 var bodyParser     =        require("body-parser");
@@ -36,9 +39,18 @@ store.on('error', function(error) {
 });
 
 
+app.enable("trust proxy");
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 15 * 60 // limit each IP to 100 requests per windowMs
+});
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+//  apply to all requests
+app.use(limiter);
 
 //mongo DB
 var mongo = require('mongodb');
