@@ -662,11 +662,12 @@ function readData(account, page, cb){
  });
 
  app.post("/transferbalance", function(req, res) { 
-	 console.log("transferbalance", req.session.transferProgress, req.session.account);
+	 
 	 //duplication check
 	 if(req.session.transferProgress != true){
-		console.log("enter transfer");
+		//console.log("enter transfer");
 		req.session.transferProgress = true;
+		console.log("transferbalance", req.session.transferProgress, req.session.account);
 	 	contract.sendDab(req.session.account,
 				    	(result) => {
 			req.session.transferProgress = false;
