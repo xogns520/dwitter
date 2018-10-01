@@ -70,15 +70,41 @@ exports.sendMessage = function(account, msg){
 }
 
 exports.voteMessage = function(from,to,msgid){  
-  const adMsg = "Please visit https://dabble.cafe ";
+  const adMsg = "Please visit https://dabble.cafe";
 	var resultMsg;
   //var maxLength = 255 - adMsg.length - 20 - account.length;
 	//const msgLength = msg.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g,"$&$1$2").length;
   //maxLength = maxLength < msg.length ? maxLength : msg.length;
 	resultMsg = adMsg;
-		resultMsg += from + " vote to ";
-	resultMsg += to + " " + msgid;	
-  transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));  
+	resultMsg += " " + from + " Voted ";
+	resultMsg += to + " for " + msgid;
+	
+		
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dg3d93pq");
+		var findquery = { account : to };
+		dbo.collection("user").findOne(findquery, function(err, res){
+			console.log("send message query result", res);
+			if (err) throw err;
+			if (typeof res.walletAccount == "undefined"){
+				transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));
+				db.close();	
+			}else{
+				if(res.walletAccount.length == 12){
+					transfer2("eoscafekorea", res.walletAccount, 
+						  0.0001, resultMsg.substring(0,80)).then((output)=>{
+						db.close();
+						}).catch((err)=>{
+						transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));
+						db.close();
+					});
+				}else{
+					transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));
+				}
+			}
+		});
+	});			
+
 }
 
 
