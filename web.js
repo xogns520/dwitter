@@ -361,12 +361,12 @@ function readData(account, page, cb){
    		//dbo.collection("board").find({}).sort({date: -1}).toArray(function(err, result){
 		
 		var agr = [	
-			{ 
+			
 
 			  {$sort: {"date" : -1}},
 			{$skip : (pageSize * page) - pageSize},
 			   {$limit : pageSize},
-			$lookup:
+			{$lookup:
 			    { from: 'user',
 			   localField: 'account',
 			   foreignField : 'account',
