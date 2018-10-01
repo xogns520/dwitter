@@ -86,7 +86,7 @@ exports.voteMessage = function(from,to,msgid){
 		dbo.collection("user").findOne(findquery, function(err, res){
 			console.log("send message query result", res);
 			if (err) throw err;
-			if (typeof res.walletAccount == "undefined"){
+			if (res == null || typeof res.walletAccount == "undefined"){
 				transfer("eoscafekorea","awesometeddy",0.0001, resultMsg.substring(0,80));
 				db.close();	
 			}else{
