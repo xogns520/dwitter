@@ -11,6 +11,7 @@
     "express-session" : "1.15.6",
     "connect-mongodb-session" : "2.0.3",
     "bcrypt" : "2.0.1",
-    "eosjs" : "16.0.0"
+    "eosjs" : "16.0.0",
+    "express-rate-limit" : "3.2.0"
   }
 }
