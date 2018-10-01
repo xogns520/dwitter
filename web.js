@@ -674,7 +674,7 @@ function readData(account, page, cb){
 	 }else{
 		 console.log("currenlty transfer working");
 		 res.send("fail");
-		 req.session.transferProgress = false;
+		 //req.session.transferProgress = false;
 	 }
  });
 
