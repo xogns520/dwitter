@@ -70,6 +70,7 @@ exports.sendMessage = function(account, msg){
 }
 
 exports.voteMessage = function(from,to,msgid){  
+	console.log("voteMessage", from, to, msgid);
   const adMsg = "Please visit https://dabble.cafe";
 	var resultMsg;
   //var maxLength = 255 - adMsg.length - 20 - account.length;
