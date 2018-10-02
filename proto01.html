@@ -73,7 +73,7 @@
 				$("#imgListContentDetailInsert").empty();
 				$("#frmReply #parentid").val($("input[name='hBoardId']").eq(idx).val());
 				$("#frmReply #account").val($("input[name='hAccount']").eq(idx).val());
-				$("#popupContentDetailInsert").modal("show");
+				$("#popupContentReplyInsert").modal("show");
 				
 			}else{
 				alert("로그인 후 사용하세요.");
@@ -507,6 +507,31 @@
 		<div id="popupContentData" ></div>
 	</div>	
 	
+	<div class="modal fade" id="popupContentReplyInsert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="margin-top: 100px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!--
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+		        	</button>
+		        	-->
+		        	<h4 class="modal-title" id="myModalLabel">당신의 의견을 알려주세요.(목록 댓글쓰기)</h4>
+				</div>
+				<div class="modal-body">
+					<textarea id="contentReplyTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
+				</div>
+				<div class="modal-body" style="padding-top: 0px; padding-bottom: 5px;">
+					<button type="button" class="btn btn-default" onClick="javascript:fnContentImagePopup(3)">이미지 업로드</button> 썸네일을 누르면 이미지가 삭제됩니다.
+					<div id="imgListContentDetailInsert" style="padding-top: 10px;"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" onClick="javascript:fnContentDetailInsertAction();" data-dismiss="modal">완료</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="modal fade" id="popupContentDetailInsert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="margin-top: 100px;">
 			<div class="modal-content">
@@ -516,7 +541,7 @@
 						<span aria-hidden="true">&times;</span>
 		        	</button>
 		        	-->
-		        	<h4 class="modal-title" id="myModalLabel">당신의 의견을 알려주세요.</h4>
+		        	<h4 class="modal-title" id="myModalLabel">당신의 의견을 알려주세요.(상세 댓글쓰기)</h4>
 				</div>
 				<div class="modal-body">
 					<textarea id="contentReplyTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
@@ -543,7 +568,7 @@
 						<span aria-hidden="true">&times;</span>
 		        	</button>
 		        	-->
-		        	<h4 class="modal-title" id="myModalLabel">당신의 의견을 알려주세요.</h4>
+		        	<h4 class="modal-title" id="myModalLabel">당신의 의견을 알려주세요.(댓글수정)</h4>
 				</div>
 				<div class="modal-body">
 					<textarea id="contentReplyTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
