@@ -42,7 +42,7 @@
 			var parentId = data[x].parentid == null ? "" :data[x].parentid;
 			
 			var replyBtn = '';
-			if ( "" != parentId ){
+			if ( "" == parentId ){
 				replyBtn= '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnContentDetailInsertPopup(' + x + ');" ><i class="fa fa-commenting-o"></i></button>';
 			}
 			
