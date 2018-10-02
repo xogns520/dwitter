@@ -194,7 +194,7 @@ function increaseVote(id, vote, account, callback){
 							var tod = Date.now();
 
    							var myobj = { boardId : id,  account : account , date : tod };
-   							dbo.collection("voting").insertOne(myobj, function(err, res){
+   							dbo.collection("voting").insertOne(myobj, function(err, insres){
     								if (err) throw err;
     								console.log("1 document inserted");
 								contract.voteMessage(account, res.account, id);
