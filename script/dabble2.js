@@ -1,8 +1,13 @@
 /**
  * @작성일   : 2018. 6. 30.
  * @작성자   : 김핡핡
- * @코멘트   : dabble common 
+ * @코멘트   : dabble common
+ * @변경일   : 2018. 10. 2. 
+ * @변경점   : 핡 각각 영향도가 있고 헨들링 헬이라 다 분리시켜놓고 확인 ㄱㄱ
+ *  
  */
+
+
 
 
 
@@ -38,7 +43,7 @@
 			
 			var replyBtn = '';
 			if ( "" == parentId && "" != $("#frmUserInfo #id").val() ){
-				replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnInsertReplyPopup(0,' + x + ');" ><i class="fa fa-commenting-o"></i></button>'
+				replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnContentDetailInsertPopup(' + x + ');" ><i class="fa fa-commenting-o"></i></button>'
 			}
 			
 			
@@ -59,7 +64,7 @@
 						+ '	<div class="hint" name="createTime">'+ timeConverter(data[x].date) + '</div>'
 						+ '	<div style="margin: 5px;"></div>'
 						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\'' + data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
-						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(0, ' + x + ');" ><i class="fa fa-edit"></i></button>'
+						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
 						+ replyBtn
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
@@ -148,9 +153,10 @@
 	 * @param idx
 	 * @returns
 	 */
-	function gfContentUpdate(type, idx){
-		$("#imgList1").empty();
-		$("#imgList2").empty();
+	function gfContentUpdate(idx){
+		$("#imgListContentInsert").empty();
+		$("#imgListContentUpdate").empty();
+		$("#imgListContentDetailInsert").empty();
 		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
 		
 		var tagImg =  $("div[name='viewDefault']").eq(idx).find("img");
@@ -160,7 +166,39 @@
 			var strRep = tagImg.eq(x).attr("src").replace("/image/upload/","/image/upload/c_limit,h_60,w_90/");
 			var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + strRep + '"/>'
 						+ '<input type="hidden" name="imgUrl" value="' + tagImg.eq(x).attr("src") + '" />';
-			$("#imgList2").append(strHtml);
+			$("#imgListContentUpdate").append(strHtml);
+		}
+		
+		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).text());
+		
+		//취소버튼 액션
+		//0:목록에서수정, 1:상세댓글
+		$("#btnUpdateCancel").on("click", fnUpdateCancel);
+		$("#btnUpdateAction").on("click", gfContentEditAction);
+		$("#contentEdit").modal("show");
+		
+		
+	}
+	
+	/**
+	 * 글수정 팝업
+	 * @param idx
+	 * @returns
+	 */
+	function gfContentDetailUpdate(idx){
+		$("#imgListContentInsert").empty();
+		$("#imgListContentUpdate").empty();
+		$("#imgListContentDetailInsert").empty();
+		$("#frmEdit #postid").val( $("input[name='hBoardId']").eq(idx).val() );
+		
+		var tagImg =  $("div[name='viewDefault']").eq(idx).find("img");
+		var len = tagImg.length;
+		
+		for ( var x = 0 ; x < len ; x++ ){
+			var strRep = tagImg.eq(x).attr("src").replace("/image/upload/","/image/upload/c_limit,h_60,w_90/");
+			var strHtml = '<img name="imgThumbNail" onClick="javascript:fnImageDelete(this);" style="width: auto; display: inline-block; padding: 2px;" src="' + strRep + '"/>'
+						+ '<input type="hidden" name="imgUrl" value="' + tagImg.eq(x).attr("src") + '" />';
+			$("#imgListContentUpdate").append(strHtml);
 		}
 		
 		$("#contentEditTextarea").val($("div[name='viewDefault']").eq(idx).text());
@@ -179,6 +217,7 @@
 		}
 	}
 
+	
 	/**
 	 * 글 수정
 	 * @returns
