@@ -30,16 +30,18 @@
 	<script src="./script/jquery.isotope.load.js" type="text/javascript"></script>
 	<script>
 		$(function(){
-			gfGetUserInfo();
+			//gfGetUserInfo();
 			gfContentList();
 			//시스템 기본 색상 
 			//00548e
 		});
 		
-		function fnLoginChk(){
-			gfIsLoginAction(fnLoginChkCallback);
+		function fnLoginChkContentInsert(){
+			var fnCallback = fnLoginChkContentInsertCallback;
+			gfIsLoginAction(fnCallback);
 		}
-		function fnLoginChkCallback(data){
+		//일반 글쓰기
+		function fnLoginChkContentInsertCallback(data){
 			if ( "true" == data.result ){
 				$("#imgListContentInsert").empty();
 				$("#imgListContentUpdate").empty();
@@ -49,6 +51,51 @@
 				alert("로그인 후 사용하세요.");
 			}
 		}
+		
+		function fnLoginChkContentDetailInsert(type, idx){
+			$("#frmTemp #postid").val(idx);
+			var fnCallback;
+			if ( 0 == type ){
+				fnCallback = fnLoginChkContentReplyInsertCallback;
+			}else if ( 1 == idx ){
+				fnCallback = fnLoginChkContentDetailInsertCallback;
+			}
+			
+			gfIsLoginAction(fnCallback);
+		}
+		//일반 댓글쓰기
+		function fnLoginChkContentReplyInsertCallback(data){
+			var idx = $("#frmTemp #postid").val();
+			if ( "true" == data.result ){
+				$("#contentReplyTextarea").val("");
+				$("#imgListContentInsert").empty();
+				$("#imgListContentUpdate").empty();
+				$("#imgListContentDetailInsert").empty();
+				$("#frmReply #parentid").val($("input[name='hBoardId']").eq(idx).val());
+				$("#frmReply #account").val($("input[name='hAccount']").eq(idx).val());
+				$("#popupContentDetailInsert").modal("show");
+				
+			}else{
+				alert("로그인 후 사용하세요.");
+			}
+		}
+		//상세 댓글쓰기
+		function fnLoginChkContentDetailInsertCallback(data){
+			var idx = $("#frmTemp #postid").val();
+			if ( "true" == data.result ){
+				$("#contentReplyTextarea").val("");
+				$("#imgListContentInsert").empty();
+				$("#imgListContentUpdate").empty();
+				$("#imgListContentDetailInsert").empty();
+				$("#frmReply #parentid").val($("input[name='hBoardId']").eq(idx).val());
+				$("#frmReply #account").val($("input[name='hAccount']").eq(idx).val());
+				$("#popupContentDetailInsert").modal("show");
+				
+			}else{
+				alert("로그인 후 사용하세요.");
+			}
+		}
+		
 		
 		function fnContentImagePopup(idx){
 			var param = {	cloud_name: 'hgnmrexj6'
@@ -199,7 +246,7 @@
 					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentUpdate(1, ' + (x+arrCnt) + ');" ><i class="fa fa-edit"></i></button>';
 				}
 				if ( 0 == x ) {
-					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnContentDetailUpdatePopup(' + (x+arrCnt) + ');" ><i class="fa fa-commenting-o"></i></button>';
+					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnLoginChkContentDetailInsert(1, ' + (x+arrCnt) + ');" ><i class="fa fa-commenting-o"></i></button>';
 				}
 				
 				var strHtml	= '<div class="element tile-reply home calc bg-change">'
@@ -345,7 +392,7 @@
 				<h4 id="headertitle-inner"></h4>
 				<div id="container">
 					<div id="conBtnGorup1">
-						<button type="button" class="button" onClick="javascript:fnLoginChk();">글쓰기</button>
+						<button type="button" class="button" onClick="javascript:fnLoginChkContentInsert();">글쓰기</button>
 					</div>
 					
 					<div id="conBtnGorup2" style="display: none;">
@@ -487,7 +534,7 @@
 	</div>
 	
 	
-	<div class="modal fade" id="popupReplyUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="popupContentDetailUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="margin-top: 100px;">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -503,7 +550,7 @@
 				</div>
 				<div class="modal-body" style="padding-top: 0px; padding-bottom: 5px;">
 					<button type="button" class="btn btn-default" onClick="javascript:fnContentImagePopup(3)">이미지 업로드</button> 썸네일을 누르면 이미지가 삭제됩니다.
-					<div id="imgListContentDetailInsert" style="padding-top: 10px;"></div>
+					<div id="imgListContentDetailUpdate" style="padding-top: 10px;"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -569,8 +616,10 @@
 		<input type="hidden" id="account" name="account" />
 		<input type="hidden" id="data" name="data" />
 	</form>
-	
 	<form id="frmDetail">
+		<input type="hidden" id="postid" name="postid" />
+	</form>
+	<form id="frmTemp">
 		<input type="hidden" id="postid" name="postid" />
 	</form>
 	
@@ -591,4 +640,3 @@
 <script src="./script/dabble2.js" type="text/javascript"></script>
 <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 </html>
- 
