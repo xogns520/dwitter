@@ -41,9 +41,9 @@
 			
 			var parentId = data[x].parentid == null ? "" :data[x].parentid;
 			
-			var replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnContentDetailInsertPopup(' + x + ');" ><i class="fa fa-commenting-o"></i></button>'
+			var replyBtn = '';
 			if ( "" != parentId ){
-				replyBtn= '';
+				replyBtn= '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnContentDetailInsertPopup(' + x + ');" ><i class="fa fa-commenting-o"></i></button>';
 			}
 			
 			
