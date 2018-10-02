@@ -41,12 +41,6 @@
 			
 			var parentId = data[x].parentid == null ? "" :data[x].parentid;
 			
-			var replyBtn = '';
-			if ( "" == parentId && "" != $("#frmUserInfo #id").val() ){
-				replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnContentDetailInsertPopup(' + x + ');" ><i class="fa fa-commenting-o"></i></button>'
-			}
-			
-			
 			var strHtml	= '<div class="element tile-1 home calc bg-change">'
 						+ '	<table style="width: 100%;">'
 						+ '		<tr>'
@@ -66,7 +60,7 @@
 						+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\'' + data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
 						+ '	<button type="button" name="btnUpdate" style="width:20%; display:none;" class="btn btn-default" onClick="javascript:gfContentUpdate(' + x + ');" ><i class="fa fa-edit"></i></button>'
 						+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
-						+ replyBtn
+						+ '	<button type="button" style="width:25%;" class="btn btn-default" onClick="javascript:fnContentDetailInsertPopup(' + x + ');" ><i class="fa fa-commenting-o"></i></button>'
 						+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 						+ '	<input type="hidden" name="hBoardParentId" value="' + parentId + '" >'
 						+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
