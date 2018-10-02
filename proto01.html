@@ -194,8 +194,12 @@
 				var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
 				
 				var editBtn = '';
+				var replyBtn = '';
 				if ( $("#frmUserInfo #id").val() == data[x].account ){
 					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentUpdate(1, ' + (x+arrCnt) + ');" ><i class="fa fa-edit"></i></button>';
+				}
+				if ( 0 == x ) {
+					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnContentDetailUpdatePopup(' + (x+arrCnt) + ');" ><i class="fa fa-commenting-o"></i></button>';
 				}
 				
 				var strHtml	= '<div class="element tile-reply home calc bg-change">'
@@ -217,13 +221,19 @@
 							+ '	<button type="button" name="btnVote" ' + btnVoteEnable +  ' style="width:30%;" class="btn btn-default" onClick="javascript:gfContentVoteAction(\''+ data[x].id + '\');" ><i name="viewVoteCount" class="fa fa-thumbs-o-up"> ' + data[x].voting + '</i></button>'
 							+ editBtn
 							//+ '	<button type="button" name="btnDetail" style="width:20%;" class="btn btn-default" onClick="javascript:fnContentDetail(' + x + ');" ><i class="fa fa-folder-open"></i></button>'
-							+ '	<button type="button" style="width:25%;" class="btn btn-default" onClick="javascript:fnContentDetailUpdatePopup(' + (x+arrCnt) + ');" ><i class="fa fa-commenting-o"></i></button>'
+							+ replyBtn
 							+ '	<input type="hidden" name="hBoardId" value="' + data[x].id + '" >'
 							+ '	<input type="hidden" name="hVoteCnt" value="' + data[x].voting + '" >'
 							+ '	<input type="hidden" name="hAccount" value="' + data[x].account + '" >'
 							+ '</div>';
 				
 				$("#popupContentData").append(strHtml);
+				/*
+				var obj = $("div[name='viewDefault']").eq(x);
+				if ( gfTextOverCheck(obj) ){
+					$("button[name='btnDetail']").eq(x).show();
+				}
+				*/
 			}				
 		}
 		
