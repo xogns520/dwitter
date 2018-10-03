@@ -89,6 +89,7 @@
 				$("#imgListContentDetailInsert").empty();
 				$("#frmReply #parentid").val($("input[name='hBoardId']").eq(idx).val());
 				$("#frmReply #account").val($("input[name='hAccount']").eq(idx).val());
+				$("#popupContentDetail").modal("hide");
 				$("#popupContentDetailInsert").modal("show");
 				
 			}else{
@@ -99,9 +100,7 @@
 		//상세 댓글닫기
 		function fnContentDetailInsertPopupClose(){
 			$("#popupContentDetailInsert").modal("hide");
-			$("#popupContentDetail").modal("hide");
 			$("#popupContentDetail").modal("show");
-			
 		}
 		
 		
