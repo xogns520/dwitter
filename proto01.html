@@ -96,6 +96,13 @@
 			}
 		}
 		
+		//상세 댓글닫기
+		function fnContentDetailInsertPopupClose(){
+			$("#popupContentDetailInsert").modal("hide");
+			$("#popupContentDetail").modal("show");
+			
+		}
+		
 		
 		function fnContentImagePopup(idx){
 			var param = {	cloud_name: 'hgnmrexj6'
@@ -551,7 +558,7 @@
 					<div id="imgListContentDetailInsert" style="padding-top: 10px;"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-default" onClick="javascript:fnContentDetailInsertPopupClose();">취소</button>
 					<button type="button" class="btn btn-primary" onClick="javascript:fnContentDetailInsertAction();" data-dismiss="modal">완료</button>
 				</div>
 			</div>
