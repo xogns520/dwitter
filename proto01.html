@@ -177,13 +177,14 @@
 		}
 		*/
 		
-		function fnContentDetailInsertAction(){
+		//목록댓글
+		function fnContentReplyInsertAction(){
 			
-			if ( '' == $("#contentReplyInsertTextarea").val().trim() ){
+			if ( '' == $("#contentReplyTextarea").val().trim() ){
 				alert("댓글이 공백입니다.");
 				return;
 			}
-			var strText = '@' + $("#frmReply #account").val() + ' ' + $("#contentReplyInsertTextarea").val();
+			var strText = '@' + $("#frmReply #account").val() + ' ' + $("#contentReplyTextarea").val();
 			var strImg = "";
 			var len = $("input[name='imgUrl']").length;
 			
@@ -193,10 +194,40 @@
 			$("#frmReply #data").val( strText + strImg );
 			
 			var sAction = "/addreply";
-			var fnCallback = fnContentDetailInsertActionCallback;
+			var fnCallback = fnContentReplyInsertActionCallback;
 			gfAjaxCallWithForm(sAction,$('#frmReply'),fnCallback,"POST");
 		}
-		function fnContentDetailInsertActionCallback(data){
+		function fnContentReplyInsertActionCallback(data){
+			if ( "success" == data ){
+				//alert("댓글작성을 하였습니다");
+				//gfContentList();
+				console.log("신규 새로고침이 아닌 현제 페이지 유지");
+			}else{
+				alert("댓글작성 실패");
+			}
+		}
+		
+		//상세댓글
+		function fnContentDetailReplyInsertAction(){
+			
+			if ( '' == $("#contentDetailReplyTextarea").val().trim() ){
+				alert("댓글이 공백입니다.");
+				return;
+			}
+			var strText = '@' + $("#frmReply #account").val() + ' ' + $("#contentDetailReplyTextarea").val();
+			var strImg = "";
+			var len = $("input[name='imgUrl']").length;
+			
+			for ( var x = 0 ; x < len ; x++ ){
+				strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+			}
+			$("#frmReply #data").val( strText + strImg );
+			
+			var sAction = "/addreply";
+			var fnCallback = fnContentDetailReplyInsertActionCallback;
+			gfAjaxCallWithForm(sAction,$('#frmReply'),fnCallback,"POST");
+		}
+		function fnContentDetailReplyInsertActionCallback(data){
 			if ( "success" == data ){
 				//alert("댓글작성을 하였습니다");
 				//gfContentList();
@@ -537,7 +568,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary" onClick="javascript:fnContentDetailInsertAction();" data-dismiss="modal">완료</button>
+					<button type="button" class="btn btn-primary" onClick="javascript:fnContentReplyInsertAction();" data-dismiss="modal">완료</button>
 				</div>
 			</div>
 		</div>
@@ -562,7 +593,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" onClick="javascript:fnContentDetailInsertPopupClose();">취소</button>
-					<button type="button" class="btn btn-primary" onClick="javascript:fnContentDetailInsertAction();" data-dismiss="modal">완료</button>
+					<button type="button" class="btn btn-primary" onClick="javascript:fnContentDetailReplyInsertAction();" data-dismiss="modal">완료</button>
 				</div>
 			</div>
 		</div>
