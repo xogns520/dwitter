@@ -52,7 +52,8 @@
 			}
 		}
 		
-		function fnLoginChkContentDetailInsert(type, idx){
+		//로그인 체크 후 팝
+		function fnLoginChkContentDetailAction(type, idx){
 			$("#frmTemp #postid").val(idx);
 			var fnCallback;
 			if ( 0 == type ){
@@ -60,10 +61,14 @@
 			}else if ( 1 == type ){
 				fnCallback = fnLoginChkContentDetailInsertCallback;
 			}
+			}else if ( 2 == type ){
+				fnCallback = fnLoginChkContentDetailUpdateCallback;
+			}
 			
 			gfIsLoginAction(fnCallback);
 		}
-		//일반 댓글쓰기
+		
+		//일반 댓글쓰기 팝업
 		function fnLoginChkContentReplyInsertCallback(data){
 			var idx = $("#frmTemp #postid").val();
 			if ( "true" == data.result ){
@@ -79,7 +84,8 @@
 				alert("로그인 후 사용하세요.");
 			}
 		}
-		//상세 댓글쓰기
+		
+		//상세 댓글쓰기 팝업
 		function fnLoginChkContentDetailInsertCallback(data){
 			var idx = $("#frmTemp #postid").val();
 			if ( "true" == data.result ){
@@ -96,6 +102,26 @@
 				alert("로그인 후 사용하세요.");
 			}
 		}
+		
+		//상세 댓글수정 팝업
+		function fnLoginChkContentDetailUpdateCallback(data){
+			var idx = $("#frmTemp #postid").val();
+			if ( "true" == data.result ){
+				$("#contentReplyTextarea").val("");
+				$("#imgListContentInsert").empty();
+				$("#imgListContentUpdate").empty();
+				$("#imgListContentDetailInsert").empty();
+				$("#frmReply #parentid").val($("input[name='hBoardId']").eq(idx).val());
+				$("#frmReply #account").val($("input[name='hAccount']").eq(idx).val());
+				$("#popupContentDetail").modal("hide");
+				$("#popupContentDetailReplyUpdate").modal("show");
+				
+			}else{
+				alert("로그인 후 사용하세요.");
+			}
+		}
+		
+		
 		
 		//상세 댓글닫기
 		function fnContentDetailInsertPopupClose(){
@@ -275,19 +301,16 @@
 					btnVoteEnable = "disabled";
 				}
 				
-				
-				
-				
 				var strProfile = (data[x].profile == null) ? "" : data[x].profile ;
 				var profilePath = (strProfile.length == 5) ? "./images/user/" + strProfile : strProfile;
 				
 				var editBtn = '';
 				var replyBtn = '';
 				if ( $("#frmUserInfo #id").val() == data[x].account ){
-					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:gfContentUpdate(1, ' + (x+arrCnt) + ');" ><i class="fa fa-edit"></i></button>';
+					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:fnLoginChkContentDetailAction(1, ' + (x+arrCnt) + ');" ><i class="fa fa-edit"></i></button>';
 				}
 				if ( 0 == x ) {
-					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnLoginChkContentDetailInsert(1, ' + (x+arrCnt) + ');" ><i class="fa fa-commenting-o"></i></button>';
+					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnLoginChkContentDetailAction(1, ' + (x+arrCnt) + ');" ><i class="fa fa-commenting-o"></i></button>';
 				}
 				
 				var strHtml	= '<div class="element tile-reply home calc bg-change">'
@@ -600,7 +623,7 @@
 	</div>
 	
 	
-	<div class="modal fade" id="popupContentDetailUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="popupContentDetailReplyUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="margin-top: 100px;">
 			<div class="modal-content">
 				<div class="modal-header">
