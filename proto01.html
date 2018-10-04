@@ -106,7 +106,7 @@
 		function fnLoginChkContentDetailUpdateCallback(data){
 			var idx = $("#frmTemp #postid").val();
 			if ( "true" == data.result ){
-				$("#contentDetailReplyUpdateTextarea").val("");
+				$("#contentDetailReplyUpdateTextarea").val($("div[name='viewDefault']").eq(idx).text());
 				$("#imgListContentInsert").empty();
 				$("#imgListContentUpdate").empty();
 				$("#imgListContentDetailInsert").empty();
@@ -337,7 +337,7 @@
 				var editBtn = '';
 				var replyBtn = '';
 				if ( $("#frmUserInfo #id").val() == data[x].account ){
-					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:fnLoginChkContentDetailAction(1, ' + (x+arrCnt) + ');" ><i class="fa fa-edit"></i></button>';
+					editBtn = '	<button type="button" name="btnUpdate" style="width:20%;" class="btn btn-default" onClick="javascript:fnLoginChkContentDetailAction(2, ' + (x+arrCnt) + ');" ><i class="fa fa-edit"></i></button>';
 				}
 				if ( 0 == x ) {
 					replyBtn = '	<button type="button" name="btnDetail" style="width:25%;" class="btn btn-default" onClick="javascript:fnLoginChkContentDetailAction(1, ' + (x+arrCnt) + ');" ><i class="fa fa-commenting-o"></i></button>';
