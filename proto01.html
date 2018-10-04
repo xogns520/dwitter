@@ -106,7 +106,7 @@
 		function fnLoginChkContentDetailUpdateCallback(data){
 			var idx = $("#frmTemp #postid").val();
 			if ( "true" == data.result ){
-				$("#contentReplyTextarea").val("");
+				$("#contentDetailReplyUpdateTextarea").val("");
 				$("#imgListContentInsert").empty();
 				$("#imgListContentUpdate").empty();
 				$("#imgListContentDetailInsert").empty();
@@ -261,7 +261,38 @@
 				alert("댓글작성 실패");
 			}
 		}
-	
+		
+		//상세댓글
+		function fnContentDetailReplyUpdateAction(){
+			if ( '' == $("#contentDetailReplyUpdateTextarea").val().trim() ){
+				alert("댓글이 공백입니다.");
+				return;
+			}
+			var strText = $("#contentDetailReplyUpdateTextarea").val();
+			var strImg = "";
+			var len = $("input[name='imgUrl']").length;
+			
+			for ( var x = 0 ; x < len ; x++ ){
+				strImg += '<img src="' + $("input[name='imgUrl']").eq(x).val() + '" />';
+			}
+			$("#frmEdit #data").val( strText + strImg );
+			
+			var sAction = "/edit";
+			var fnCallback = fnContentDetailReplyUpdateActionCallback;
+			gfAjaxCallWithForm(sAction,$('#frmEdit'),fnCallback,"POST");				
+			
+		}
+		function fnContentDetailReplyUpdateActionCallback(data){
+			if ( "success" == data ){
+				//alert("댓글작성을 하였습니다");
+				//gfContentList();
+				console.log("신규 새로고침이 아닌 현제 페이지 유지");
+			}else{
+				alert("댓글작성 실패");
+			}
+		}
+				
+		
 		/*
 			댓글 닫는다
 		*/
