@@ -90,7 +90,7 @@
 				$("#frmReply #parentid").val($("input[name='hBoardId']").eq(idx).val());
 				$("#frmReply #account").val($("input[name='hAccount']").eq(idx).val());
 				$("#popupContentDetail").modal("hide");
-				$("#popupContentDetailInsert").modal("show");
+				$("#popupContentDetailReplyInsert").modal("show");
 				
 			}else{
 				alert("로그인 후 사용하세요.");
@@ -99,7 +99,7 @@
 		
 		//상세 댓글닫기
 		function fnContentDetailInsertPopupClose(){
-			$("#popupContentDetailInsert").modal("hide");
+			$("#popupContentDetailReplyInsert").modal("hide");
 			$("#popupContentDetail").modal("show");
 		}
 		
@@ -167,21 +167,23 @@
 		/*
 			댓글 단다
 		*/
+		/*
 		function fnContentDetailInsertPopup(idx){
 			$("#frmReply #parentid").val($("input[name='hBoardId']").eq(idx).val());
 			$("#frmReply #account").val($("input[name='hAccount']").eq(idx).val());
 			$("#contentReplyTextarea").val("");
 			$("#imgListContentDetailInsert").empty();
-			$("#popupContentDetailInsert").modal("show");
-
+			$("#popupContentDetailReplyInsert").modal("show");
 		}
+		*/
 		
 		function fnContentDetailInsertAction(){
-			if ( '' == $("#contentReplyTextarea").val().trim() ){
+			
+			if ( '' == $("#contentReplyInsertTextarea").val().trim() ){
 				alert("댓글이 공백입니다.");
 				return;
 			}
-			var strText = '@' + $("#frmReply #account").val() + ' ' + $("#contentReplyTextarea").val();
+			var strText = '@' + $("#frmReply #account").val() + ' ' + $("#contentReplyInsertTextarea").val();
 			var strImg = "";
 			var len = $("input[name='imgUrl']").length;
 			
@@ -197,7 +199,8 @@
 		function fnContentDetailInsertActionCallback(data){
 			if ( "success" == data ){
 				//alert("댓글작성을 하였습니다");
-				gfContentList();
+				//gfContentList();
+				console.log("신규 새로고침이 아닌 현제 페이지 유지");
 			}else{
 				alert("댓글작성 실패");
 			}
@@ -208,10 +211,10 @@
 		*/
 		function fnContentDetailInsertCancel(){
 			console.log("일반 댓글달기 닫기");
-			$("#popupContentDetailInsert").modal("hide");
+			$("#popupContentDetailReplyInsert").modal("hide");
 		}
 		function fnDetailReplyCancel(){
-			console.log("상세 댓글달기 닫기");
+			//console.log("상세 댓글달기 닫기");
 			$("#popupReply").modal("hide");
 			$("#popupContentDetail").modal("show");
 		}
@@ -539,7 +542,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="popupContentDetailInsert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="popupContentDetailReplyInsert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="margin-top: 100px;">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -551,7 +554,7 @@
 		        	<h4 class="modal-title" id="myModalLabel">당신의 의견을 알려주세요.(상세 댓글쓰기)</h4>
 				</div>
 				<div class="modal-body">
-					<textarea id="contentReplyTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
+					<textarea id="contentDetailReplyTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
 				</div>
 				<div class="modal-body" style="padding-top: 0px; padding-bottom: 5px;">
 					<button type="button" class="btn btn-default" onClick="javascript:fnContentImagePopup(3)">이미지 업로드</button> 썸네일을 누르면 이미지가 삭제됩니다.
@@ -578,7 +581,7 @@
 		        	<h4 class="modal-title" id="myModalLabel">당신의 의견을 알려주세요.(댓글수정)</h4>
 				</div>
 				<div class="modal-body">
-					<textarea id="contentReplyTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
+					<textarea id="contentDetailReplyUpdateTextarea" style="width:100%; height: 180px; padding: 7px 7px 7px 7px; border: 1px solid #dedede;"></textarea>
 				</div>
 				<div class="modal-body" style="padding-top: 0px; padding-bottom: 5px;">
 					<button type="button" class="btn btn-default" onClick="javascript:fnContentImagePopup(3)">이미지 업로드</button> 썸네일을 누르면 이미지가 삭제됩니다.
